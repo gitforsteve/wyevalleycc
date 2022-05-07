@@ -48,7 +48,10 @@ require "Exception.php";
 require "PHPMailer.php";
 require "SMTP.php";
 require "MyCSV.class.php";
-if(isset($_POST['id'])){
+if(isset($_GET['id'])){
+  // send to me
+  $id = $_GET['id'];
+}elseif(isset($_POST['id'])){
   // send to a specific councillor
   $id = $_POST['id'];
 }elseif(isset($_POST['name'])){
