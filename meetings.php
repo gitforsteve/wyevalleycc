@@ -35,7 +35,7 @@ while($row = $data->each()){
 }
 if(count($meetings > 0)){
   print("<h1>Meetings</h1>");
-  print("<p>Council meetings are held at 7:00pm in either of the Tintern or Llandogo Village Halls</p><p>There is a short time allocated to members of the public who wish to attend who are asked to notify the Clerk as soon as possible before the proposed attendance.</p>");
+  print("<p>Council meetings are held at the time shown in either of the Tintern or Llandogo Village Halls</p><p>There is a short time allocated to members of the public who wish to attend who are asked to notify the Clerk as soon as possible before the proposed attendance.</p>");
   $table->heading();
   foreach($meetings as $meeting){
     $agenda = in_array($meeting['dtcode'], $docs)?sprintf("<a href='showagenda.php?%s'> Agenda",$meeting['dtcode']):"";
