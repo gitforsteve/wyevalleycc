@@ -47,6 +47,7 @@ require "classes.php";
 require "Exception.php";
 require "PHPMailer.php";
 require "SMTP.php";
+require "MyCSV.class.php";
 if(isset($_POST['id'])){
   // send to a specific councillor
   $id = $_POST['id'];
@@ -139,20 +140,17 @@ HERE;
     }
   }
 }
-$q = new Database('Councillor');
-$councillors = $q->getData("select * from councillor c left join ward w on c.ward=w.wardid order by surname, name");
+//$q = new Database('Councillor');
+//$councillors = $q->getData("select * from councillor c left join ward w on c.ward=w.wardid order by surname, name");
+$councillors = new MyCSV('data/councillor.csv');
+$councillors->sort('surname');
 
 ?>
 <div class="eight columns" id="content" style="border-radius:0 0 15px 0; ">
   <div class="row">
     <h1 class="limit-min-max">Contact Us</h1>
     <p>Use this form to send an email to any of the Councillors. Messages sent via this form are automatically copied to the Clerk to ensure that appropriate action is taken in the event of holiday or sickness.</p>
-    <p>If you prefer you can contact our Clerk by writing to<br />
-    <?
-    $address = $q->getSingle("select * from councillor where ward = 3");
-    echo $address->address;
-    ?>
-    </p>
+    <p>If you prefer you can contact our Clerk by writing to The Poplars, Whitelye, NP16 6NP<br /></p>
     <p class="newshead">Wye Valley Community Council will never share the information given on this form or in any other way unless you give your express permission and that this is necessary for the response. If this is the case you will be contacted for your permission.</p>
   </div>
   <div class="row" style="color: red; font-weight: bold; text-align:center;"><?=$errorMessage?> <?=$unsent?></div>
@@ -170,16 +168,24 @@ $councillors = $q->getData("select * from councillor c left join ward w on c.war
       <select class="u-full-width" name="emailTo" id="emailTo">
         <option value="">--- Please choose (required, for general email choose the Clerk) ---</option>
         <?php
-        foreach($councillors as $councillor){
-          $sel = "";
-          if($councillor->surname > '' or $id > ''){
-            if($councillor->code === $id or $councillor->email === $_POST['emailTo']){
+        while($councillor = $councillors->each()){
+          if($councillor['surname'] != "ZZZ"){
+            $sel = "";
+            switch($councillor['ward']){
+              case 1: $wardname = "Tintern"; break;
+              case 2: $wardname = "Llandogo"; break;
+              case 3: $wardname = "Clerk to the Council"; break;
+              case 4: $wardname = "County Councillor"; break;
+            }
+            if($councillor['surname'] > '' or $id > ''){
+              if($councillor['code'] === $id or $councillor['email'] === $_POST['emailTo']){
               $sel = "selected";
             }
-            printf("<option value='%s' %s>%s %s (%s)</option>",$councillor->email,$sel,$councillor->name,$councillor->surname,$councillor->wardname);
+            printf("<option value='%s' %s>%s %s (%s)</option>",$councillor['email'],$sel,$councillor['name'],$councillor['surname'],$wardname);
           }
         }
-        ?>
+      }
+       ?>
       </select>
       <label for="subject">Subject</label>
       <input class="u-full-width" type="text" name="subject" id="subject" placeholder="Please enter the subject of your email (required)" value="<?=$_POST['subject']?>">
