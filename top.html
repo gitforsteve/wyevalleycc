@@ -1,0 +1,186 @@
+<?PHP
+// cSpell:disable
+date_default_timezone_set("Europe/London");
+// elements to be displayed via display function
+// Repeating Tintern News notice (file date)
+$tinternnews = <<<EOD
+<a class="buttonlink shadow" href='docs/Tintern News.pdf' target='new' title="Click to view Tintern News as a PDF in a new window or tab">Latest Tintern News available. Click here or on Useful Links</a>
+EOD;
+//
+function display($dt,$mode,$val=0){
+	$end = date_create_from_format("Y-m-d",$dt);
+	$now = date_create();
+	$days = date_diff($now,$end)->d;
+	switch ($mode) {
+		case 'bf': return $now < $end;
+		case 'gt': return $days > $val; break;
+		case 'lt': return $days < $val; break;
+		default: return false;
+	}
+}
+// ELECTORS RIGHTS CONTROLS
+$year = "2021";
+$hours = "9:30 and 16:30";
+$announcedate = "17 March 2023"; // date of announcement
+$endd = new DateTime($announcedate);
+$endd->modify('+14 day');
+$enddate = $endd->format('jS F Y'); // date for contact clerk
+//$enddate = "17 September 2021"; // last date for contact clerk
+$displayfrom = $announcedate; // show on menu
+$displayto = $enddate; // stop showing on menu
+//$contactfrom = "20 September 2021";
+//
+$displayfromdt = new DateTime($displayfrom);
+$displaytodt = new DateTime($displayto);
+$displaycontactdt = new DateTime($contactfrom);
+$now = new DateTime("now");
+if($now >= $displayfromdt && $now <= $displaytodt){
+  $showrights = true;
+}else{
+  $showrights = false;
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<!-- *EXCLUDE* -->
+	<head>
+  		<!-- Basic Page Needs
+  		–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	  <title><?PHP echo $title?></title>
+	  <meta name="description" content="<?PHP echo $desc?>">
+	  <meta name="keywords" content="<?PHP echo $keywords?>">
+    <!--******* WARNING CHANGE FOR LIVE **********/-->
+    <meta name="baseurl" content="https://wyevalleycc.co.uk" />
+    <!--*******************************************-->
+	  <meta name="author" content="Steve Evans" >
+	  <meta charset="UTF-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	  <!-- Mobile Specific Metas
+	  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <!---- remove skeleton when compressed css used ---->
+	  <link rel="stylesheet" href="css/skeleton.css">
+	  <link rel="stylesheet" href="css/wvcc.css" >
+	  <!-- Favicon
+	  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	  <link rel="icon" type="image/png" href="images/favicon.png">
+	  <script type="text/javascript" src="js/all.min.js"></script>
+    <?
+    if(isset($mailpage)){
+      ?>
+      <script src='https://www.google.com/recaptcha/api.js' async defer></script>
+      <?
+    }
+    ?>
+    <script type="text/javascript">
+		var eobject = null;
+		 var mousePos = {x: -1, y: -1};
+		 var currentPage = 'index.html';
+		 function resize(){
+			var h = $('#document').innerHeight();
+			$('#content').height(h);
+		 }
+		 function current(page){
+			$('#current').html(page);
+		 };
+		 function handleMenu(mnu){
+			$("#menu a").removeClass("active");
+			$(mnu).addClass("active");
+		 }
+		 function handleSubmenu(mnu){
+			$("#submenu a").removeClass("active");
+			$(mnu).addClass("active");
+		 }
+		 function showPopup(e){
+		    var pos=$('financial').parent().offset();
+		    var xpos = mousePos.x;
+		    var ypos = mousePos.y;
+		    handleMenu($('#financial'));
+		    $('#submenu').css({"top":ypos+10,"left":xpos+10});
+		    $('#submenu').show();
+		 }
+		 $(document).ready(function(){
+		   $(document).mousemove(function(e){
+		     mousePos.x = e.pageX;
+		     mousePos.y = e.pageY;
+		   })
+			$('#codes').hide();
+			$('#bottom').load('copyright.php');
+			$('#pnotice').hide();
+			$('#latestcontent').load('notices.php?type=latest');
+			$('div:not(#submenu)').on("mouseover",function(){
+		  		$('#submenu').hide();
+			});
+			$('#financialmenu li').on("mouseover",function(){
+			  $(this).addClass("active");
+			});
+			$('#financialmenu li').on("mouseout",function(){
+			  $(this).removeClass("active");
+			});
+			$('#submenu a').on('mouseover',function(){
+			  $(this).addClass("subactive");
+			  $(this).css("color","white");
+			});
+			$('#submenu a').on('mouseout',function(){
+			  $(this).removeClass("subactive");
+			  $(this).css("color","#336699");
+			});
+		});
+   </script>
+	</head>
+	<body>
+  		<!-- Primary Page Layout
+  		–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  		<div id="container" class="container u-full-width" >
+    	<div class="row">
+			  <div class="one.column" role="banner" style="position:relative;">
+					<div id="headerimage" class="twelve columns" ><img src="images/headerbg1.jpeg" alt="View of the river Wye" />
+						<div id="head" class="u-full-width smallspace">Wye Valley Community Council<br /><span style="font-size:1.5vw;">REPRESENTING THE PEOPLE OF TINTERN AND LLANDOGO IN THE WYE VALLEY</span><br />
+            </div>
+          </div>
+      	</div>
+    </div>
+    <div class="row">
+      <div class="one.columns" style="background:#336699;height:10px;">&nbsp;</div>
+    </div>
+    <div class="row">
+      <div class="three columns rounded" style='background:white;'>
+	<nav id="menu" class="u-full-width" role="navigation">
+	  <ul class='u-full-width'>
+	    <li><a href="sitemap.php" id="sitemap" title="Link to a textual list of pages as links">Site Map</a></li>
+	    <li><a class="active" id='home' href="index.php" title="Home page" >Home Page</a></li>
+	    <li><a href="about.php" id='about' title="About us page">About Us</a></li>
+	    <li><a href="contact.php" id='contact' title="Contact us page" >Contact Us</a></li>
+	    <li><a href="meetings.php" id='meetings' title="List of meetings" >Meetings</a></li>
+	    <li><a href="agenda.php" id='agenda' title="List of agenda" >Meeting Agenda</a></li>
+	    <li><a href="minutes.php" id='minutes' title="List of published minutes" >Minutes</a></li>
+	    <li><a href="planning.php" id='planning' title="List of planning applications" >Planning</a></li>
+	    <li><a href="notices.php" id='notices' title="List of notices" >Notices</a></li>
+	    <li><a href="financial.php" id="financial" title="Our audited accounts" >Financial </a></li>
+	    <li><a href="standards.php" id="standards" title="The standards to which we adhere when we transact the Council's business">Standards</a></li>
+	    <li><a href="employersliability.php" id='employersliability' title="Display our employer's liability certificate" >Employers Liability</a></li>
+	    <li><a href="privacy.php" id='privacy' title="Our privacy policy" >Privacy and Legal</a></li>
+      <li><a href="accessibility.php" id="accessibility" title="Our accessibility statement">Accessibility</a></li>
+	    <li><a href="links.php" id='links' title="List of links to external sites">Useful Links</a></li>
+      <?
+      if($showrights){
+        ?>
+        <li><a href="auditreport.php" id="electorsrights" title="Display notice of electors' rights" >Notice of Audit</a></li>
+      <?
+      }
+      ?>
+  </ul>
+	  <br />
+	  <?PHP
+	  $now = time();
+    // check file date less that 7 days old (60*60*24*7);
+	  if($now - filemtime("docs/Tintern News.pdf") < 604800){
+	  	  echo $tinternnews;
+	  }
+	  ?>
+
+</nav>
+		<br />
+      </div> <!-- four column menu-->
+      <main role="main">

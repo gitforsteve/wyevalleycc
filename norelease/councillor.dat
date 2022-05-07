@@ -1,0 +1,10 @@
+id,key,name,surname,ward,email,address,phone,photo,responsibility,status
+1,"ss","Stephanie","Shewell",1,"stephanie.shewell@wyevalleyvv.co.uk","Monkstone,Tintern,NP16 6SF","01291689590","missing.jpg","","1"
+2,"se","Steve","Evans",1,"stephen.evans@wyevalleycc.co.uk","5 Parva Springs,Tintern,NP16 6TY","07879815561","stevevans.jpg","Federated Schools and web site","1"
+3,"eg","Elizabeth","Greatorex-Davies",3,"clerk@wyevallecc.co.uk","The Poplars,NP16 6NP","01291689861","lizg.jpg","Clerk to the Council","1"
+4,"aw","Ann","Webb",4,"annwebb@monmouthshire.gov.uk","Home Farm,NP16 6QW","01291689559","ann.jpg","County Councillor","1"
+5,"aa","Angus","Ashman",1,"angus.ashman@wyevallecc.co.uk","Wesley Cottage,Tintern,NP16 6SE","0129168322","angus.jpg","Planning","1"
+6,"jm","Jamie","Morrison",1,"jamie.marrison@wyevalleycc.co.uk","Leytons Cottage,2 Lower Leytons,Tintern,NP16 6SY","07815904363","missing.jpg","1"
+7,"lp","Lynne","Parker",2,"lynne.parker@wyevalleycc.co.uk","Stoneleigh,Llandogo,NP25 4TA","01594530126","lynne.jpg","1"
+8,"cs","Carla","Snell",2,"carla.snell@wyevalleycc.co.ul","Treetops,Llandogo,NP25 4TW","01594531314","missing.jpg",""
+9,"","VACANCY","",2,"","","","","1"

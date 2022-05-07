@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "Access to /councillors"
+AuthUserFile /kunden/homepages/0/d700995788/htpasswd
+Require user tcccouncillor

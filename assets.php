@@ -1,0 +1,64 @@
+<?PHP
+//cSpell:disable
+include "MyCSV.class.php";
+include "stevetable.php";
+$data = new MyCSV('data/assets.csv');
+$data->sort('item');
+$title = "Finance - Tangible Assets";
+$desc = "The tangible assets owned on behalf of the residents by the Council";
+include "top.html";
+include "classes.php";
+$q = new Database('Asset');
+$data = $q->getData("select * from asset order by item");
+echo "<h1>Tangible Assets</h1><br />";
+echo "<p>The tangible assets owned on behalf of the residents of Tintern and Llandogo by the Council</p>";
+$table = new steveTable('{
+  "tableCenter": true,
+  "tableWidth": "70%",
+  "tableFontSize": "2vw",
+  "widths": ["70%","10%","20%"],
+  "aligns": ["L","C","R"],
+  "heading": ["&nbsp;Item","Qty","Total Value&nbsp;"],
+  "headingBackground": "rgb(40,82,134)",
+  "headingColor": "white",
+  "sum": [0,0,1],
+  "currency": [0,0,1],
+  "currencySymbol": "&pound;",
+  "decimals": 0,
+  "totalLabel": "Total"
+}');
+
+$table->heading();
+class Item {
+  public $item;
+  public $qty;
+  public $total;
+  function __construct($i){
+    $this->item = $i;
+    $this->qty = 0;
+    $this->total = 0;
+  }
+}
+$items = [];
+$thisitem = "X";
+$thisvalue = $count = 0;
+foreach($data as $dataitem){
+  if($thisitem !== $dataitem->item){
+    $item = new Item($dataitem->item);
+    $items[] = $item;
+    $thisitem = $dataitem->item;
+  }
+  $item->qty += $dataitem->qty;
+  $item->total += $dataitem->qty*$dataitem->value;
+}
+foreach($items as $item){
+  if($item->item > ''){
+    $table->row([$item->item,$item->qty,$item->total]);
+  }
+}
+$table->print();
+include "bottom.html";
+?>
+<script type="text/javascript">
+  handleMenu('#financial');
+</script>

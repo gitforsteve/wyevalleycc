@@ -1,0 +1,24 @@
+  <div class='nine columns' id="content">
+    <h1 style="font-size:4vw;">Accounting statements <?=date('Y',strtotime($date1))?>-<?=date('Y',strtotime($date2))?></h1>
+    <table class="accounts">
+      <tr><td colspan="2"></td><td colspan="2" class="cash">Year ending</td></tr>
+      <tr><td colspan="2"></td><td valign="top" class="cash"><?=$date1?><br />&pound;</td><td valign="top" class="cash"><?=$date2?><br />&pound;</td></tr>
+      <tr><td colspan="4" style="font-weight:bold;">Statement of income and expenditure/receipts and payments</td></tr>
+      <tr><td>1</td><td>Balances brought forward</td><td class='cash'><?=number_format($bf[0],0,'.',',')?></td><td class='cash'><?=number_format($bf[1])?></td></tr>
+      <tr><td>2</td><td>(+) Income from local taxation/levy</td><td class='cash'><?=number_format($income[0],0,'.',',')?></td><td class='cash'><?=number_format($income[1],0,'.',',')?></td></tr>
+      <tr><td>3</td><td>(+) Total other receipts</td><td class='cash'><?=number_format($receipts[0],0,'.',',')?></td><td class='cash'><?=number_format($receipts[1],0,'.',',')?></td></tr>
+      <tr><td>4</td><td>(-) Staff costs</td><td class='cash'><?=number_format($staff[0],0,'.',',')?></td><td class='cash'><?=number_format($staff[1],0,'.',',')?></td></tr>
+      <tr><td>5</td><td>(-) Loan interest/capital repayments</td><td class='cash'>NIL</td><td class='cash'>NIL</td></tr>
+      <tr><td>6</td><td>(-) Total other payments</td><td class='cash'><?=number_format($other[0],0,'.',',')?></td><td class='cash'><?=number_format($other[1],0,'.',',')?></td></tr>
+      <tr><td>7</td><td>(=) Balances carried forward</td><td class='cash'><?=number_format($bals[0],0,'.',',')?></td><td class='cash'><?=number_format($bals[1],0,'.',',')?></td></tr>
+      <tr><td colspan='4' style='font-weight:bold;'>Statement of balances</td></tr>
+      <tr><td>8</td><td>(+) Debtors and stock balances</td><td class='cash'>-</td><td class='cash'>-</td></tr>
+      <tr><td>9</td><td>(+) Total cash and investments</td><td class='cash'><?=number_format($bals[0],0,'.',',')?></td><td class='cash'><?=number_format($bals[1],0,'.',',')?></td></tr>
+      <tr><td>10</td><td>(-) Creditors</td><td class='cash'>-</td><td class='cash'>-</td></tr>
+      <tr><td>11</td><td>(=) Balances carried forward</td><td class='cash'><?=number_format($bals[0],0,'.',',')?></td><td class='cash'><?=number_format($bals[1],0,'.',',')?></td></tr>
+      <tr><td>12</td><td>Total fixed assets and long-term assets</td><td class='cash'><?=number_format($assets[0],0,'.',',')?></td><td class='cash'><?=number_format($assets[1],0,'.',',')?></td></tr>
+      <tr><td>13</td><td>Total borrowing</td><td class='cash'>-</td><td class='cash'>-</td></tr>
+      <tr><td>14</td><td>Trust funds disclosure note</td><td class='cash' colspan='2'>N/A</td></tr>
+
+    </table>
+  </div>

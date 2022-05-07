@@ -1,0 +1,36 @@
+<div class="nine columns" id="content">
+  <h1 style="font-size:4vw;">BUDGET <?=$years[1]?>-<?=$years[2]?></h1>
+  <table class="accounts">
+    <tr><td>ITEM</td><td class="cash">Budget<br /><?=$years[0]?>-<?=$years[1]?></td><td>Spent</td><td class="cash">Budget<br /><?=$years[1]?>-<?=$years[2]?></td><td class="cash">Spent</td></tr>
+    <tr><td colspan="5">REVENUE</td></tr>
+    <tr><td>Clerk's Salary</td><td class="cash"><?=number_format($salary[0])?></td><td class="cash"><?=number_format($salary[1])?></td><td class="cash"><?=number_format($salary[2])?></td><td></td></tr>
+    <tr><td>Clerk's Home Allowance</td><td class="cash"><?=number_format($allowance[0])?></td><td class="cash"><?=number_format($allowance[1])?></td><td class="cash"><?=number_format($allowance[2])?></td><td></td></tr>
+    <tr><td>Clerk's Expenses</td><td class="cash"><?=number_format($clerkexp[0])?></td><td class="cash"><?=number_format($clerkexp[1])?></td><td class="cash"><?=number_format($clerkexp[2])?></td><td></td></tr>
+    <tr><td>Clerk's Home Allowance</td><td class="cash"><?=number_format($allowance[0])?></td><td class="cash"><?=number_format($allowance[1])?></td><td class="cash"><?=number_format($allowance[2])?></td><td></td></tr>
+    <tr><td>Training</td><td class="cash"><?=number_format($training[0])?></td><td class="cash"><?=number_format($training[1])?></td><td class="cash"><?=number_format($training[2])?></td><td></td></tr>
+    <tr><td>Cllr Expenses</td><td class="cash"><?=number_format($cllrexp[0])?></td><td class="cash"><?=number_format($cllrexp[1])?></td><td class="cash"><?=number_format($cllrexp[2])?></td><td></td></tr>
+    <tr><td>Chair's Honoraria</td><td class="cash"><?=number_format($chair[0])?></td><td class="cash"><?=number_format($chair[1])?></td><td class="cash"><?=number_format($chair[2])?></td><td></td></tr>
+    <tr><td>Village Hall Hire</td><td class="cash"><?=number_format($hire[0])?></td><td class="cash"><?=number_format($hire[1])?></td><td class="cash"><?=number_format($hire[2])?></td><td></td></tr>
+    <tr><td>Insurance Hall/Came&amp;Co</td><td class="cash"><?=number_format($ins[0])?></td><td class="cash"><?=number_format($ins[1])?></td><td class="cash"><?=number_format($ins[2])?></td><td></td></tr>
+    <tr><td>Subs (OVW/SLCC)</td><td class="cash"><?=number_format($subs[0])?></td><td class="cash"><?=number_format($subs[1])?></td><td class="cash"><?=number_format($subs[2])?></td><td></td></tr>
+    <tr><td>Audit</td><td class="cash"><?=number_format($audit[0])?></td><td class="cash"><?=number_format($audit[1])?></td><td class="cash"><?=number_format($trainingaudit[2])?></td><td></td></tr>
+    <tr><td>Elections</td><td class="cash"><?=number_format($elect[0])?></td><td class="cash"><?=number_format($elect[1])?></td><td class="cash"><?=number_format($elect[2])?></td><td></td></tr>
+    <tr><td>Safety Inspections</td><td class="cash"><?=number_format($safety[0])?></td><td class="cash"><?=number_format($safety[1])?></td><td class="cash"><?=number_format($safety[2])?></td><td></td></tr>
+    <tr><td>Maintenance</td><td class="cash"><?=number_format($maint[0])?></td><td class="cash"><?=number_format($maint[1])?></td><td class="cash"><?=number_format($maint[2])?></td><td></td></tr>
+    <tr><td>REVENUE TOTAL</td><td class="cash"><?=number_format($revtot[0])?></td><td class="cash"><?=number_format($revtot[1])?></td><td class="cash"><?=number_format($revtot[2])?></td><td></td></tr>
+    <tr><td colspan="5">CAPITAL</td></tr>
+    <tr><td>Village Hall</td><td class="cash"><?=number_format($hall[0])?></td><td class="cash"><?=number_format($hall[1])?></td><td class="cash"><?=number_format($hallt[2])?></td><td></td></tr>
+      <tr><td>Churchyards</td><td class="cash"><?=number_format($church[0])?></td><td class="cash"><?=number_format($church[1])?></td><td class="cash"><?=number_format($churcht[2])?></td><td></td></tr>
+    <tr><td>Tintern News</td><td class="cash"><?=number_format($news[0])?></td><td class="cash"><?=number_format($news[1])?></td><td class="cash"><?=number_format($news[2])?></td><td></td></tr>
+    <tr><td>Tintern Website</td><td class="cash"><?=number_format($website[0])?></td><td class="cash"><?=number_format($website[1])?></td><td class="cash"><?=number_format($website[2])?></td><td></td></tr> 
+    <tr><td>Youth Brigade</td><td class="cash"><?=number_format($brigade[0])?></td><td class="cash"><?=number_format($brigade[1])?></td><td class="cash"><?=number_format($brigade[2])?></td><td></td></tr>
+    <tr><td>Toddlers Group</td><td class="cash"><?=number_format($toddlers[0])?></td><td class="cash"><?=number_format($toddlers[1])?></td><td class="cash"><?=number_format($toddlers[2])?></td><td></td></tr>
+    <tr><td>Charities</td><td class="cash"><?=number_format($charity[0])?></td><td class="cash"><?=number_format($charity[1])?></td><td class="cash"><?=number_format($charity[2])?></td><td></td></tr>
+    <tr><td>Projects</td><td class="cash"><?=number_format($proj[0])?></td><td class="cash"><?=number_format($proj[1])?></td><td class="cash"><?=number_format($proj[2])?></td><td></td></tr>
+    <tr><td>Llandogo School</td><td class="cash"><?=number_format($school[0])?></td><td class="cash"><?=number_format($school[1])?></td><td class="cash"><?=number_format($school[2])?></td><td></td></tr>
+    <tr><td>CAPITAL TOTAL</td><td class="cash"><?=number_format($captot[0])?></td><td class="cash"><?=number_format($captot[1])?></td><td class="cash"><?=number_format($captot[2])?></td><td></td></tr>
+    <tr><td>TOTAL EXPENDITURE</td><td class="cash"><?=number_format($totexp[0])?></td><td class="cash"><?=number_format($totexp[1])?></td><td class="cash"><?=number_format($totexp[2])?></td><td></td></tr></table>
+    <p>Appropriate sum for <?=$years[1]?>-<?=$years[2]?> will be &pound;<?=$sum?> <?=$roll?></p>
+    <p />
+    <p>Projects <?=$years[1]?>-<?=$years[2]?><br /><?=$projects?></p>
+  </div>
