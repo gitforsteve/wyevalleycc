@@ -2,7 +2,7 @@
 // cSpell:disable
 $title = "Councillors and wards";
 $desc = "Find out who your Councillors are and the wards they represent";
-$keywords = "Tintern Llandogo community councillors, wards, represent";
+$keywords = "contact Tintern Llandogo community councillors, wards, represent";
 require 'top.html';
 require 'MyCSV.class.php';
 //if(!class_exists('Database')){

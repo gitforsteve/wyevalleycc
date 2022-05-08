@@ -2,6 +2,7 @@
 // cSpell:disable
 $title = "Dates of Council meetings";
 $desc = "Our upcoming meetings have a public forum. Find the date of our next meeting here";
+$keywords = "Council meetings date of meetings public forum";
 require "top.html";
 require "MyCSV.class.php";
 require "stevetable.php";
