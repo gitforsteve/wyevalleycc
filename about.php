@@ -56,7 +56,12 @@ if(!isset($_GET['ward'])){
 	      <div class="eight columns">
 	        <span><?=$councillor['name']?> <?=$councillor['surname']?> </span><?=$stat?><br /><?=$address?><br /><?=$phone?> <?=$councillor['phone']?><br /><br />
           <button class='email shadow' style='text-align:center;font-weight:bold;width:30vw;font-size:1.2vw;' type='button' id="<?=$councillor['code']?>">Send email to <?=$councillor['name']?></button>
-          <br /><?=$councillor['responsibility']?>
+          <br />
+          <?PHP
+            if(strlen($councillor['responsibility']) > 0){
+              printf("Responsibility: %s<br /><br />",$councillor['responsibility']);
+            }
+          ?>
 	      </div>
 	      <br />
 	    </div>
