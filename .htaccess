@@ -1,0 +1,4 @@
+RewriteEngine On # turn on rewriting engine
+RewriteCond %{SERVER_PORT} 80
+RewriteRule ^(.*)$ https://wyevalleycc.co.uk/$1 [R=301,L]
+
