@@ -16,6 +16,7 @@ Disallow: /logs/
 Disallow: /minutes/
 Disallow: /norelease/
 Disallow: /voting/
+Disallow: /*?*
 Disallow: bottom.html
 Disallow: classes.php
 Disallow: createrobotstxt.php
@@ -26,5 +27,6 @@ Disallow: planningsearch.php
 Disallow: robots.bak
 Disallow: showagenda.php
 Disallow: showminute.php
+Disallow: singlenotice.php
 Disallow: top.html
 Sitemap: https://wyevalleycc.co.uk/sitemap.xml

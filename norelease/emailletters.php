@@ -1,6 +1,6 @@
 <?PHP
 //cSpell:disable
-require_once "MyCSV.class.php";
+require_once "../MyCSV.class.php";
 require_once "../sfpdf.php";
 class PDF extends SFPDF {
   function Header(){
@@ -23,13 +23,13 @@ function describe($pw){
   }
   return $s;
 }
-$pdf = new PDF;
-$pdf->SetLeftMargin(20);
-$pdf->SetRightMargin(20);
-$pdf->setFont("helvetica","",11);
-$pdf->setTextColor(0,0,0);
 $councillors = new MyCSV('emails.csv');
 while($row = $councillors->each()){
+  $pdf = new PDF;
+  $pdf->SetLeftMargin(20);
+  $pdf->SetRightMargin(20);
+  $pdf->setFont("helvetica","",11);
+  $pdf->setTextColor(0,0,0);
   if($row['ward'] > "0"){
     $pdf->AddPage();
     $pdf->Ln(10);
@@ -103,6 +103,6 @@ while($row = $councillors->each()){
     $pdf->Ln(20);
     $pdf->WriteText("All this will make <my> job easier and protect you from anything nasty");
   }
+  $pdf->OutPut($name.".pdf");
 }
-$pdf->OutPut();
 ?>
