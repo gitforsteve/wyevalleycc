@@ -24,13 +24,14 @@ function describe($pw){
   return $s;
 }
 $councillors = new MyCSV('emails.csv');
+$councillors->sort('surname');
 while($row = $councillors->each()){
   $pdf = new PDF;
   $pdf->SetLeftMargin(20);
   $pdf->SetRightMargin(20);
   $pdf->setFont("helvetica","",11);
   $pdf->setTextColor(0,0,0);
-  if($row['ward'] > "0"){
+  if($row['surname'] !== "ZZZ"){
     $pdf->AddPage();
     $pdf->Ln(10);
     $pdf->Cell(0,5,date('jS F Y'),0,1);
@@ -99,7 +100,7 @@ while($row = $councillors->each()){
     $pdf->Ln(10);
     $pdf->WriteText("If you have <any> doubt about an email please give me a call and I can explain the checks which you can carry out. There is even a utility on our host's site which will allow a check of a saved email which appears to come from our host (IONOS). This is https://phishing-contact.ionos.co.uk");
     $pdf->Ln(10);
-    $pdf->WriteText("<Never use your wyevallycc email address for anything other than Council business including using it to sign up to any on-line services or social media.>");
+    $pdf->WriteText("<Never use your wyevallycc email address for anything other than Council business including using it to sign up to any on-line services or social media.></Never>");
     $pdf->Ln(20);
     $pdf->WriteText("All this will make <my> job easier and protect you from anything nasty");
   }
