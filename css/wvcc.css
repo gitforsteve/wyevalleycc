@@ -25,10 +25,6 @@
   }
 }
 
-body {
-  font-family: "helvetica", "sans-serif";
-}
-
 header, section, footer, aside, nav, main, article, figure {
   display: block;
 }
@@ -67,6 +63,7 @@ html.blank {
 
 body {
   font-family: 'Open Sans', sans-serif;
+  background-color: #FFFFFF;
   margin: 0;
   padding: 0;
   height: 100%;
@@ -478,5 +475,9 @@ ol.dec li:before {
 
 .desc {
   float: right;
+}
+
+.important {
+  font-weight: bold;
 }
 /*# sourceMappingURL=wvcc.css.map */

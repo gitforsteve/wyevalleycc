@@ -18,6 +18,7 @@ function plansort($a,$b){
 <div class='nine columns' style='padding-right: 10px; border-radius:0 0 15px 0; ' id='content'>
 <h1>Planning</h1>
 <p>Local planning applications may be listed here when details become available. For direct access to Monmouthshire CC Planning click for <a title="External link to Monmouthshire Planning weekly page" href="https://planningonline.monmouthshire.gov.uk/online-applications/search.do?action=weeklyList" target="new">weekly list</a> or <a title="External link to Monmouthshire Planning monthly list" href="https://planningonline.monmouthshire.gov.uk/online-applications/search.do?action=monthlyList" target="new">monthly list</a></p>
+<p class="important">Due to the change of boundaries some planning shown may relate to Tintern Community Council and updating may be less frequent in this transition period.</p>
 <p>If an application has been approved, refused, invalidated or withdrawn it will be retained for a period of 30 days before being removed from this list. Approved and refused applications will show the date of approval or refusal, in green for approved and red for refused. Note that there may be a delay between a change in status and an update to this page.</p>
 <form action="planningsearch.php" method="POST" onsubmit="return $('#srch').val() > ''">
 <label for="srch" style="display:inline;">Search our planning records</label> <input size="25" id="srch" name="srch" type="text" placeholder="Search all of our records" />&nbsp;<input class="shadow" title="Search button" id="srchbtn" type="submit" style="width:80px;text-align:center;padding:0;" value="SEARCH"><br />
@@ -50,13 +51,15 @@ switch($display){
 $q->query($sql);
 $q->execute();
 $applications = $q->resultset();
-usort($applications,"plansort");
-
-printf("<table class='u-full-width'><thead><tr style='border-top:1px solid #336699;border-bottom:1px solid #336699;background:lightgray;'>%s<th>Application Number</th><th>Description</th><th>Status</th></tr></thead><tbody>",$caption);
-foreach($applications as $application){
-  $application->output();
+if(count($applications) > 0){
+  printf("<div class='u-full-width' style='text-align:center;background:black;color:white;'>%s</div>",$caption);
+  usort($applications,"plansort");
+  print("<table class='u-full-width'><thead><tr style='border-top:1px solid #336699;border-bottom:1px solid #336699;background:lightgray;'><th>Application Number</th><th>Description</th><th>Status</th></tr></thead><tbody>");
+  foreach($applications as $application){
+    $application->output();
+  }
+  print("</tbody></table></div>");
 }
-print("</tbody></table></div>");
 require 'bottom.html';
 ?>
 <script type="text/javascript" src="js/clipboard.min.js"></script>

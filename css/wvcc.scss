@@ -27,9 +27,6 @@ $grey: rgb(211,211,211);
 $darkgrey: rgb(128,128,128);
 $yellow: rgb(255,255,0);
 $white: #FFFFFF;
-body {
-  font-family: "helvetica", "sans-serif";
-}
 header, section, footer, aside, nav, main, article, figure{
 	display: block;
 }
@@ -63,6 +60,7 @@ html.blank{
 }
 body{
   font-family: 'Open Sans', sans-serif;
+  background-color: $white;
 	margin: 0;
 	padding: 0;
 	height: 100%;
@@ -410,4 +408,7 @@ ol.dec li:before {
 }
 .desc{
   float: right;
+}
+.important {
+  font-weight: bold;
 }
