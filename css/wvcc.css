@@ -49,12 +49,7 @@ h1 {
 }
 
 html {
-  background: #FFFFFF;
-  background: -webkit-gradient(linear, left top, left bottom, from(#336699), to(#FFFFFF));
-  background: linear-gradient(#336699, #FFFFFF);
   height: 100%;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
 }
 
 html.blank {
@@ -63,12 +58,17 @@ html.blank {
 
 body {
   font-family: 'Open Sans', sans-serif;
-  background-color: #FFFFFF;
+  background-color: lightgray;
   margin: 0;
   padding: 0;
-  height: 100%;
+  min-height: 100%;
   font-size: calc(12px + (26 - 12) * ((100vw - 300px) / (1600 - 300)));
   line-height: calc(1.2em + (1.5 - 1.2) * ((100vw - 300px)/(1600 - 300)));
+  background: -webkit-gradient(linear, left top, left bottom, from(#336699), to(#FFFFFF));
+  background: linear-gradient(#336699, #FFFFFF);
+  height: 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 button:focus {

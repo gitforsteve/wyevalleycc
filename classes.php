@@ -270,23 +270,28 @@ class Application {
         }
     }
     public function output(){
+      if($this->code === 'TCC'){
+        $code = "(Tintern CC)";
+      }else{
+        $code = "";
+      }
         if($this->status === "EIA required"){
             $ad = date('d/m/Y',strtotime($this->appdate));
-            printf("<tr style='border-bottom:1px solid #336699;'><td style='vertical-align:top;'>%s</td><td>%s</td><td style='vertical-align:top;'><span style='color:%s;background:%s;' title='Environmental impact assessment required' >%s</span></td></tr>",$this->number,$this->reason,$this->color,$this->bground,$ad,$this->appdate);
+            printf("<tr style='border-bottom:1px solid #336699;'><td style='vertical-align:top;'>%s<br />%s</td><td>%s</td><td style='vertical-align:top;'><span style='color:%s;background:%s;' title='Environmental impact assessment required' >%s</span></td></tr>",$this->number,$code,$this->reason,$this->color,$this->bground,$ad,$this->appdate);
         }elseif($this->status === 'Approved' OR $this->status === 'Discharged' OR $this->status === "Acceptable"){
             $ad = date('d/m/Y',strtotime($this->appdate));
-            printf("<tr style='border-bottom:1px solid #336699;'><td style='vertical-align:top;'>%s</td><td>%s</td><td style='vertical-align:top;'><span style='color:%s;background:%s;' title='Application %s' >%s</span></td></tr>",$this->number,$this->reason,$this->color,$this->bground,$this->status,$ad,$this->appdate);
+            printf("<tr style='border-bottom:1px solid #336699;'><td style='vertical-align:top;'>%s<br />%s</td><td>%s</td><td style='vertical-align:top;'><span style='color:%s;background:%s;' title='Application %s' >%s</span></td></tr>",$this->number,$code,$this->reason,$this->color,$this->bground,$this->status,$ad,$this->appdate);
         }elseif($this->status === 'Refused'){
             $ad = date('d/m/Y',strtotime($this->appdate));
-            printf("<tr style='border-bottom:1px solid #336699;'><td style='vertical-align:top;'>%s</td><td>%s</td><td style='vertical-align:top;'><span style='color:%s;background:%s;' title='Application refused' >%s</span></td></tr>",$this->number,$this->reason,$this->color,$this->bground,$ad,$this->appdate);
+            printf("<tr style='border-bottom:1px solid #336699;'><td style='vertical-align:top;'>%s<br />%s</td><td>%s</td><td style='vertical-align:top;'><span style='color:%s;background:%s;' title='Application refused' >%s</span></td></tr>",$this->number,$code,$this->reason,$this->color,$this->bground,$ad,$this->appdate);
         }elseif($this->status === 'Invalid'){
-            printf("<tr style='border-bottom:1px solid #336699;'><td style='vertical-align:top;'>%s</td><td>%s</td><td style='vertical-align:top;color:%s;background:%s' title='Application ruled as invalid'>%s</td></tr>",$this->number,$this->reason,$this->color,$this->bground,$this->status);
+            printf("<tr style='border-bottom:1px solid #336699;'><td style='vertical-align:top;'>%s<br />%s</td><td>%s</td><td style='vertical-align:top;color:%s;background:%s' title='Application ruled as invalid'>%s</td></tr>",$this->number,$code,$this->reason,$this->color,$this->bground,$this->status);
         }elseif($this->status === 'Appeal'){
             $ad = date('d/m/Y',strtotime($this->appdate));
-            printf("<tr style='border-bottom:1px solid #336699;'><td style='vertical-align:top;'>%s</td><td>%s</td><td style='vertical-align:top;'><span style='color:%s;background:%s;' >%s</span></td></tr>",$this->number,$this->reason,$this->color,$this->bground,$this->status);
+            printf("<tr style='border-bottom:1px solid #336699;'><td style='vertical-align:top;'>%s<br />%s</td><td>%s</td><td style='vertical-align:top;'><span style='color:%s;background:%s;' >%s</span></td></tr>",$this->number,$code,$this->reason,$this->color,$this->bground,$this->status);
         }elseif($this->status === 'Withdrawn'){
-            printf("<tr style='border-bottom:1px solid #336699;'><td style='vertical-align:top;'>%s</td><td>%s</td><td style='vertical-align:top;color:%s;background:%s' title='Application has been withdrawn'>%s</td></tr>",$this->number,$this->reason,$this->color,$this->bground,$this->status);
-        }else{printf("<tr style='border-bottom:1px solid #336699;'><td style='vertical-align:top;'>%s</td><td>%s</td><td style='vertical-align:top;color:%s;background:%s' title='Application is being considered'>%s</td></tr>",$this->number,$this->reason,$this->color,$this->bground,$this->status);
+            printf("<tr style='border-bottom:1px solid #336699;'><td style='vertical-align:top;'>%s<br />%s</td><td>%s</td><td style='vertical-align:top;color:%s;background:%s' title='Application has been withdrawn'>%s</td></tr>",$this->number,$code,$this->reason,$this->color,$this->bground,$this->status);
+        }else{printf("<tr style='border-bottom:1px solid #336699;'><td style='vertical-align:top;'>%s<br />%s</td><td>%s</td><td style='vertical-align:top;color:%s;background:%s' title='Application is being considered'>%s</td></tr>",$this->number,$code,$this->reason,$this->color,$this->bground,$this->status);
              }
     }
     public function matchoutput($match,$needle){
