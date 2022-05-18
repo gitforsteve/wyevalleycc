@@ -8,8 +8,8 @@ $title = "Finance - Tangible Assets";
 $desc = "The tangible assets owned on behalf of the residents by the Council";
 include "top.html";
 include "classes.php";
-$q = new Database('Asset');
-$data = $q->getData("select * from asset order by item");
+//$q = new Database('Asset');
+//$data = $q->getData("select * from asset order by item");
 echo "<h1>Tangible Assets</h1><br />";
 echo "<p>The tangible assets owned on behalf of the residents of Tintern and Llandogo by the Council</p>";
 $table = new steveTable('{
@@ -42,14 +42,14 @@ class Item {
 $items = [];
 $thisitem = "X";
 $thisvalue = $count = 0;
-foreach($data as $dataitem){
-  if($thisitem !== $dataitem->item){
-    $item = new Item($dataitem->item);
+while($dataitem = $data->each()){
+  if($thisitem !== $dataitem['item']){
+    $item = new Item($dataitem['item']);
     $items[] = $item;
-    $thisitem = $dataitem->item;
+    $thisitem = $dataitem['item'];
   }
-  $item->qty += $dataitem->qty;
-  $item->total += $dataitem->qty*$dataitem->value;
+  $item->qty += $dataitem['qty'];
+  $item->total += $dataitem['qty']*$dataitem['value'];
 }
 foreach($items as $item){
   if($item->item > ''){
