@@ -6,6 +6,14 @@ require 'top.html';
 ?>
 <div class='nine columns' id='content' style="border-radius:0 0 15px 0; ">
 <h1><?=$title?></h1>
+<div role="navigation">Our other standards documents:
+    <ul>
+      <li><a href="codeofconduct.php">Code of conduct</a></li>
+      <li><a href="standingorders.php">Standing orders</a></li>
+      <!--li><a href="financialregs.php">Financial regulations</a></li-->
+      <li><a href="complaints.php">Complaints procedure</a></li>
+    </ul>
+  </div>
 <p>Adopted 26th June 2017</p>
 <ol class="dec">
   <li>GENERAL

@@ -5,6 +5,14 @@ require 'classes.php';
 require 'top.html';
 ?>
 <div class="nine columns" id="content">
+<div role="navigation">Our other standards documents:
+    <ul>
+      <li><a href="codeofconduct.php">Code of conduct</a></li>
+      <li><a href="standingorders.php">Standing orders</a></li>
+      <li><a href="financialregs.php">Financial regulations</a></li>
+      <!--li><a href="complaints.php">Complaints procedure</a></li-->
+    </ul>
+  </div>
   <h1>Complaints Procedure</h1>
   <p>ADOPTED BY COUNCIL 20 AUGUST 2018</p>
   <p>The Council receives queries, problems and comments as part of its day to day running and they should not all be regarded as complaints. These are routine and expected and are generally resolved quickly and satisfactorily. If someone is dissatisfied with the original service or response they receive and wishes to take the matter further then the issue should be recognised as a complaint.</p>

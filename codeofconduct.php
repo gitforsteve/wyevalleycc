@@ -8,6 +8,14 @@ if(!class_exists('Database')){
 require 'top.html';
 ?>
 <div class="nine columns" id="content">
+  <div role="navigation">Our other standards documents:
+    <ul>
+      <!--li><a href="codeofconduct.php">Code of conduct</a></li-->
+      <li><a href="standingorders.php">Standing orders</a></li>
+      <li><a href="financialregs.php">Financial regulations</a></li>
+      <li><a href="complaints.php">Complaints procedure</a></li>
+    </ul>
+  </div>
 <h1>Code of Conduct</h1>
 <p>Adopted at a meeting on 27th March 2017<br />as recommended by the Welsh Assembly</p>
 <h2>PART 1 INTERPRETATION</h2>
@@ -18,15 +26,15 @@ require 'top.html';
     <li>Is a member of any committee or sub-committee of the authority, or</li>
     <li>Is a member of, and represents the authority on, any joint committee or joint sub-committee of the authority, and who is entitled to vote on any question which falls to be decided at any meeting of that committee or sub-committee;</li>
   </ol>
-  <p style="margin-left:20px;text-indent:-20px;">“meeting” (“cyfarfod”) means any meeting-</p>
+  <dfn style="margin-left:20px;text-indent:-20px;">“meeting” (“cyfarfod”) means any meeting-</dfn>
   <ol type="a">
     <li>of the relevant authority</li>
     <li>of any executive or board of the relevant authority,</li>
     <li>of any committee, sub-committee, joint committee or joint sub-committee of the relevant authority or of any such committee, sub-committee, joint committee or joint sub-committee of any executive or board of the authority, or</li>
     <li>where members or officers of the relevant authority are present other than a meeting of a political group constituted in accordance with Regulation 8 of the Local Government (Committees and Political Groups) Regulations 1990(1), and includes circumstances in which a member of an executive or board or an officer acting alone exercises a function of an authority;</li>
   </ol>
-  <p>“member” (“aelod”) includes, unless the context requires otherwise, a co-opted member,
-    “relevant authority” (“awdurdodperthnasol”) means</p>
+  <dfn>“member” (“aelod”) includes, unless the context requires otherwise, a co-opted member,
+    “relevant authority” (“awdurdodperthnasol”) means
   <ol type="a">
     <li>a county council,</li>
     <li>a county borough council,</li>
@@ -34,9 +42,10 @@ require 'top.html';
     <li>a fire and rescue authority constituted by a scheme under Section 2 of the Fire and Rescue Services Act 2004 (2) or a scheme to which Section 4 of that Act applies,</li>
     <li>a National Park authority established under Section 63 of the Environment Act 1995 (3);</li>
   </ol>
-  <p>“you” (“chi”) means you as a member or co-opted member of a relevantAuthority; and<br />
-“your authority” (“eich awdurdod”) means the relevant authority of which you are a member or co-opted member.</p>
-
+</dfn>
+  <dfn>“you” (“chi”) means you as a member or co-opted member of a relevantAuthority; and<br />
+“your authority” (“eich awdurdod”) means the relevant authority of which you are a member or co-opted member.</dfn>
+<br /><br />
 <p style="margin-left:20px;text-indent:-20px;">(2) In relation to a community council, references to an authority’s monitoring officer and an authority’s standards committee are to be read, respectively, as references to the monitoring officer and the standards committee of the county or county borough council which has functions in relation to the community council for which it is responsible under Section 56 (2) of the Local Government Act 2000.</p>
 
 <h2>PART 2 GENERAL PROVISIONS</h2>

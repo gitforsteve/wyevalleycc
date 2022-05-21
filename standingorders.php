@@ -5,6 +5,14 @@ require 'classes.php';
 require 'top.html';
 ?>
 <div class="nine columns" id="content">
+<div role="navigation">Our other standards documents:
+    <ul>
+      <li><a href="codeofconduct.php">Code of conduct</a></li>
+      <!--li><a href="standingorders.php">Standing orders</a></li-->
+      <li><a href="financialregs.php">Financial regulations</a></li>
+      <li><a href="complaints.php">Complaints procedure</a></li>
+    </ul>
+  </div>
 <h1>STANDING ORDERS</h1>
 <p>ADOPTED BY COUNCIL 28 SEPTEMBER 2020</p>
 <h2>1 RULES OF DEBATE AT MEETINGS</h2>

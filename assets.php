@@ -1,17 +1,17 @@
 <?PHP
 //cSpell:disable
-include "MyCSV.class.php";
-include "stevetable.php";
-$data = new MyCSV('data/assets.csv');
-$data->sort('item');
 $title = "Finance - Tangible Assets";
 $desc = "The tangible assets owned on behalf of the residents by the Council";
-include "top.html";
-include "classes.php";
-//$q = new Database('Asset');
-//$data = $q->getData("select * from asset order by item");
-echo "<h1>Tangible Assets</h1><br />";
-echo "<p>The tangible assets owned on behalf of the residents of Tintern and Llandogo by the Council</p>";
+require "stevetable.php";
+require "top.html";
+require "MyCSV.class.php";
+$data = new MyCSV('data/assets.csv');
+$data->sort('item');
+//include "classes.php";
+?>
+<h1 style="padding-left:10ox;">Tangible Assets</h1>
+<p>The tangible assets owned on behalf of the residents of Tintern and Llandogo by the Council</p>
+<?
 $table = new steveTable('{
   "tableCenter": true,
   "tableWidth": "70%",
