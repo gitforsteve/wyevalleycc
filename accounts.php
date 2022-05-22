@@ -10,6 +10,13 @@ include "data/accstatement.php";
 
 ?>
 <div class='nine columns' id='content'>
+<div role="navigation">Our other financial pages:
+    <ul>
+      <!--li><a href="accounts.php">Accounting statement</a></li-->
+      <li><a href="budgets.php">Budgets</a></li>
+      <li><a href="assets.php">Tangible assets</a></li>
+    </ul>
+  </div>
 <h1>Accounting statement</h1>
 <?
 

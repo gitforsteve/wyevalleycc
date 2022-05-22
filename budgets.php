@@ -19,6 +19,13 @@ while($row = $data->each()){
 $revtotals = $captotals = [0,0,0,0];
 ?>
 <div class='nine columns' id='content'>
+<div role="navigation">Our other financial pages:
+    <ul>
+      <li><a href="accounts.php">Accounting statement</a></li>
+      <!--li><a href="budgets.php">Budgets</a></li-->
+      <li><a href="assets.php">Tangible assets</a></li>
+    </ul>
+  </div>
 <?PHP
 
 $table = new steveTable('{

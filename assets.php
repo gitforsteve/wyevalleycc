@@ -9,6 +9,14 @@ $data = new MyCSV('data/assets.csv');
 $data->sort('item');
 //include "classes.php";
 ?>
+<div class="nine columns" id="content">
+<div role="navigation">Our other financial pages:
+    <ul>
+      <li><a href="accounts.php">Accounting statement</a></li>
+      <li><a href="budgets.php">Budgets</a></li>
+      <!--li><a href="assets.php">Tangible assets</a></li-->
+    </ul>
+  </div>
 <h1 style="padding-left:10ox;">Tangible Assets</h1>
 <p>The tangible assets owned on behalf of the residents of Tintern and Llandogo by the Council</p>
 <?
@@ -57,6 +65,9 @@ foreach($items as $item){
   }
 }
 $table->print();
+?>
+</div>
+<?
 include "bottom.html";
 ?>
 <script type="text/javascript">
