@@ -7,6 +7,7 @@ require "top.html";
 require "MyCSV.class.php";
 $data = new MyCSV('data/assets.csv');
 $data->sort('item');
+$assets = $data->toObj();
 //include "classes.php";
 ?>
 <div class="nine columns" id="content">
@@ -50,14 +51,14 @@ class Item {
 $items = [];
 $thisitem = "X";
 $thisvalue = $count = 0;
-while($dataitem = $data->each()){
-  if($thisitem !== $dataitem['item']){
-    $item = new Item($dataitem['item']);
+foreach($assets as $dataitem){
+  if($thisitem !== $dataitem->item){
+    $item = new Item($dataitem->item);
     $items[] = $item;
-    $thisitem = $dataitem['item'];
+    $thisitem = $dataitem->item;
   }
-  $item->qty += $dataitem['qty'];
-  $item->total += $dataitem['qty']*$dataitem['value'];
+  $item->qty += $dataitem->qty;
+  $item->total += $dataitem->qty*$dataitem->value;
 }
 foreach($items as $item){
   if($item->item > ''){

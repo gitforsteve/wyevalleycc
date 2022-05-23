@@ -66,7 +66,7 @@ if (!defined('SORT_NULL'))
  *
  * Don't hesitate to report bugs or feature requests.
  *
- * @author Thiemo Mättig (http://maettig.com/)
+ * @author Thiemo Mï¿½ttig (http://maettig.com/)
  * @version 2009-09-02
  * @package TM
  * @requires PHP 4.0.5 (array_search, strcoll)
@@ -606,7 +606,13 @@ class MyCSV
         if (!list($id, $data) = each($this->data)) return false;
         return array('id' => $id) + $data;
     }
-
+    /*******
+     * Objectify
+     */
+    function toObj(){
+      $obj = json_decode(json_encode($this->data));
+      return $obj;
+    }
     /**
      * Sets the internal pointer to the last data row. Returns the last data
      * row.
