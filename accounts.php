@@ -21,13 +21,14 @@ include "data/accstatement.php";
 <?
 
 $table = new steveTable('{
-  "widths": ["5%","55%","20%","20%"],
+  "widths": ["5%","50%","22%","21%","2%"],
   "border": "b",
   "tableBorder": true,
   "borderColor": "gray",
   "sum": [0,0,0,0],
   "currency": [0,0,0,0],
   "currencySymbol": "&pound;",
+  "decimals": 0,
   "brackets": [0,0,1,1]
 }');
 $table->reset('{ "aligns": ["L","L","R","L"] }');

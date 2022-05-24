@@ -11,7 +11,7 @@ require 'classes.php';
   <h2><a href="codeofconduct.php">Code of Conduct</a></h2>
   <p>This was adopted at a meeting on 27th March 2017 and is the recommended code of conduct to which we must abide at our meetings and other dealings on your behalf.</p>
   <h2><a href="standingorders.php">Standing Orders</a></h2>
-  <p>This was adopted by Council on 20th August 2018. This lays out how we must carry out our meetings.</p>
+  <p>This was adopted by Council on 28th September 2020. This lays out how we must carry out our meetings.</p>
   <h2><a href="financialregs.php">Financial Regulations</a></h2>
   <p>The regulations which we follow in our financial business.</p>
   <h2><a href="complaints.php">Complaints Procedure</a></h2>
