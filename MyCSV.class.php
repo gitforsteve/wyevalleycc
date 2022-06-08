@@ -608,6 +608,8 @@ class MyCSV
     }
     /*******
      * Objectify
+     * Converts and returns the table as
+     * an object for -> notation
      */
     function toObj(){
       $obj = json_decode(json_encode($this->data));
