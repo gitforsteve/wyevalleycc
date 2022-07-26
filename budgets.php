@@ -25,6 +25,7 @@ $revtotals = $captotals = [0,0,0,0];
       <li><a href="accounts.php">Accounting statement</a></li>
       <!--li><a href="budgets.php">Budgets</a></li-->
       <li><a href="assets.php">Tangible assets</a></li>
+      <li><a href="paymenttomembers.php">Payments to members</a></li>
     </ul>
   </div>
 <?PHP

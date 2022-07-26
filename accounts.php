@@ -1,4 +1,5 @@
 <?PHP
+// cSpell:disable
 $title = "Accounting Statement";
 $desc = "our latest accounting statement";
 require 'top.html';
@@ -15,6 +16,7 @@ include "data/accstatement.php";
       <!--li><a href="accounts.php">Accounting statement</a></li-->
       <li><a href="budgets.php">Budgets</a></li>
       <li><a href="assets.php">Tangible assets</a></li>
+      <li><a href="paymenttomembers.php">Payments to members</a></li>
     </ul>
   </div>
 <h1>Accounting statement</h1>

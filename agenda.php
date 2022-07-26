@@ -1,4 +1,5 @@
 <?PHP
+// cSpell:disable
 $title = "Agenda for meetings";
 $desc = "Agenda for our meetings";
 $keywords = "council meeting agenda";
@@ -31,8 +32,9 @@ $agendas = array_reverse($agendas);
 
 foreach($agendas as $agenda){
   $note = "";
-  $file = "minutes/".$agenda->filepart.".txt";
-  if(file_exists($file)){
+  $filesearch = $agenda->filepart;
+  $files = glob("minutes/".$filesearch."*.txt");
+  if(count($files) > 0) {
     $note = sprintf(" ... %s<a href='showminute.php?%s' title='View minutes for this meeting'>Minutes are available</a>",$space,$agenda->filepart);
   }
   printf("<li><a href='showagenda.php?%s' title='Get the agenda for %s'>%s</a> %s</li>",$agenda->filepart,$agenda->date,$agenda->date,$note);

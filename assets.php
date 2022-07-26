@@ -16,6 +16,7 @@ $assets = $data->toObj();
       <li><a href="accounts.php">Accounting statement</a></li>
       <li><a href="budgets.php">Budgets</a></li>
       <!--li><a href="assets.php">Tangible assets</a></li-->
+      <li><a href="paymenttomembers.php">Payments to members</a></li>
     </ul>
   </div>
 <h1 style="padding-left:10ox;">Tangible Assets</h1>

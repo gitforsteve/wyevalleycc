@@ -35,33 +35,33 @@ include "top.html";
         switch($count){
             case 0: print("No new items"); break;
             case 1: print("There is 1 active notice"); break;
-            default: printf("There are %s active notices, the latest shown here</a></p>",$count); break;
+            default: printf("There are %s active notices, the latest shown here",$count); break;
         }
-        print("</p>");
-        $q->query("SELECT * FROM notice WHERE (start <= CURDATE() AND date >= CURDATE()) OR (start = '0000-00-00' and date >= CURDATE()) order by noticeid desc");
-        $q->execute();
-        $items = $q->resultset();
-        if($q->rowCount()===0){
-            print("No new items");
+        print("</a></p>");
+        if($count < 1){
+          print("<p>To view expired notices <a href='notices.php' title='link to view all notices'>click here</a> </p>");
         }else{
-            $counter = 0;
-            foreach($items as $item){
-                $dt = substr($item->date,8,2)."/".substr($item->date,5,2)."/".substr($item->date,0,4);
-                if($counter < 3){
-                    printf("<a title='See the full notice' class='newshead' href=\"singlenotice.php?item=%s');\">",$item->noticeid);
-                    echo $item->headline;
-                    echo "</a><br />";
-                    echo "<span class='para'>".substr(strip_tags($item->notice),0,50)."...</span>";
-                    if($item->start !== '0000-00-00'){
-                        $now = new DateTime();
-                        $start = new DateTime($item->start);
-                        $end = new DateTime($item->date);
-                        date_add($end,date_interval_create_from_date_string("1 day"));
-                    }
-                    echo "<hr>";
-                }
-                $counter += 1;
-            }
+          $q->query("SELECT * FROM notice WHERE (start <= CURDATE() AND date >= CURDATE()) OR (start = '0000-00-00' and date >= CURDATE()) order by noticeid desc");
+          $q->execute();
+          $items = $q->resultset();
+          $counter = 0;
+          foreach($items as $item){
+              $dt = substr($item->date,8,2)."/".substr($item->date,5,2)."/".substr($item->date,0,4);
+              if($counter < 3){
+                  printf("<a title='See the full notice' class='newshead' href=\"singlenotice.php?item=%s');\">",$item->noticeid);
+                  echo $item->headline;
+                  echo "</a><br />";
+                  echo "<span class='para'>".substr(strip_tags($item->notice),0,50)."...</span>";
+                  if($item->start !== '0000-00-00'){
+                      $now = new DateTime();
+                      $start = new DateTime($item->start);
+                      $end = new DateTime($item->date);
+                      date_add($end,date_interval_create_from_date_string("1 day"));
+                  }
+                  echo "<hr>";
+              }
+              $counter += 1;
+          }
         }
         ?>
     </div>

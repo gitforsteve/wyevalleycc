@@ -15,15 +15,13 @@ $colours = Array('red','blue','green','yellow');
 $spectrum = $colours[mt_rand(0,3)];
 $database = new Database("Visitor");
 
-$database->query("SELECT * FROM newvisits");
-  $database->execute();
-  $data = $database->resultset();
+$data = $database->getData("SELECT * FROM newvisits");
 // get rid of older data
 $thisyear = date("Y");
 $result = [];
 foreach($data as $item){
 	$dt = substr($item->id,-4);
-	if($thisyear+0 - $dt+0 < 3){
+	if((int)$thisyear - (int)$dt < 3){
 		$result[] = $item;
 	}
 }
@@ -84,7 +82,7 @@ $lastreading = json_decode($last);
    </head>
   <body>
     <?PHP
-      print("<table><tr><td>Month</td><td style='text-align:right;'>Count</td><td style='text-align:right;'>Daily</td></tr>");
+      print("<table style='overflow-y:scroll;height:700px;display:block;'><tr><td>Month</td><td style='text-align:right;'>Count</td><td style='text-align:right;'>Daily</td></tr>");
       foreach($result as $visit){
 		$d = strtotime('1 '.$visit->id);
 		$days = days_in_month(date('m',$d), date('Y',$d));

@@ -32,6 +32,7 @@ if($database->rowCount() > 0){
   printf("<p>Oops! Sorry nothing matches '%s'<br />",$needle);
   //print("<p style='cursor:pointer;' onclick=\"$('#content').load('planning.php');\" role='link'>Click here to return to Planning</p>");
 }
+print "</div>";
 require "bottom.html";
 ?>
 <script type="text/javascript">

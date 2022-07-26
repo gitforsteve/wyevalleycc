@@ -40,6 +40,7 @@ if($q->rowCount()===0){
     $counter += 1;
   }
 }
+echo "</div>";
 require 'bottom.html';
 ?>
   <script type="text/javascript">

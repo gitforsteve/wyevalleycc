@@ -14,7 +14,7 @@ require 'top.html';
     </ul>
   </div>
   <h1>Complaints Procedure</h1>
-  <p>ADOPTED BY COUNCIL 20 AUGUST 2018</p>
+  <p>ADOPTED BY COUNCIL 25 JULY 2022</p>
   <p>The Council receives queries, problems and comments as part of its day to day running and they should not all be regarded as complaints. These are routine and expected and are generally resolved quickly and satisfactorily. If someone is dissatisfied with the original service or response they receive and wishes to take the matter further then the issue should be recognised as a complaint.</p>
   <ol style="list-style-position: outside;">
     <li>If a complaint about procedures or administration is notified orally to a Councillor or the Clerk and it is not possible to satisfy the complainant fully forthwith the complainant shall be asked to put the complaint in writing to the Clerk and be assured that it will be dealt with promptly after receipt.</li>

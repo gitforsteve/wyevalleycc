@@ -18,6 +18,11 @@ function display($dt,$mode,$val=0){
 		default: return false;
 	}
 }
+if (!function_exists('str_contains')) {
+  function str_contains($haystack, $needle) {
+      return $needle !== '' && mb_strpos($haystack, $needle) !== false;
+  }
+}
 // ELECTORS RIGHTS CONTROLS
 $year = "2022";
 $hours = "9:30 and 16:30";
@@ -60,14 +65,22 @@ if($today >= $fromdate && $today <= $todate){
     <?
     if(isset($mailpage)){
       ?>
-      <script src='https://www.google.com/recaptcha/api.js' async defer></script>
+      <script src='https://www.google.com/recaptcha/api.js'></script>
       <?
     }
     ?>
+    <!-- google translate-->
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <!-- end translate -->
     <script type="text/javascript">
 		var eobject = null;
 		 var mousePos = {x: -1, y: -1};
 		 var currentPage = 'index.html';
+     // google translate
+     //function googleTranslateElementInit(){
+     // new google.translate.TranslateElement({pageLanguage: 'en'},'google_translate_element');
+     //}
+     //
 		 function resize(){
 			var h = $('#document').innerHeight();
 			$('#content').height(h);
@@ -172,5 +185,10 @@ if($today >= $fromdate && $today <= $todate){
 
           </nav>
 		    <br />
-        </div> <!-- four column menu-->
-        <main role="main">
+        <!-- google translate -->
+        <!--div class="u_full-width" style="display:flex;justify-content:center;">
+          <div class="u-full-width" style="padding-left: 5px;" id="google_translate_element">
+          </div>
+        </div-->
+      </div> <!-- four column menu-->
+      <main role="main">

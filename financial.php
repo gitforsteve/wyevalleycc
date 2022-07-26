@@ -29,6 +29,8 @@ issued an audit opinion.</p>";
   <p>Each year the Council sets budgets and this page show the budget and the amount spent  for the last financial year.</p>
   <h2><a href="assets.php">Tangible Assets</a></h2>
   <p>The Council owns, on behalf of its electors, a number of actual assets. These are listed together with the value.</p>
+  <h2><a href="paymenttomembers.php">Payments to members</a></h2>
+  <p>This is a report of payments made to Councillors such as allowances and expenses.</p>
 </div>
 <?PHP
   require "bottom.html";

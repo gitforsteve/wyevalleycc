@@ -18,7 +18,11 @@ function showbetween($start,$end){
     $edate = date_create($end);
     return $today >= $sdate && $today <= $edate ? true : false;
 }
-
+if (!function_exists('str_contains')) {
+  function str_contains($haystack, $needle) {
+      return $needle !== '' && mb_strpos($haystack, $needle) !== false;
+  }
+}
 $demo = array('localhost','127.0.0.1','::1');
 if(in_array($_SERVER['REMOTE_ADDR'], $demo)){
     // development
@@ -255,9 +259,17 @@ class Application {
     public $status;
     public $appdate;
     public $color;
+    public $statuses;
     public $bground = '#ffffff';
     function __construct(){
-        switch($this->status){
+      $this->statuses = array('Current'=>['#000000','#ffffff'],'Appeal'=>['#000000','#ffd9b3'],'Refused'=>['#ffffff','#cc0000'],'Approved'=>['#000000','#33ff00'],'Acceptable'=>['#000000','#33ff00'],'Discharged'=>['#000000','#33ff00'],'Withdrawn'=>['#000000','#dddddd'],'EIA  required'=>['#000000','#e5d0b5']);
+      foreach($this->statuses as $key=>$value){
+        if(str_contains($this->status,$key)){
+          $this->color = $value[0];
+          $this->bground = $value[1];
+        }
+      }
+      /*switch($this->status){
             case 'Current' : $this->color = '#000000'; break;
             case 'Appeal' : $this->color = '#000000';
             $this->bground = '#ffd9b3'; break;
@@ -267,7 +279,7 @@ class Application {
             case 'Discharged' : $this->color = '#000000'; $this->bground = '#33ff00'; break;
             case 'Withdrawn' : $this->color = '#000000'; $this->bground = '#dddddd'; break;
             case 'EIA required' : $this->color = '#000000'; $this->bground = '#e5d0b5';
-        }
+        }*/
     }
     public function output(){
       if($this->code === 'TCC'){

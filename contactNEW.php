@@ -163,7 +163,7 @@ $councillors->sort('surname');
   </div>
   <div class="row" style="color: red; font-weight: bold; text-align:center;"><?=$errorMessage?> <?=$unsent?></div>
   <div class="row">
-    <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" autocomplete="off">
+    <form id="contactForm" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" autocomplete="off">
       <label for="name">Your name</label>
       <input class="u-full-width" type="text" name="name" id="name" placeholder="Your full name (required)" value="<?=$_POST['name']?>">
       <label for="emailFrom">Your email address</label>
@@ -236,9 +236,9 @@ $councillors->sort('surname');
       ?>
       <input type="checkbox" name="email_me" style="display:none; !important" tabindex="-1" autocomplete="off" placeholder="If you are human do not check this box" >
       <input type="radio" name="reply" id="none" value="none" <?=$rep?>> no reply required thanks</p>
-      <div class="g-recaptcha" data-sitekey="6LfVv88fAAAAANvEHvw8aNvhT_qrtvBHoAA4Z71s"></div>
+      <!--div class="g-recaptcha" data-sitekey="6LfVv88fAAAAANvEHvw8aNvhT_qrtvBHoAA4Z71s"></div-->
       <br />
-      <input class="shadow" name="submit" type="submit" value="Send Email" />   
+      <button class="shadow g-recaptcha" name="submit" type="button" date-sitekey="reCAPTCHA_site_key" data-callback="onSubmit" data-action="submit">Send Email</button>   
     </form>
   </div>
 </div>
@@ -247,4 +247,7 @@ require "bottom.html";
 ?>
 <script>
   handleMenu($('#contact'));
+  function onSubmit(token){
+    $('#contactForm').submit();
+  }
 </script>

@@ -12,10 +12,7 @@ $files = glob("minutes/*.txt");
 foreach($files as $filename){
   $agm = false;
   $doc = basename($filename);
-   if(substr($doc,-5,1) === "a"){
-    $agm = true;
-    $doc = substr($doc,0,8).substr($doc,-4);
-  }
+  $draft = str_contains($doc,'draft') ? 1 : 0;
   $filepart = substr($doc,0,-4);
   $datepart = substr($doc,0,4)."-".substr($doc,4,2)."-".substr($doc,6,2);
   $date = date("jS M Y",strtotime($datepart));
@@ -27,17 +24,15 @@ foreach($files as $filename){
     $minute->date = $date;
     $minute->filepart = $filepart;
     $minute->file = $datepart;
+    $minute->draft = $draft;
     $minutes[$doc] = $minute;
   }
 }
 
 $minutes = array_reverse($minutes);
 foreach($minutes as $minute){
-  $agm_msg = $minute->agm ? " (includes <b>draft</b> AGM minutes)" : "";
-  if($minute->agm){
-    $minute->filepart = $minute->filepart."a";
-  }
-  printf("<li><a href='showminute.php?%s' title='Read the minutes for %s'>%s</a>%s</li>",$minute->filepart,$minute->date,$minute->date,$agm_msg);
+  $draft_msg = $minute->draft === 1 ? " DRAFT" : "";
+  printf("<li><a href='showminute.php?%s' title='Read the minutes for %s'>%s</a> %s</li>",$minute->filepart,$minute->date,$minute->date,$draft_msg);
 }
 print("</ul>")
 ?>

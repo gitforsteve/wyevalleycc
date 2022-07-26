@@ -14,12 +14,16 @@ function plansort($a,$b){
   if($a->number===$b->number) return 0;
   return ($a->number<$b->number)?1:-1;
 }
+if (!function_exists('str_contains')) {
+  function str_contains($haystack, $needle) {
+      return $needle !== '' && mb_strpos($haystack, $needle) !== false;
+  }
+}
 ?>
 <div class='nine columns' style='padding-right: 10px; border-radius:0 0 15px 0; ' id='content'>
 <h1>Planning</h1>
-<p>Local planning applications may be listed here when details become available. For direct access to Monmouthshire CC Planning click for <a title="External link to Monmouthshire Planning weekly page" href="https://planningonline.monmouthshire.gov.uk/online-applications/search.do?action=weeklyList" target="new">weekly list</a> or <a title="External link to Monmouthshire Planning monthly list" href="https://planningonline.monmouthshire.gov.uk/online-applications/search.do?action=monthlyList" target="new">monthly list</a></p>
-<p class="important">Due to the change of boundaries some planning shown may relate to Tintern Community Council and updating may be less frequent in this transition period.</p>
-<p>If an application has been approved, refused, invalidated or withdrawn it will be retained for a period of 30 days before being removed from this list. Approved and refused applications will show the date of approval or refusal, in green for approved and red for refused. Note that there may be a delay between a change in status and an update to this page.</p>
+<p>Local planning applications may be listed here when details become available. For direct access to Monmouthshire CC Planning click for <a class="button shadow" title="External link to Monmouthshire Planning weekly page" href="https://planningonline.monmouthshire.gov.uk/online-applications/search.do?action=weeklyList" target="new">weekly list</a> or <a class="button shadow" title="External link to Monmouthshire Planning monthly list" href="https://planningonline.monmouthshire.gov.uk/online-applications/search.do?action=monthlyList" target="new">monthly list</a></p>
+
 <form action="planningsearch.php" method="POST" onsubmit="return $('#srch').val() > ''">
 <label for="srch" style="display:inline;">Search our planning records</label> <input size="25" id="srch" name="srch" type="text" placeholder="Search all of our records" />&nbsp;<input class="shadow" title="Search button" id="srchbtn" type="submit" style="width:80px;text-align:center;padding:0;" value="SEARCH"><br />
 </form>
@@ -87,6 +91,4 @@ require 'bottom.html';
   }, function() {
     $('#hover').hide();
   });
-  //var text = "A list of planning applications made within the village and surrounding area. These have been submitted by Monmouthshire CC to the Community Council for comment and the status of each is shown.<br />Clicking on an application number will copy it to your clipboard and launch the new MCC search page in a new window or tab. Paste into the search field.<br />Note that applications approved or refused more than 30 days ago will not be displayed.</p>";
-  //$('#current').html("<p style='cursor:help;' onclick=\"$('#help').html(text);$('#help').show();eobject.addClass('reversed');\" onmouseleave=\"$('#help').hide();eobject.removeClass('reversed');\">Planning<br /><br />What is this? <img src='images/help.png' /></p>");
 </script>
