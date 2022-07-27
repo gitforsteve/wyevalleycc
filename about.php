@@ -51,7 +51,7 @@ if(!isset($_GET['ward'])){
   ?>
 	    <div class='row councillor' style="display:flex">
 	      <div class='four columns'>
-	        <img class="u-full-width" src="images/<?=$councillor['photo']?>" alt="Photo of Councillor <?=$councillor['name']?> <?=$councillor['surname']?>" />
+	        <img class="u-full-width" style="padding-right:10px;" src="images/<?=$councillor['photo']?>" alt="Photo of Councillor <?=$councillor['name']?> <?=$councillor['surname']?>" />
 	      </div>
 	      <div class="eight columns">
 	        <span><?=$councillor['name']?> <?=$councillor['surname']?> </span><?=$stat?><br /><?=$address?><br /><?=$phone?> <?=$councillor['phone']?><br /><br />
@@ -59,7 +59,7 @@ if(!isset($_GET['ward'])){
           <br />
           <?PHP
             if(strlen($councillor['responsibility']) > 0){
-              printf("Responsibility: %s<br /><br />",$councillor['responsibility']);
+              printf("<span style='font-size:80%%;font-weight:normal;'>Responsibility: %s</span><br /><br />",$councillor['responsibility']);
             }
           ?>
 	      </div>
