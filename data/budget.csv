@@ -1,0 +1,30 @@
+id,type,text,budget1,spend1,budget2,spend2
+1,revenue,Clerk's salary,3800,3942,6500,432
+2,revenue,Clerk's home allowance,350,350,400,0
+3,revenue,Clerk's expenses,450,396.32,600,26.2
+4,revenue,Training,50,0,420,0
+5,revenue,Cllr expenses,250,0,1400,62.55
+6,revenue,Chair's honorarium,300,300,500,0
+7,revenue,Village hall hire,200,144,200,0
+8,revenue,Council insurance,1400,776.72,800,0
+9,revenue,Tintern village hall insurance,0,983.72,1000,0
+10,revenue,Village hall business rates,0,0,500,
+11,revenue,Village hall services,0,0,700,0
+12,revenue,Subs (OVW/SLCC),220,223,300,133
+13,revenue,Audit,300,75,500,0
+14,revenue,Elections,200,0,250,0
+15,revenue,Safety inspections,100,79,100,0
+16,revenue,Maintenance,10000,9826.07,2000,130
+17,revenue,Data protection,40,40,40,40
+18,revenue,Gwent Magistrates appeal fee,60,60,0,0
+19,capital,Village hall/playground,0,0,1500,0
+20,capital,Churchyard,500,500,1000,0
+21,capital,Tintern News,300,300,300,0
+22,capital,Tintern websites,150,129.75,500,11
+23,capital,Church Lads Brigade,100,300,500,0
+24,capital,Charities,100,100,1500,0
+25,capital,Projects*,1000,453.94,8500,2377.99
+26,capital,Education grants,500,500,1000,0
+27,capital,Village fete,500,0,500,0
+28,capital,Festivals,0,0,500,0
+29,capital,Summer play scheme,0,0,500,0
