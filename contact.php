@@ -27,6 +27,9 @@ function isValid()
     }
 }
 function test_input($data) {
+  if(strtoupper($data) === 'CRYSOSOK'){
+    return false;
+  }
   $data = trim($data);
   $data = stripslashes($data);
   $data = htmlspecialchars($data);
@@ -206,7 +209,7 @@ $councillors->sort('surname');
         }
       ?>
       <label>
-        <input type="checkbox" id="copy" name="copy" <?echo $check?>>
+        <input type="checkbox" id="copy" name="copy" <?=$check?>>
         <span class="label-body">Would you like a copy sent to your email address?</span>
       </label>
       <p>How would you like the reply?<br />
