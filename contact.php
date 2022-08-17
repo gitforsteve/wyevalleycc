@@ -1,6 +1,11 @@
 <?PHP
 // cSpell:disable
 $mailpage = true;
+if (!function_exists('str_contains')) {
+  function str_contains($haystack, $needle) {
+      return $needle !== '' && mb_strpos($haystack, $needle) !== false;
+  }
+}
 function isValid() 
 {
     try {
@@ -27,9 +32,14 @@ function isValid()
     }
 }
 function test_input($data) {
-  if(strtoupper($data) === 'CRYSOSOK'){
-    return false;
+  $bad = 0;
+  if(isset($_POST['email_me'])){
+    $bad = 1;
   }
+  if(str_contains(strtoupper($data),"SOK")){
+      $bad = 1;
+  }
+  if($bad === 1){return false;}
   $data = trim($data);
   $data = stripslashes($data);
   $data = htmlspecialchars($data);

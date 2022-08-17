@@ -2336,8 +2336,12 @@ function GetMultiCellHeight($w, $h, $txt, $border=null, $align='J') {
      return $this->FontSizePt;
    }
    function CheckMark($size=11){
+		$font = $this->FontFamily;
+		$fontsize = $this->FontSizePt;
+		$fontstyle = $this->FontStyle;
      $this->SetFont('ZapfDingbats','',$size);
      $this->Cell(5,5,'4');
+	 	$this->SetFont($font,$fontstyle,$fontsize);
    }
    function CheckedBox(){
      $x = $this->GetX();

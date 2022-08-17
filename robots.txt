@@ -16,6 +16,7 @@ Disallow: /logs/
 Disallow: /minutes/
 Disallow: /norelease/
 Disallow: /voting/
+Disallow: /expenses/
 Disallow: /*?*
 Disallow: bottom.html
 Disallow: classes.php
