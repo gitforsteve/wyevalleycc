@@ -3,21 +3,29 @@
 require 'classes.php';
 require 'fpdf.php';
 require 'fpdi.php';
+function test_input($data) {
+  $data = trim($data,"£");
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
+
 $rate = 0.45;
-$name = $_POST['name'];
-$date = $_POST['date'];
-$description = $_POST['description'];
+$name = test_input($_POST['name']);
+$date = test_input($_POST['date']);
+$description = test_input($_POST['description']);
 $farerect = isset($_POST['farerec']);
 $parkrect = isset($_POST['parkingrec']);
 $accomrect = isset($_POST['accomrec']);
 $foodrect = isset($_POST['foodrec']);
-$fares = floatval($_POST['fares']);
-$miles = floatval($_POST['mileage']);
-$parking = floatval($_POST['parking']);
-$accommodation = floatval($_POST['accom']);
-$food = floatval($_POST['food']);
-$otherdesc = $_POST['otherdesc'];
-$other = floatval($_POST['other']);
+$fares = floatval(test_input($_POST['fares']));
+$miles = floatval(test_input($_POST['mileage']));
+$parking = floatval(test_input($_POST['parking']));
+$accommodation = floatval(test_input($_POST['accom']));
+$food = floatval(test_input($_POST['food']));
+$otherdesc = test_input($_POST['otherdesc']);
+$other = floatval(test_input($_POST['other']));
 $otherrect = isset($_POST['otherrec']);
 $total = $fares + ($miles*$rate) + $parking + $accommodation + $food + $other;
 $pdf = new FPDI();
@@ -48,14 +56,13 @@ if($fares > 0){
 }
 // MILES
 $pdf->SetXY(76,140);
-if($miles !== 0){
+if($miles > 0){
   $pdf->Cell(10,5,$miles);
 }
 // RATE
 $pdf->SetX(144);
-if($miles !== 0){
-  $pdf->Cell(10,5,($rate * 100)."p");
-}
+$pdf->Cell(10,5,($rate * 100)."p");
+
 // TRAVELCOST
 $pdf->SetX(165);
 if($miles > 0){
@@ -85,7 +92,7 @@ if($food > 0){
 }
 // OTHER
 $pdf->SetXY(144,185);
-if(isset($otherrect)){
+if($otherrect){
   $pdf->CheckedBox();
 }else{
   $pdf->CheckBox();

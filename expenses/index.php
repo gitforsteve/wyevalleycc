@@ -77,11 +77,11 @@
                             <input type="number" step="0.01" name="fares" id="fares" class="u-full-width" placeholder="Receipts required">
                             <input type="checkbox" name="farerec"> Receipts attached
                         </div>
-                        <div class="four columns">
+                        <div class="three columns">
                             <label for="mileage">Vehicle mileage</label>
                             <input type="number" step="0.01" name="mileage" id="mileage" class="u-full-width" placeholder="Actual mileage">
                         </div>
-                        <div class="three columns">
+                        <div class="four columns">
                             <label for="parking">Parking fees</label>
                             <input type="number" step="0.01" name="parking" id="parking" class="u-full-width" placeholder="Receipt/ticket required">
                             <input type="checkbox" name="parkingrec"> Receipts attached
@@ -108,21 +108,23 @@
                 <div class="row">
                     <fieldset>
                         <legend>Other expense</legend>
-                        <div class="eight columns">
+                        <div class="seven columns">
                             <label for="otherdesc">Description of expense</label>
                             <textarea id="otherdesc" name="otherdesc" class="u-full-width" placeholder="Enter details of other expenses"></textarea>
                         </div>
-                        <div class="three columns">
+                        <div class="four columns">
                             <label for="other">Amount paid</label>
-                            <input type="number" step="0.01" name="other" id="other" class="u-full-width" placeholder="Receipt required">
+                            <input type="number" step="0.01" name="other" id="other" class="u-full-width" placeholder="Receipt if available">
                             <br />
-                            <input type="checkbox" name="otherrec"> Receipt attached
+                            <input type="checkbox" name="foodrec"> Receipt attached
                         </div>
                     </fieldset>
                 </div>
                 <div class="row">
                     <p>ENTER AMOUNTS WITH NO POUND SIGN</p>
-                    <p>Fares are fares for coach, train, bus, etc., and parking fees and receipts must be scanned and sent<br />Mileage is actual mileage for the journey(s)<br />Parking fees do <span style="font-weight:bold;">not</span> include parking fines<br />Accommodation receipts must be scanned and sent</p>
+                    <p>Fares are fares for coach, train, bus, etc.<br />
+                    Mileage is actual mileage for the journey(s)<br /><strong>Parking fees do not include parking fines.</strong></p>
+                    <p>Receipts must be scanned and sent</p>
                     <p style="font-weight:bold">IMPORTANT</p>
                     <p>By submitting this form you are certifying that the amounts were expended while on Wyevalley Community Council business.</p>
                     <p>A PDF of the form will be produced and this should be saved and sent to the Clerk.</p>
