@@ -124,7 +124,7 @@
                     <p>ENTER AMOUNTS WITH NO POUND SIGN</p>
                     <p>Fares are fares for coach, train, bus, etc., and parking fees and receipts must be scanned and sent<br />Mileage is actual mileage for the journey(s)<br />Parking fees do <span style="font-weight:bold;">not</span> include parking fines<br />Accommodation receipts must be scanned and sent</p>
                     <p style="font-weight:bold">IMPORTANT</p>
-                    <p>By submitting this form you are certifying that the amounts were expended while on Tintern Community Council business.</p>
+                    <p>By submitting this form you are certifying that the amounts were expended while on Wyevalley Community Council business.</p>
                     <p>A PDF of the form will be produced and this should be saved and sent to the Clerk.</p>
                     <input type="submit" id="printform" name="printform" value="Produce form" />
                 </div>
