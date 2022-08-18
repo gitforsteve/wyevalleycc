@@ -106,6 +106,21 @@
                     </fieldset>
                 </div>
                 <div class="row">
+                    <fieldset>
+                        <legend>Other expense</legend>
+                        <div class="eight columns">
+                            <label for="otherdesc">Description of expense</label>
+                            <textarea id="otherdesc" name="otherdesc" class="u-full-width" placeholder="Enter details of other expenses"></textarea>
+                        </div>
+                        <div class="three columns">
+                            <label for="other">Amount paid</label>
+                            <input type="number" step="0.01" name="other" id="other" class="u-full-width" placeholder="Receipt required">
+                            <br />
+                            <input type="checkbox" name="otherrec"> Receipt attached
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="row">
                     <p>ENTER AMOUNTS WITH NO POUND SIGN</p>
                     <p>Fares are fares for coach, train, bus, etc., and parking fees and receipts must be scanned and sent<br />Mileage is actual mileage for the journey(s)<br />Parking fees do <span style="font-weight:bold;">not</span> include parking fines<br />Accommodation receipts must be scanned and sent</p>
                     <p style="font-weight:bold">IMPORTANT</p>

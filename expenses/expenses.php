@@ -16,7 +16,10 @@ $miles = floatval($_POST['mileage']);
 $parking = floatval($_POST['parking']);
 $accommodation = floatval($_POST['accom']);
 $food = floatval($_POST['food']);
-$total = $fares + ($miles*$rate) + $parking + $accommodation + $food;
+$otherdesc = $_POST['otherdesc'];
+$other = floatval($_POST['other']);
+$otherrect = isset($_POST['otherrec']);
+$total = $fares + ($miles*$rate) + $parking + $accommodation + $food + $other;
 $pdf = new FPDI();
 $pdf->AddPage();
 $pdf->setSourceFile('wvccexpenses.pdf');
@@ -24,27 +27,27 @@ $tplIdx = $pdf->importPage(1);
 $pdf->useTemplate($tplIdx);
 $pdf->SetFont("Arial","B",10);
 // NAME
-$pdf->SetXY(60,45);
+$pdf->SetXY(70,40);
 $pdf->Cell(0,5,$name);
 // DATE
-$pdf->SetXY(60,60);
+$pdf->SetXY(70,54);
 $pdf->Cell(0,5,$date);
 // DESCRIPTION
-$pdf->SetXY(35,85);
+$pdf->SetXY(30,75);
 $pdf->MultiCell(150,5,$description);
 // FARES
-$pdf->SetXY(144,187);
+$pdf->SetXY(144,130);
 if($farerect){
   $pdf->CheckedBox();
 }else{
   $pdf->CheckBox();
 }
-$pdf->SetXY(165,187);
+$pdf->SetXY(165,130);
 if($fares > 0){
   $pdf->Cell(15,5,substr("£",1,1).number_format($fares,2),0,0,'R');
 }
 // MILES
-$pdf->SetXY(76,197);
+$pdf->SetXY(76,140);
 if($miles !== 0){
   $pdf->Cell(10,5,$miles);
 }
@@ -59,32 +62,45 @@ if($miles > 0){
   $pdf->Cell(15,5,substr("£",1,1).number_format($miles*$rate,2),0,0,'R');
 }
 // PARKING
-$pdf->SetXY(144,207);
+$pdf->SetXY(144,150);
 if($parkrect){
   $pdf->CheckedBox();
 }else{
   $pdf->CheckBox();
 }
 $pdf->SetFont("Arial","B",10);
-$pdf->setXY(165,207);
+$pdf->setXY(165,150);
 if($parking > 0){
   $pdf->Cell(15,5,substr("£",1,1).number_format($parking,2),0,0,'R');
 }
 // ACCOMMODATION
-$pdf->SetXY(165,218);
+$pdf->SetXY(165,161);
 if($accommodation > 0){
   $pdf->Cell(15,5,substr("£",1,1).number_format($accommodation,2),0,0,'R');
 }
 // FOOD
-$pdf->SetXY(165,228);
+$pdf->SetXY(165,172);
 if($food > 0){
   $pdf->Cell(15,5,substr("£",1,1).number_format($food,2),0,0,'R');
 }
+// OTHER
+$pdf->SetXY(144,185);
+if(isset($otherrect)){
+  $pdf->CheckedBox();
+}else{
+  $pdf->CheckBox();
+}
+$pdf->SetXY(30,192);
+if($other > 0){
+  $pdf->MultiCell(110,5,$otherdesc,0,'L',false);
+  $pdf->SetXY(165,202);
+  $pdf->Cell(15,5,substr("£",1,1).number_format($other,2),0,0,"R");
+}
 // TOTAL
-$pdf->SetXY(165,238);
+$pdf->SetXY(165,229);
 $pdf->Cell(15,5,substr("£",1,1).number_format($total,2),0,0,'R');
 // SIGNATURE
-$pdf->SetXY(100,252);
+$pdf->SetXY(100,249);
 $pdf->MultiCell(80,5,"By submitting this claim the claimant has agreed to the statement hereon and declares that all amounts claimed were incurred for Council business.");
 
 $pdf->SetTextColor(255);

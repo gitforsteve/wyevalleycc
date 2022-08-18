@@ -247,7 +247,7 @@ $councillors->sort('surname');
           $rep = "";
         }
       ?>
-      <input type="checkbox" name="email_me" style="display:none; !important" tabindex="-1" autocomplete="off" placeholder="If you are human do not check this box" >
+      <input type="checkbox" name="email_me" style="display:none !important;" tabindex="-1" autocomplete="off" placeholder="If you are human do not check this box" >
       <input type="radio" name="reply" id="none" value="none" <?=$rep?>> no reply required thanks</p>
       <div class="g-recaptcha" data-sitekey="6LfVv88fAAAAANvEHvw8aNvhT_qrtvBHoAA4Z71s"></div>
       <br />
