@@ -10,7 +10,6 @@ function test_input($data) {
   $data = htmlspecialchars($data);
   return $data;
 }
-
 $rate = 0.45;
 $name = test_input($_POST['name']);
 $date = test_input($_POST['date']);

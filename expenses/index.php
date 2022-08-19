@@ -116,7 +116,7 @@
                             <label for="other">Amount paid</label>
                             <input type="number" step="0.01" name="other" id="other" class="u-full-width" placeholder="Receipt if available">
                             <br />
-                            <input type="checkbox" name="foodrec"> Receipt attached
+                            <input type="checkbox" name="otherrec"> Receipt attached
                         </div>
                     </fieldset>
                 </div>
