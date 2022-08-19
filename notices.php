@@ -20,13 +20,11 @@ require 'top.html';
      <h1>Notices</h1>
     <p style="font-weight: bold;">Notices which expired over 60 days ago are not shown. Notices are shown in order of expiry date, earliest first.</p>
     <form action="noticesrch.php" method="POST">
-        <label for="srch" style="display:inline;">Search notices</label><input type="text" size="35" id="srch" name="srch" placeholder="Search all notices (including out of date)" onkeyup="$(this).val()===''?$('#srchbtn').prop('disabled',true):$('#srchbtn').prop('disabled',false)" /> <input class="shadow" title="Search button" id="srchbtn" disabled type="submit" style="width:100px;;text-align:center;padding:0;" value="Search" />
+        <label for="srch" style="display:inline;">Search notices</label><input type="text" size="35" id="srch" name="srch" placeholder="Search all notices (including out of date)" onkeyup="$(this).val()===''?$('#srchbtn').prop('disabled',true):$('#srchbtn').prop('disabled',false)" /> <input class="shadow" title="Search button" id="srchbtn" disabled type="submit" style="width:70px;text-align:center;padding:0;" value="Search" />
     </form>
     <?PHP
     $q = new Database('Notice');
-    $q->query("select * from notice where date >= CURDATE() order by date");
-    $q->execute();
-    $result = $q->resultset();
+    $result = $q->getdata("select * from notice where date >= CURDATE() AND start <= CURDATE() order by date");
     $count = $q->rowcount();
     print("<h3>");
     switch($count){

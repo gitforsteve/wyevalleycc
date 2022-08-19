@@ -29,7 +29,7 @@ if(in_array($_SERVER['REMOTE_ADDR'], $demo)){
     define("DB_HOST","localhost");
     define("DB_USER","root");
     define("DB_PASS","mysql");
-    define("DB_NAME","tinterncc");
+    define("DB_NAME","wyevalleycc");
 }else{
     // live
     define("DB_HOST","db701010966.db.1and1.com");
