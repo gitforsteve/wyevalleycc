@@ -14,7 +14,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Wyevalley CC Expenses</title>
+        <title>Wye Valley CC Expenses</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="../css/skeleton.css">
@@ -41,7 +41,7 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
         <div class="container">
-            <h1 style="text-align:center;">Wyevalley Community Council</h1>
+            <h1 style="text-align:center;">Wye Valley Community Council</h1>
             <h2 style="text-align:center;">Expenses Claim</h2>
             <form action="expenses.php" method="POST" autocomplete="off">
                 <div class="row">
@@ -126,7 +126,7 @@
                     Mileage is actual mileage for the journey(s)<br /><strong>Parking fees do not include parking fines.</strong></p>
                     <p>Receipts must be scanned and sent</p>
                     <p style="font-weight:bold">IMPORTANT</p>
-                    <p>By submitting this form you are certifying that the amounts were expended while on Wyevalley Community Council business.</p>
+                    <p>By submitting this form you are certifying that the amounts were expended while on Wye Valley Community Council business.</p>
                     <p>A PDF of the form will be produced and this should be saved and sent to the Clerk.</p>
                     <input type="submit" id="printform" name="printform" value="Produce form" />
                 </div>
