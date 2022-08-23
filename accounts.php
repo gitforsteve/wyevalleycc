@@ -20,7 +20,7 @@ include "data/accstatement.php";
     </ul>
   </div>
 <h1>Accounting statement</h1>
-<?
+<?PHP
 
 $table = new steveTable('{
   "widths": ["5%","50%","22%","21%","2%"],
@@ -73,7 +73,7 @@ $table->print();
 
 ?>
 </div>
-<?
+<?PHP
 require 'bottom.html';
 ?>
 <script type="text/javascript">

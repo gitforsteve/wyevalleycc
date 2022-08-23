@@ -46,7 +46,7 @@ $table = new steveTable('{
 ?>
 <!--div class="nine columns" id="content"-->
 <h1>BUDGET <?=$years?></h1>
-<?
+<?PHP
 $table->heading();
 $table->fontWeight('b');
 $table->text("REVENUE");
@@ -101,7 +101,7 @@ $table->print();
 ?>
 
 </div>
-<?
+<?PHP
 require "bottom.html";
 ?>
 <script type="text/javascript">

@@ -534,7 +534,7 @@ public function row($s,$id = null,$h = false){
     }
     if($this->sum[$i] && is_numeric($s[$i]) && !$this->subtotal){
       $this->sums[$i] += $s[$i];
-      $c->subtotal = $sums[$i];
+      $c->subtotal = $this->sums[$i];
     }else{
       if($this->sum[$i] && !$this->subtotal){
         $newval = $s[$i];
@@ -544,7 +544,7 @@ public function row($s,$id = null,$h = false){
         if($newval > ''){
           $this->sums[$i] += $newval;
         }
-        $c->subtotal = $sums[$i];
+        $c->subtotal = $this->sums[$i];
       }
     }
     $c->class = $this->classes[$i];

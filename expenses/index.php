@@ -36,25 +36,43 @@
                 padding: 5px 10px;
             }
             input.error {
-                border: 2px solid red;
+                background-color: #ffdddd;
             }
             textarea.error {
-                border: 2px solid red;
+                background-color: #ffdddd;
+            }
+            #msg {
+                color: red;
             }
         </style>
         <script src="../js/jquery-3.1.1.min.js"></script>
         <script src="../js/jquery-ui.min.js"></script>
         <script>
-            $(document).ready(function(){
+           $(document).ready(function(){
                 $('#date').datepicker({
                     dateFormat: "d MM yy"
                 });
                 $('#printform').on("click",function(){
-                    ok = true;
-                    $('#name').removeClass('error');
+                    var ok = true;
+                     var total = 0.00;
+                    $('#msg').empty();
+                    $('#expform').find(':input').each(function(){
+                        $(this).removeClass('error');
+                    });
+                    /*$('#name').removeClass('error');
                     $('#date').removeClass('error');
+                    $('#description').removeClass('error');
                     $('#fares').removeClass('error');
-                    if(!$.trim($('#name').val())){
+                    */
+                    $('#expform').find(':input').each(function(){
+                        if($(this).attr('id') !== 'date' && $(this).type !== 'button'){
+                            var v = parseFloat($(this).val());
+                            if($.isNumeric(v)){
+                                total += v;
+                            }
+                         }
+                    })
+                   if(!$.trim($('#name').val())){
                         $('#name').addClass('error');
                         $('#name').attr('placeholder','YOUR NAME IS REQUIRED');
                         ok = false;
@@ -69,9 +87,19 @@
                         $('#description').attr('placeholder','REASON FOR EXPENSE IS REQUIRED');
                         ok = false;
                     }
-                   if(ok){
-                    $('#expform').submit();
-                   }
+                    if(!ok){
+                        $('#msg').text("Please check missing fields");
+                    }else if(!total){
+                       $('#msg').text("No amounts have been entered");
+                        var ok = false;
+                        $('#expform').find(':input[type="number"]').each(function(){
+                            $(this).addClass('error');
+                        })
+
+                    }
+                    if(ok){
+                        $('#expform').submit();
+                    }
                 })
                 $('#fares').on('input',function(){
                     if($.trim($(this).val()) && $(this).val() > 0){
@@ -206,7 +234,7 @@
                     <p>A PDF of the form will be produced and this should be saved and sent to the Clerk.</p>
                  </div>
             </form>
-            <input type="button" id="printform" name="printform" value="Produce form" />
+            <input type="button" id="printform" name="printform" value="Produce form" /> <span id="msg"></span>
        </div>
     </body>
 </html>

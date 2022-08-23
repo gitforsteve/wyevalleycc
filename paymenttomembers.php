@@ -28,7 +28,7 @@ $year = "2021 - 2022";
 <h1>Payments to members</h1>
 <p>Statement of payments made to members of the Community Council for the financial year <?=$year?></p>
 <p> 
-<?
+<?PHP
   foreach($data as $cllr){
     if(output($cllr->total) !== 'nil'){
       printf("<strong>%s Total %s</strong><br />",$cllr->Councillor,output($cllr->total));
@@ -60,7 +60,7 @@ $year = "2021 - 2022";
   ?>
 <p style="font-size:80%;">In accordance with Section 151 of the Local Government Measure 2011, Community and Town Councils must publish within their authority area the remuneration received by their members by 30th September following the end of the previous financial year.</p></div>
 
-<?
+<?PHP
   require "bottom.html";
 ?>
 <script type="text/javascript">

@@ -21,7 +21,7 @@ $assets = $data->toObj();
   </div>
 <h1 style="padding-left:10ox;">Tangible Assets</h1>
 <p>The tangible assets owned on behalf of the residents of Tintern and Llandogo by the Council</p>
-<?
+<?PHP
 $table = new steveTable('{
   "tableCenter": true,
   "tableWidth": "70%",
@@ -69,7 +69,7 @@ foreach($items as $item){
 $table->print();
 ?>
 </div>
-<?
+<?PHP
 include "bottom.html";
 ?>
 <script type="text/javascript">

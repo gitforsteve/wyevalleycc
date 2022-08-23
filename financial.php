@@ -8,7 +8,7 @@ require 'classes.php';
 <div class="nine columns" id="content">
   <h1>Financial documents</h1>
   <p>These documents relate to our financial transactions and our audited accounts.</p>
-<?
+<?PHP
 $auditdate = new DateTime('2021-09-30');
 $now = new DateTime();
 if($auditdate->diff($now)->days < 14){
