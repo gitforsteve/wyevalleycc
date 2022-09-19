@@ -18,6 +18,17 @@ function display($dt,$mode,$val=0){
 		default: return false;
 	}
 }
+function between($fromdate, $todate){
+	$now = new DateTime();
+	$from = new DateTime($fromdate);
+	$to = new DateTime($todate);
+	if($now >= $from && $now <= $to){
+	  return true;
+	}else{
+	  return false;
+	}
+  }
+  
 // ELECTORS RIGHTS CONTROLS
 $year = "2022";
 $hours = "9:30 and 16:30";
@@ -92,10 +103,29 @@ if($today >= $fromdate && $today <= $todate){
 		    $('#submenu').show();
 		 }
 		 $(document).ready(function(){
+			$('#gotop').hide();
 		   $(document).mousemove(function(e){
 		     mousePos.x = e.pageX;
 		     mousePos.y = e.pageY;
-		   })
+		   });
+		   /*$(document).on("resize",function(){
+			if($(document).scrollTop() > $(window).height()){
+				$('#gotop').css('left',offset.left);
+				$('#gotop').show();
+			}else{
+				$('#gotop').hide();
+			}
+		   });
+		   $(document).on("scroll",function(){
+				if($(document).scrollTop() > $(window).height()){
+					$('#gotop').show();
+				}else{
+					$('#gotop').hide();
+				}
+		   });
+		   $('#gotop').on("click",function(){
+				$(window).scrollTop(0);
+		   });*/
 			$('#codes').hide();
 			$('#bottom').load('copyright.php');
 			$('#pnotice').hide();
@@ -124,7 +154,7 @@ if($today >= $fromdate && $today <= $todate){
   	<!-- Primary Page Layout
   	–––––––––––––––––––––––––––––––––––––––––––––––––– -->
   	<div id="container" class="container u-full-width" >
-      <div class="row">
+		<div class="row">
 		    <div class="one.column" role="banner" style="position:relative;">
 		  	  <div id="headerimage" class="twelve columns" ><img src="images/headerbg1.jpeg" alt="View of the river Wye" /></div>
 				  <div id="head" class="u-full-width smallspace">Wye Valley Community Council<br /><span style="font-size:1.5vw;">REPRESENTING THE PEOPLE OF TINTERN AND LLANDOGO IN THE WYE VALLEY</span><br />
@@ -151,13 +181,14 @@ if($today >= $fromdate && $today <= $todate){
               <li><a href="standards.php" id="standards" title="The standards to which we adhere when we transact the Council's business">Standards</a></li>
               <li><a href="employersliability.php" id='employersliability' title="Display our employer's liability certificate" >Employers Liability</a></li>
               <li><a href="privacy.php" id='privacy' title="Our privacy policy" >Privacy and Legal</a></li>
+			  <!--li><a href="freedomofinfo.php" id="freedomofinfo" title="Freedom of information">FOI Requests</a></li-->
               <li><a href="accessibility.php" id="accessibility" title="Our accessibility statement">Accessibility</a></li>
               <li><a href="links.php" id='links' title="List of links to external sites">Useful Links</a></li>
-              <?
+              <?php
               if($showrights){
               ?>
                 <li><a href="auditreport.php" id="electorsrights" title="Display notice of electors' rights" >Notice of Audit</a></li>
-              <?
+              <?php
               }
               ?>
             </ul>
@@ -171,6 +202,8 @@ if($today >= $fromdate && $today <= $todate){
 	          ?>
 
           </nav>
+		  <!--button id="gotop" style="visibility: none; bottom: 25px; left: 10px; position: fixed; color: white; background-color: rgb(40,83,125);" title="Return to top of page" aria-hidden="true">GO TO TOP</button-->
+
 		    <br />
         </div> <!-- four column menu-->
         <main role="main">
