@@ -8,7 +8,7 @@ include "top.html";
 ?>
 <div class="six columns" style="background:white; padding-left:10px;" id="content">
     <h1>Welcome</h1>
-    <p>Welcome to the web site of your local Community Council. In May 2022 part of the wards of Tintern Community Council and Trellech United Community Council were merged to form your new Council.</p>
+    <p>Welcome to the web site of your local Community Council. In May 2022 part of the wards of Tintern Community Council and Trellech United Community Council, in the Wye Valley, were merged to form your new Council.</p>
     <p>Your Community Council is here to help you and our fellow villagers enjoy the wonderful surroundings with which we are blessed.</p>
     <p>While the Councillors are elected to represent their particular ward (Tintern Ward and Llandogo Ward) they are, of course, able to represent anyone in either ward. Your Councillors are <a href="about.php" title="Link to list of Councillors">listed here</a>. Monthly meetings are held to which villagers are invited and all minutes are recorded.</p>
     <p class="center">For any concerns regarding this site<br />please <a href="contact.php?id=se">contact Steve Evans</a></p>

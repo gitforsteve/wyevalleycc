@@ -42,7 +42,7 @@ require 'top.html';
     print("</ul>");
     foreach($result as $notice){
         $notice->output();
-        echo "<a href='#top' title='Return to top of page'>Return to top</a><hr>";
+        echo "<a href='#top' title='Return to top of page' aria-hidden='true'>Return to top</a><hr>";
     }
     $q->query("select * from notice where  date > DATE_SUB(CURDATE(), INTERVAL 90 DAY) order by date desc" );
     $q->execute();

@@ -1,4 +1,5 @@
 <?PHP
+// cSpell:disable
     include "../MyCSV.class.php";
     $data = new MyCSV('../data/councillor.csv');
     $data->sort("name surname");
@@ -196,7 +197,7 @@
                     <fieldset>
                         <legend>Subsistence</legend>
                         <div class="four columns">
-                            <label for="accom">Accomodation</label>
+                            <label for="accom">Accommodation</label>
                             <input type="number" step="0.01" name="accom" id="accom" class="u-full-width" placeholder="Receipt required">
                             <br />
                             <input type="checkbox" name="accomrec" id="accomrec"> Receipts attached

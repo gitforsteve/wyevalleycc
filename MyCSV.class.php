@@ -161,7 +161,7 @@ class MyCSV
      * @param length int
      * @return MyCSV
      */
-    function MyCSV($tablename = "", $length = 10000)
+    function __construct($tablename = "", $length = 10000)
     {
         // Warning: Constructors can not return anything.
         if ($tablename) $this->read($tablename, $length);

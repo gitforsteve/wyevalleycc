@@ -1,0 +1,121 @@
+<?php
+// cSpell: disable
+date_default_timezone_set('Europe/London');
+include "mc_table.php";
+class PDF extends PDF_MC_Table{
+    function Footer(){
+        $this->SetY(-10);
+        $this->SetFont("","",8);
+        $this->Cell(0,5,"Produced from the Wye Valley Community Council website at ".date('h:i')." on ".date('jS F Y'),0,0,"C");
+    }
+}
+$pdf = new PDF();
+$pdf->SetWidths([95,60,35]);
+$pdf->SetAligns(['L','L',"L"]);
+$pdf->SetFont("helvetica","",11);
+$pdf->addPage();
+$pdf->Image('images/wyevalleylogomono.jpg',95,10,20,0,'jpg');
+$pdf->SetXY(10,30);
+$pdf->Cell(0,5,"WYE VALLEY COMMUNITY COUNCIL",0,1,'C');
+$pdf->Cell(0,5,"FREEDOM OF INFORMATION",0,1,'C');
+$pdf->Image('images/icologo.jpg',10,30,20,0,'jpg');
+$pdf->SetXY(10,45);
+$pdf->Cell(0,5,"Information available from Wye Valley Community Council under the model publishing scheme",0,1,'C');
+$pdf->Ln();
+$pdf->SetFont("","b");
+$pdf->Row(["Information to be published","How the information can be obtained","Cost (ppc 10p per sheet"]);
+$pdf->SetFont("","");
+$pdf->SetWidths(["190"]);
+$pdf->Row(["CLASS 1 - Who we are and what we do\n(Organisational information, structures, locations and contacts)","",""],["L"]);
+$pdf->SetWidths([95,60,35]);
+$pdf->Row(["Who's who on the Council and its Advisory Groups. Current information only","Notice boards and website",""]);
+$pdf->Row(["Contact details for Clerk and Council members.
+Name, location, telephone number and email address","Notice boards and website",""]);
+$pdf->Row(["Location of Community Council meeting venue and accessibility details","Tintern & Llandogo Village Halls (alternate months)","Accessible"]);
+$pdf->SetWidths([190]);
+$pdf->Row(["CLASS 2 - What we spend and how we spend it\n(Financial information relating to projected and actual income and expenditure, procurement, contracts and financial audit)\nCurrent and previous financial year as a minimum"]);
+$pdf->SetWidths([95,60,35]);
+$pdf->Row(["Annual return form and report by auditor","Web site & hard copy",""]);
+$pdf->Row(["Precept, Finalised budget","Hard copy",""]);
+$pdf->Row(["Precept","Hard copy",""]);
+$pdf->Row(["Financial, Standing Orders & Regulations","Website & hard copy",""]);
+$pdf->Row(["Grants given and received","Hard copy",""]);
+$pdf->Row(["List of current contracts awarded and value of contract","Hard copy",""]);
+$pdf->Row(["Members' allowances and expenses","Hard copy",""]);
+
+$pdf->SetWidths(190);
+$pdf->Row(["CLASS 3 - What our priorities are and how we are doing"]);
+$pdf->SetWidths([95,60,35]);
+$pdf->Row(["Strategies and plans, performance indicators, audits, inspections and reviews) Current and previous years as a minimum","Hard copy or website",""]);
+$pdf->Row(["Community Plan (current and previous year as a minimum)","LDP hard copy",""]);
+$pdf->Row(["Annual Report (current year as a minimum","Annual meeting minutes, hard copy & website",""]);
+
+$pdf->SetWidths([190]);
+$pdf->Row(["Class 4 - How we make decisions"]);
+$pdf->SetWidths([95,60,35]);
+$pdf->Row(["Decision making processes and records of decisions) Current and previous Council year as a minimum","Hard copy or website",""]);
+$pdf->Row(["Timetable of meetings (Council, Community meetings","Website & hard copy",""]);
+$pdf->Row(["Agendas of meetings (as above)","Website & notice boards",""]);
+$pdf->Row(["Minutes of meetings (as above) - NB this will exclude information that is properly regarded as private to the meeting.","Websote & notice boards",""]);
+$pdf->Row(["Reports presented to council meetings – NB this will exclude information that is properly regarded as private to the meeting.","Hard copy",""]);
+$pdf->Row(["Responses to consultation papers","Hard copy & minutes",""]);
+$pdf->Row(["Responses to planning applications","Hard copy or website",""]);
+$pdf->AddPage();
+$pdf->SetWidths([190]);
+$pdf->Row(["CLASS 5 - Our policies and procedures"]);
+$pdf->SetWidths([95,60,35]);
+$pdf->Row(["Current written protocols, policies and procedures for delivering our services and responsibilities). Current information only","Hard copy or websote",""]);
+$pdf->Row(["Policies and procedures for the conduct of council business:\nProcedural Standing Orders\nAdvisory Group terms of reference\nCode of Conduct\nPolicy statements","Website & hard copy",""]);
+$pdf->Row(["Policies and procedures for the provision of services and about the employment of staff:\nInternal policies relating to the delivery of services\nEquality and diversity policy\nHealth and safety policy\nRecruitment and Employment policies\nPolicies and procedures for handling requests for information Complaints procedures (including those covering requests for information and operating the publication scheme)","Website & hard copy",""]);
+$pdf->Row(["Information security policy","Website & hard copy",""]);
+$pdf->Row(["Information security policy","Website & hard copy",""]);
+$pdf->Row(["Records management policies (records retention, destruction and archive)","Hard copy",""]);
+$pdf->Row(["Data protection policies","Hard copy",""]);
+$pdf->SetWidths([190]);
+$pdf->Row(["CLASS 6 - Lists and Registers"]);
+$pdf->SetWidths([95,60,35]);
+$pdf->Row(["Currently maintained lists and registers only","hard copy or website; some information may only be available by inspection",""]);
+$pdf->Row(["Assets register","Hard copy & website",""]);
+$pdf->Row(["Register of members' interests","Hard copy",""]);
+$pdf->Row(["Register of gifts and hospitality","Hard copy",""]);
+$pdf->SetWidths([190]);
+$pdf->Row(["CLASS 7 - The services we offer"]);
+$pdf->SetWidths([95,60,35]);
+$pdf->Row(["Information about the services we offer, including leaflets, guidance and newsletters produced for the public and businesses. Current information only","hard copy or website; some information may only be available by inspection",""]);
+$pdf->Row(["Burial grounds and closed churchyards","Hard copy",""]);
+$pdf->Row(["Village Halls","Hard copy",""]);
+$pdf->Row(["Parks, playing fields and recreational facilities","Hard copy",""]);
+$pdf->Row(["Seating, litter bins and lighting","Hard copy",""]);
+$pdf->Row(["Bus shelters","Hard copy",""]);
+$pdf->SetWidths(190);
+$pdf->Row(["Additional Information\nThis will provide Councils with the opportunity to publish information that is not itemised in the lists above\n"]);
+$pdf->Ln(10);
+$pdf->Cell(0,5,"Email contact the Clerk via our form on the website at https://wyevalleycc.co.uk");
+$pdf->AddPage();
+$pdf->Cell(0,5,"SCHEDULE OF CHARGES",0,1);
+$pdf->Cell(0,5,"This describes how the charges have been arrived at and should be published as part of the guide.",0,1);
+$pdf->Ln(10);
+$pdf->SetWidths([63,63,63]);
+$pdf->SetFont("","b");
+$pdf->Row(["TYPE OF CHARGE","DESCRIPTION","BASIS OF CHARGE"]);
+$pdf->SetFont("","");
+$pdf->Row(["Disbursement cost","Photocopying 10p per sheet (black & white)","Actual cost *"]);
+$pdf->Row(["","Photocopying 15p per sheet (colour)","Actual cost"]);
+$pdf->SetWidths([190]);
+$pdf->Row([""]);
+$pdf->SetWidths([63,63,63]);
+$pdf->Row(["","Postage","Actual cost"]);
+$pdf->SetWidths([190]);
+$pdf->Row([""]);
+$pdf->SetWidths([63,63,63]);
+$pdf->Row(["Statutory Fee","","In accordance with the relevant legislation (quote the actual statute)"]);
+$pdf->SetWidths([190]);
+$pdf->Row([""]);
+$pdf->SetWidths([63,63,63]);
+$pdf->Row(["Other","",""]);
+$pdf->Ln(10);
+$pdf->Cell(0,5,"* The actual cost incurred by the public authority");
+
+//$pdf->Output();
+$pdf->Output("WVCCFOI.pdf","D");
+?>

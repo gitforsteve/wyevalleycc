@@ -1,30 +1,27 @@
 /* cSpell:disable */
 @-o-viewport {
-  zoom: 1.0;
+  zoom: 1;
   width: extend-to-zoom;
 }
 @viewport {
-  zoom: 1.0;
+  zoom: 1;
   width: extend-to-zoom;
 }
-
 @-ms-viewport {
   width: extend-to-zoom;
-  zoom: 1.0;
+  zoom: 1;
 }
-
 @media screen and (max-width: 670px) {
   nav ul li {
     display: block;
     font-size: 15px;
-    line-height: 1.2;
+    line-height: 1.5;
   }
   .container {
     font-size: 15px;
-    line-height: 1.2;
+    line-height: 1.5;
   }
 }
-
 header, section, footer, aside, nav, main, article, figure {
   display: block;
 }
@@ -57,14 +54,13 @@ html.blank {
 }
 
 body {
-  font-family: 'Open Sans', sans-serif;
-  background-color: lightgray;
+  font-family: "Open Sans", sans-serif;
+  background-color: rgb(211, 211, 211);
   margin: 0;
   padding: 0;
   min-height: 100%;
-  font-size: calc(12px + (26 - 12) * ((100vw - 300px) / (1600 - 300)));
-  line-height: calc(1.2em + (1.5 - 1.2) * ((100vw - 300px)/(1600 - 300)));
-  background: -webkit-gradient(linear, left top, left bottom, from(#336699), to(#FFFFFF));
+  font-size: calc(12px + 14 * (100vw - 300px) / 1300);
+  line-height: calc(1.2em + 0.3 * (100vw - 300px) / 1300);
   background: linear-gradient(#336699, #FFFFFF);
   height: 100%;
   background-repeat: no-repeat;
@@ -76,8 +72,8 @@ button:focus {
 }
 
 button:disabled {
-  border: 1px solid lightgray;
-  background-color: lightgray;
+  border: 1px solid rgb(211, 211, 211);
+  background-color: rgb(211, 211, 211);
 }
 
 #header {
@@ -122,8 +118,6 @@ button:disabled {
 }
 
 #display {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
 }
 
@@ -139,8 +133,9 @@ button:disabled {
 }
 
 #menu li {
-  border-bottom: 1px solid gray;
-  border-right: 1px solid gray;
+  border-bottom: 1px solid rgb(128, 128, 128);
+  border-right: 1px solid rgb(128, 128, 128);
+  min-height: 1.7rem;
 }
 
 .active {
@@ -190,7 +185,7 @@ button:disabled {
   background-color: #336699;
   color: #FFFFFF;
   width: 100%;
-  border-top: 1px solid gray;
+  border-top: 1px solid rgb(128, 128, 128);
   text-align: center;
   font-size: 1.25vh;
   line-height: 1.2;
@@ -228,7 +223,7 @@ button:disabled {
 }
 
 p {
-  line-height: 1.2;
+  line-height: 1.5;
   padding-right: 10px;
 }
 
@@ -246,15 +241,13 @@ ul.special > li {
 }
 
 .shadow {
-  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#cccccc')";
-  filter: progid:DXImageTransform.Microsoft.Shadow(Strength = 4, Direction = 135, Color = '#cccccc');
+  filter: progid:DXImageTransform.Microsoft.Shadow(Strength = 4, Direction = 135, Color = "#cccccc");
 }
 
 .grad {
   background: #FFFFFF;
-  background: -webkit-gradient(linear, left top, left bottom, from(#336699), to(#FFFFFF));
   background: linear-gradient(#336699, #FFFFFF);
 }
 
@@ -310,7 +303,7 @@ a.nofancy {
 }
 
 .error {
-  background-color: yellow;
+  background-color: rgb(255, 255, 0);
 }
 
 .center {
@@ -332,7 +325,7 @@ a.nofancy {
 }
 
 .striped tr:nth-child(even) {
-  background-color: lightgray;
+  background-color: rgb(211, 211, 211);
 }
 
 .header {
@@ -351,8 +344,7 @@ div#container {
   border: 1px solid #336699;
   background: #FFFFFF;
   border-radius: 0 0 15px 15px;
-  -webkit-box-shadow: 0 0 3px lightgray;
-  box-shadow: 0 0 10px lightgray;
+  box-shadow: 0 0 10px rgb(211, 211, 211);
 }
 
 div#head {
@@ -400,7 +392,7 @@ div#socialbox {
 }
 
 div.shares {
-  background: lightgray;
+  background: rgb(211, 211, 211);
   width: 170px;
   position: relative;
   left: 800px;
@@ -479,5 +471,4 @@ ol.dec li:before {
 
 .important {
   font-weight: bold;
-}
-/*# sourceMappingURL=wvcc.css.map */
+}/*# sourceMappingURL=wvcc.css.map */

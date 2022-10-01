@@ -12,11 +12,11 @@
   nav ul li {
       display: block;
       font-size: 15px;
-      line-height: 1.2;
+      line-height: 1.5;
   }
   .container {
     font-size: 15px;
-    line-height: 1.2;
+    line-height: 1.5;
   }
 }
 //@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
@@ -121,7 +121,7 @@ button:disabled {
 }
 #menu{
 	background-color: $white;
-  padding-right: 3px;
+  	padding-right: 3px;
 }
 #menu ul {
   list-style-type: none;
@@ -131,6 +131,7 @@ button:disabled {
 #menu li {
   border-bottom: 1px solid $darkgrey;
   border-right: 1px solid $darkgrey;
+  min-height: 1.7rem;
 }
 .active {
   color: $white;
@@ -206,7 +207,7 @@ button:disabled {
   border-radius: 10px;
 }
 p{
-	line-height: 1.2;
+	line-height: 1.5;
 	padding-right: 10px;
 }
 ul.special{

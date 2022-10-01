@@ -1,5 +1,5 @@
 <?PHP
-
+// cSpell:disable
 require 'classes.php';
 require 'fpdf.php';
 require 'fpdi.php';

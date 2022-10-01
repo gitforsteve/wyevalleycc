@@ -49,7 +49,7 @@ class Row {
           $cell->content = substr($cell->content,2);
           $i += $cell->colspan - 1;
         }
-        if($cell->colspan > ''){
+        if(trim($cell->colspan) > ''){
           $colspan = sprintf("colspan='%s'",$cell->colspan);
         }
           $cstyles = $cell->style."width:".$cell->width.";text-align:".$cell->align;
@@ -89,7 +89,7 @@ class Cell {
     public $id; // identifier
 }
 class steveTable {
-  public $version = "Build 22";
+  public $version = "Build 24";
   public $ID = "steveTable"; //id for table
   public $tableClass = ""; //Overall class for table
   public $classes; //Array of class for each column
@@ -143,6 +143,7 @@ class steveTable {
   public $keyCell = '';
   public $pointers = ''; // array of pointers. 1 for pointer 0 for default
   public $seperators;
+  public $lineheight = 1.5; 
 
   public function isJson($string) { // test for valid json string
     return ((is_string($string) &&
@@ -288,6 +289,9 @@ class steveTable {
   }
   public function setPointers($s){
       $this->pointers = $s;
+  }
+  public function setLineheight($s){
+    $this->lineheight = $s;
   }
 
   public function total($sub = false){
@@ -445,9 +449,12 @@ class steveTable {
       if(isset($obj->pointers)){
         $this->pointers = $obj->pointers;
       }
+      if(isset($obj->lineheight)){
+        $this->lineheight = $obj->lineheight;
+      }
    }else{
-    trigger_error("<p style='font-weight:bold;color:red;'>steveTable version ".$this->version."<br />Invalid json string (".json_last_error_msg().")<br /></p>");
-    exit;
+    printf("<p style='font-weight:bold;color:red;'>steveTable version %s <br />Invalid json string (%s)<br /></p>",$this->version,json_last_error_msg());
+    exit($s);
    }
 }
 public function __construct($s=''){
@@ -687,6 +694,10 @@ public function row($s,$id = null,$h = false){
     if($this->tableBorder){
       $this->tableStyle.="border:1px solid ".$this->bordercolor.";";
     }
+    if($this->lineheight){
+      $this->tableStyle.="line-height:".$this->lineheight
+    .";";
+    }
     if($this->tableStyle.="font-family:".$this->tableFont.";font-size:".$this->tableFontSize.";");
     if(isset($this->tableClass) && $this->tableClass > ''){
       $tstyle = "class='".$this->tableClass."' ";
@@ -695,6 +706,7 @@ public function row($s,$id = null,$h = false){
       $tstyle .= "style='".$this->tableStyle;
     }
     $tstyle = $tstyle."width:".$this->tableWidth.";";
+    
     if($this->borderCollapse){
       $tstyle.="border-collapse:collapse;";
     }
