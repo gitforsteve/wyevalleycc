@@ -1,5 +1,7 @@
 <?PHP
 // cSpell:disable
+$bad = 0;
+
 $mailpage = true;
 if (!function_exists('str_contains')) {
   function str_contains($haystack, $needle) {
@@ -32,12 +34,14 @@ function isValid()
     }
 }
 function test_input($data) {
-  $bad = 0;
   if(isset($_POST['email_me'])){
     $bad = 1;
   }
-  if(str_contains(strtoupper($data),"SOK")){
+  $blacklist = ["SOK","SEDDELCERY","ROBOT"];
+  for($i=0;$i<count($blacklist);$i++){
+    if(str_contains(strtoupper($data),$blacklist[$i])){
       $bad = 1;
+    }
   }
   if($bad === 1){return false;}
   $data = trim($data);
@@ -94,6 +98,9 @@ if(isset($_GET['id'])){
     $error = 1;
   }
   if(test_input($_POST['subject']) > ''){
+    if($bad){
+      exit();
+    }
     $subject = $_POST['subject'];
     $error = 0;
   }else{
@@ -116,7 +123,7 @@ if(isset($_GET['id'])){
   }
   if(!$captcha){
     $errorMessage = "Please check the captcha form";
-    $error - 1;
+    $error = 1;
   }else{
     if(!isValid()){
       $errorMessage = "Sorry, the captcha was rejected";
@@ -126,7 +133,7 @@ if(isset($_GET['id'])){
   $telephone = test_input($_POST['telephone']);
   $address = test_input($_POST['address']);
   $reply = test_input($_POST['reply']);
-    if($error === 0){
+    if($error === 0 && $bad === 0 ){
       $mail = new PHPMailer(TRUE);
       $mail->isHTML(TRUE);
       try {

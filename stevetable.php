@@ -11,8 +11,29 @@
     if ($a->cells[$col]->content===$b->cells[$col]->content) return 0;
     return ($a->cells[$col]->content<$b->cells[$col]->content)?-1:1;
   }
-
-class Row {
+  function getBetween($content,$start,$end){
+    $r = explode($start, $content);
+    if(strlen($r[0]) === 0 AND strlen($r[1] === 0)){
+        return $content;
+    }
+    if (isset($r[1])){
+        $r = explode($end, $r[1]);
+        return $r[0];
+    }
+    return '';
+  }
+  function deleteBetween($string, $beginning, $end) {
+    $beginningPos = strpos($string, $beginning);
+    $endPos = strpos($string, $end);
+    if ($beginningPos === false || $endPos === false) {
+      return $string;
+    }
+  
+    $textToDelete = substr($string, $beginningPos, ($endPos + strlen($end)) - $beginningPos);
+  
+    return deleteBetween(str_replace($textToDelete, '', $string), $beginning, $end ); // recursion to ensure all occurrences are replaced
+  }
+  class Row {
     public $style = ""; 
     public $stripe = "";
     public $cells; // array of cells
@@ -61,14 +82,18 @@ class Row {
           if($cell->content === ""){
             $cell->content = "&nbsp;";
           }
+          // set up cell id text
+          if($cell->id > ''){
+            $cell->id = "id='".$cell->id."' ";
+          }
           if($this->heading){
-            $s .= sprintf("<th %s %s>%s</th>",$colspan,$cstyles,$cell->content);
+            $s .= sprintf("<th %s %s %s>%s</th>\r\n",$cell->id, $colspan,$cstyles,$cell->content);
           }else{
-            $s .= sprintf("<td %s %s>%s</td>",$colspan,$cstyles,$cell->content);
+            $s .= sprintf("<td %s %s %s>%s</td>\r\n",$cell->id, $colspan,$cstyles,$cell->content);
           }
         }
       //}
-      $s .= "</tr>";
+      $s .= "</tr>\r\n";
       return $s;
     }
 }
@@ -89,7 +114,7 @@ class Cell {
     public $id; // identifier
 }
 class steveTable {
-  public $version = "Build 24";
+  public $version = "Build 26";
   public $ID = "steveTable"; //id for table
   public $tableClass = ""; //Overall class for table
   public $classes; //Array of class for each column
@@ -536,6 +561,11 @@ public function row($s,$id = null,$h = false){
   }
   for($i=0;$i<$max;$i++){
     $c = new Cell();
+    // CHECK FOR CELL ID
+    $c->id = getBetween($s[$i],"{","}");
+    if($c->id > ''){
+      $s[$i] = deleteBetween($s[$i],"{","}");
+    }
     if($this->textRowActive){
       $c->colspan = count($this->widths);
     }
@@ -631,7 +661,6 @@ public function row($s,$id = null,$h = false){
       $c->style .= "vertical-align:top;";
     }
     if($this->seperators[$i]){
-      echo "YES";
       $c->style .= "border-right:2px solid ".$this->bordercolor.";";
     }
     if(count($this->skipFields) > 0){

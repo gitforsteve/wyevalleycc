@@ -24,7 +24,7 @@ function highlight_words( $text, $keywords ){
                         if( preg_match_all('/('.preg_quote($search,'/').')/i', $s, $matches)){
                             $found ++;
                             $searchok = true;
-                            if($found === 1){echo date("jS F Y",strtotime($dt))."<br />";}
+                            if($found === 1){echo "<strong>Minutes for ".date("jS F Y",strtotime($dt))."</strong><br />";}
                             echo highlight_words($s,$search)."<br />";
                         }
                     }
