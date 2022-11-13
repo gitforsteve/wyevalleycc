@@ -56,7 +56,7 @@ if($q->rowCount()==0){
       $foundtext .= sprintf("<h3>%s</h3>",highlight_words($notice->headline,$keywords,0));
       //$GLOBALS['links'] .= "[ <a href='#find".$GLOBALS['findcount']."'>".$GLOBALS['findcount']."</a> ]<br />";
       if($now > $ndate){
-        $foundtext .= "<span style='font-weight:bold;'>THIS NOTICE HAS EXPIRED</span><br />";
+        $foundtext .= "<span style='font-weight:bold;'>THIS NOTICE EXPIRED on ".date("jS F Y",$ndate)."</span><br />";
       }
       $foundtext .= sprintf("<p>%s</p>",highlight_words($notice->notice,$keywords));
       $foundtext .= "<hr />";
