@@ -38,7 +38,7 @@ print("</ul>")
 ?>
 <br />
 <form action="searchminutes.php" method="POST">
-  <label for="srch" style="font-weight:normal;">Search minutes for last 12 months <input type="text" id="srch" name="srch" autocomplete='off' placeholder='At least 4 characters' > <button class="shadow" id="srchbtn" disabled>SEARCH</button></label>
+  <label for="srch" style="font-weight:normal;">Search minutes for last 18 months <input type="text" id="srch" name="srch" autocomplete='off' placeholder='At least 4 characters' > <button class="shadow" id="srchbtn" disabled>SEARCH</button></label>
 </form>
 </div>
 <script type="text/javascript">

@@ -16,7 +16,7 @@ function highlight_words( $text, $keywords ){
             if(pathinfo($file,PATHINFO_EXTENSION) === "txt"){
                 $realname = substr($file,0,1)==="a"?substr($file,1):$file;
                 $dt = substr($realname,0,4)."-".substr($realname,4,2)."-".substr($realname,6,2);
-                if(strtotime($dt) > strtotime('-360 days')){
+                if(strtotime($dt) > strtotime('-540 days')){
                     $f = fopen("./minutes/".$file,"r");
                     $found = 0;
                     while(!feof($f)){
