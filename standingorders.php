@@ -158,7 +158,9 @@ the meetings of a sub-committee;</li>
 	</ol>
 </li>
 </ol>
-
+<!-- *************************************************
+UPDATE TO THIS SECTION REQUIRED REGARDING LENGTH OF SERVICE OF CHAIR AND VICE CHAIR
+***************************************************/-->
 <h2>5 ORDINARY COUNCIL MEETINGS</h2>
 <ol type="a">
 <li>in an election year, the annual meeting of the Council shall be held on or within 14 days following the day on which the councillors elected take office.</li>
