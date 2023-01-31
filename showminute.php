@@ -15,6 +15,7 @@ if(file_exists($file)){
   //$text = implode("<hr style='height:10px;;visibility:hidden;' />",explode("<br />",$txt));
   ?>
   <div class="nine columns" id="content">
+    <h3>Minutes of meeting held on <?=$date?></h3>
     <?=$txt?>
   </div>
   <?PHP
