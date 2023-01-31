@@ -42,6 +42,10 @@
     public $headingBackground;
     public $subtotalRow = false;
     public $textrow = false;
+    public $stripeTextcolor;
+    public $borderColor;
+    public $skipFieldValues;
+    
     public $id = "";
     public function __construct($tot = false){
       $this->cells = [];
@@ -114,7 +118,7 @@ class Cell {
     public $id; // identifier
 }
 class steveTable {
-  public $version = "Build 26";
+  public $version = "Build 28";
   public $ID = "steveTable"; //id for table
   public $tableClass = ""; //Overall class for table
   public $classes; //Array of class for each column
@@ -169,6 +173,8 @@ class steveTable {
   public $pointers = ''; // array of pointers. 1 for pointer 0 for default
   public $seperators;
   public $lineheight = 1.5; 
+  public $skipFieldValues = [];
+  public $borderColor;
 
   public function isJson($string) { // test for valid json string
     return ((is_string($string) &&
@@ -345,6 +351,13 @@ class steveTable {
     }
     $this->subtotal = false;
   }
+//******** */
+  public function boldtotal($sub = false){
+    $this->fontWeight("b");
+    $this->total($sub);
+    $this->fontWeight("");
+  }
+//******** */
   public function reset($s=''){ //analyse json string and set properties
     if($this->isJson($s)){
       $obj = json_decode($s);
