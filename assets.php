@@ -4,10 +4,11 @@ $title = "Finance - Tangible Assets";
 $desc = "The tangible assets owned on behalf of the residents by the Council";
 require "stevetable.php";
 require "top.html";
-require "MyCSV.class.php";
-$data = new MyCSV('data/assets.csv');
-$data->sort('item');
-$assets = $data->toObj();
+require "steveCSV.php";
+$csv = new steveCSV('data/assets.csv');
+$csv->sortfield = "item";
+$csv->sort();
+$assets = $csv->data;
 //include "classes.php";
 ?>
 <div class="nine columns" id="content">

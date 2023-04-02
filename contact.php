@@ -265,6 +265,7 @@ $councillors->sort('surname');
 <?php
 require "bottom.html";
 ?>
-<script>
+<script type='text/javascript' src='js/jquery-3.1.1.min.js'></script>
+<script type="text/javascript">
   handleMenu($('#contact'));
 </script>

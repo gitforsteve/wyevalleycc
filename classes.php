@@ -150,10 +150,7 @@ class Councillor {
     public $phone;
     public $photo;
     public $responsibility;
-    public $tccemail;
-    public $email_password;
     public $status;
-    public $wardname;
     function __construct(){
         if($this->photo===''){$this->photo = 'missing.jpg';}
         if($this->responsibility!=''){$this->responsibility = 'Responsibility: '.$this->responsibility;}
@@ -219,7 +216,7 @@ class Account {
 class Notice {
     public $date;
     public $headline;
-    public $notice;
+    public $noticeid;
     public $start;
     public function output(){
         $dt = substr($this->date,8,2)."/".substr($this->date,5,2)."/".substr($this->date,0,4);

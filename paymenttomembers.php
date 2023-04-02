@@ -2,10 +2,10 @@
 //cSpell:disable
 $title = "Payments to members";
 $desc = "Statement of payments made to members";
-require 'MyCSV.class.php';
+require 'steveCSV.php';
 require 'top.html';
-$d = new MyCSV("data/payments.csv");
-$data = $d->toObj();
+$d = new steveCSV("data/payments.csv");
+$data = $d->data;
 $total = 0;
 function output($v){
   if($v === ''){
@@ -14,7 +14,7 @@ function output($v){
   return "&pound;".number_format($v,2,'.',',');
 }
 /*********** SET FINANCIAL YEAR *************/
-$year = "2021 - 2022";
+$year = "2022 - 2023";
 ?>
 <div class="nine columns" style="padding-left:10px;">
 <div role="navigation">Our other financial pages:
@@ -26,7 +26,7 @@ $year = "2021 - 2022";
     </ul>
 </div>
 <h1>Payments to members</h1>
-<p>Statement of payments made to members of the Community Council for the financial year <?=$year?></p>
+<p>Statement of payments made to members of the Community Council for the financial year <?=$year?></p><p>Please note that one or more Councillors may no longer be in office.</p>
 <p> 
 <?PHP
   foreach($data as $cllr){
@@ -41,7 +41,7 @@ $year = "2021 - 2022";
       printf("Responsibility allowance %s<br />",output($cllr->responsibility));
     }
     if(output($cllr->allowance) !== 'nil'){
-      printf("Chair's allowance %s<br />",output($cllr->allowance));
+      printf("Allowance %s<br />",output($cllr->allowance));
     }
     if(output($cllr->loss) !== 'nil'){
       printf("Financial loss allowance %s<br />",output($cllr->loss));

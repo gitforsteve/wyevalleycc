@@ -1,30 +1,49 @@
 <?PHP
 // cSpell:disable
+function mysort($a,$b){
+  return $a->surname <=> $b->surname;
+}
+require "steveCSV.php";
 $title = "Councillors and wards";
 $desc = "Find out who your Councillors are and the wards they represent";
 $keywords = "contact Tintern Llandogo community councillors, wards, represent";
 require 'top.html';
-require 'MyCSV.class.php';
-//if(!class_exists('Database')){
-//  require 'classes.php';
-//}
-//<!--text-->
-
-/*$database = new Database("Councillor");
-if(isset($_GET['ward'])){
-  $sql = sprintf("SELECT * FROM councillor c left join ward w on c.ward = w.wardid where c.ward=%s order by w.wardname, c.surname",$_GET['ward']);
-  $councillors = $database->getData($sql);
-  //$database->query("SELECT * FROM councillor c left join ward w on c.ward = w.wardid where c.ward=:ward order by w.wardname, c.surname");  
-  //$database->bind(':ward',$_GET['ward']);
-}else{
-  $councillors = $database->getData("SELECT * FROM ward w left join councillor c on c.ward = w.wardid order by w.wardname desc, c.surname");
+/******************************* */
+class Councillor {
+  public $id;
+  public $code;
+  public $name;
+  public $surname;
+  public $ward;
+  public $email;
+  public $address;
+  public $phone;
+  public $photo;
+  public $responsibility;
+  public $status;
 }
-//$database->execute();
-//$councillors = $database->resultset();
-*/
-$councillors = new MyCSV('data/councillor.csv');
-$councillors->sort('ward surname');
-$wards = ["","Tintern","Llandogo","Clerk to the Council","County Councillor"];
+$csv = new steveCSV('data/councillor.csv');
+$csv->sortfield = "ward";
+$csv->sort();
+/**** GROUP INTO WARDS */
+$wards = [];
+foreach($csv->data as $councillor){
+  $wards[$councillor->ward][] = $councillor;
+}
+
+usort($wards['Llandogo'],"mysort");
+usort($wards['Tintern'],"mysort");
+$councillors = [];
+foreach($wards['Tintern'] as $item){
+  $councillors[] = $item;
+}
+
+foreach($wards['Llandogo'] as $item){
+  $councillors[] = $item;
+}
+$councillors[] = $wards['Clerk to the Council'][0];
+$councillors[] = $wards['County Councillor'][0];
+/******************************** */
 if(!isset($_GET['ward'])){
 ?>
 <div class="nine columns" style="padding-left:10px;">
@@ -33,33 +52,34 @@ if(!isset($_GET['ward'])){
  <?PHP
   }
   $thisward = "";
-  while($councillor = $councillors->each()){
-    $stat = $councillor['status'] > "" ? "(".$councillor['status'].")" : "";
-    $address = implode("<br />",explode(',',$councillor['address']));
-    if(strcmp($wards[$councillor['ward']],$thisward)!=0){
-  	  printf("<div class='row u-full-width reversed center'>%s</div>",$wards[$councillor['ward']]);
-      $thisward = $wards[$councillor['ward']];
+  foreach($councillors as $councillor){
+    //while($councillor = $councillors->each()){
+    $address = implode("<br />",explode(',',$councillor->address));
+    if($thisward !== $councillor->ward){
+ 	    printf("<div class='row u-full-width reversed 
+    center'>%s</div>",$councillor->ward);
+      $thisward = $councillor->ward;
     }
-	  switch(substr($councillor['phone'],0,2)){
+	  switch(substr($councillor->phone,0,2)){
 	    case '01': $phone = "<img src='images/phone.png' style='display:in-line;' alt='landline phone' role='presentation' />"; break;
 	    case '07': $phone = "<img src='images/mobile.png' style='display:in-line;' alt='mobile phone' role='presentation' />"; break;
 	    default: $phone = "";
 	  }
-	  if($councillor['surname'] === "ZZZ"){
+	  if($councillor->surname === "ZZZ"){
 	    print("<div class='row councillor u-full-width' style='text-align:center;'><strong>VACANCY</strong><p>If you would like information on becoming<br />a Community Councillor please contact the Clerk</p></div>");
 	  }else{
   ?>
 	    <div class='row councillor' style="display:flex">
 	      <div class='four columns'>
-	        <img class="u-full-width" style="padding-right:10px;" src="images/<?=$councillor['photo']?>" alt="Photo of Councillor <?=$councillor['name']?> <?=$councillor['surname']?>" />
+	        <img class="u-full-width" style="padding-right:10px;" src="images/<?=$councillor->photo?>" alt="Photo of Councillor <?=$councillor->name?> <?=$councillor->surname?>" />
 	      </div>
 	      <div class="eight columns">
-	        <span><?=$councillor['name']?> <?=$councillor['surname']?> </span><?=$stat?><br /><?=$address?><br /><?=$phone?> <?=$councillor['phone']?><br /><br />
-          <button class='email shadow' style='text-align:center;font-weight:bold;width:30vw;font-size:1.2vw;' type='button' id="<?=$councillor['code']?>">Send email to <?=$councillor['name']?></button>
+	        <span><?=$councillor->name?> <?=$councillor->surname?> </span><?=$stat?><br /><?=$address?><br /><?=$phone?> <?=$councillor->phone?><br /><br />
+          <button class='email shadow' style='text-align:center;font-weight:bold;width:30vw;font-size:1.2vw;' type='button' id="<?=$councillor->code?>">Send email to <?=$councillor->name?></button>
           <br />
           <?PHP
-            if(strlen($councillor['responsibility']) > 0){
-              printf("<span style='font-size:80%%;font-weight:normal;'>Responsibility: %s</span><br /><br />",$councillor['responsibility']);
+              if($councillor->responsibility > ''){
+              printf("<span style='font-size:80%%;font-weight:normal;'>Responsibility: %s</span><br /><br />",$councillor->responsibility);
             }
           ?>
 	      </div>
