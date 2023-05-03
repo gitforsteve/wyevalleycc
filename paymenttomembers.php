@@ -8,8 +8,8 @@ $d = new steveCSV("data/payments.csv");
 $data = $d->data;
 $total = 0;
 function output($v){
-  if($v === ''){
-    return "nil";
+  if($v === '0'){
+    return "0";
   }
   return "&pound;".number_format($v,2,'.',',');
 }
@@ -26,33 +26,40 @@ $year = "2022 - 2023";
     </ul>
 </div>
 <h1>Payments to members</h1>
-<p>Statement of payments made to members of the Community Council for the financial year <?=$year?></p><p>Please note that one or more Councillors may no longer be in office.</p>
+<p>Statement of payments made to members of the Community Council for the financial year <?=$year?></p>
 <p> 
 <?PHP
+//"Councillor","Basic Payment","Responsibility Payment","Chair's Payment","Vice Chair's Payment","Loss Allowance","Travel and Subsistence","Cost of Care","Attendance","Other","total"
   foreach($data as $cllr){
-    if(output($cllr->total) !== 'nil'){
-      printf("<strong>%s Total %s</strong><br />",$cllr->Councillor,output($cllr->total));
+    if(output($cllr->total) !== '0'){
+      printf("<strong>%s Total %s</strong><br />",$cllr->councillor,output($cllr->total));
       $total += floatval($cllr->total);
     }
-    if(output($cllr->telephone) !== 'nil'){
-      printf("Telephone, broadband, etc. %s<br />",output($cllr->telephone));
+    if(output($cllr->basic) !== '0'){
+      printf("Basic Payment. %s<br />",output($cllr->basic));
     }
-    if(output($cllr->responsibility) !== 'nil'){
-      printf("Responsibility allowance %s<br />",output($cllr->responsibility));
+    if(output($cllr->responsibility) !== '0'){
+      printf("Responsibility Payment %s<br />",output($cllr->responsibility));
     }
-    if(output($cllr->allowance) !== 'nil'){
-      printf("Allowance %s<br />",output($cllr->allowance));
+    if(output($cllr->chair) !== '0'){
+      printf("Chair's Payment %s<br />",output($cllr->chair));
     }
-    if(output($cllr->loss) !== 'nil'){
-      printf("Financial loss allowance %s<br />",output($cllr->loss));
+    if(output($cllr->vice) !== '0'){
+      printf("Vice Chair's Payment %s<br />",output($cllr->loss));
     }
-    if(output($cllr->expenses) !== 'nil'){
-      printf("Travel and subsistence %s<br />",output($cllr->expenses));
+    if(output($cllr->loss) !== '0'){
+      printf("Loss Allowance %s<br />",output($cllr->expenses));
     }
-    if(output($cllr->care) !== 'nil'){
-      printf("Care allowance %s<br />",output($cllr->care));
+    if(output($cllr->expenses) !== '0'){
+      printf("Travel and Subsistence Expenses %s<br />",output($cllr->expenses));
     }
-    if(output($cllr->other) !== 'nil'){
+    if(output($cllr->care) !== '0'){
+      printf("Contribution to Cost of Care %s<br />",output($cllr->care));
+    }
+    if(output($cllr->attendance) !== '0'){
+      printf("Attendance Allowance %s<br />",output($cllr->expenses));
+    }
+    if(output($cllr->other) !== '0'){
       printf("Other %s<br />",output($cllr->other));
     }
   }
