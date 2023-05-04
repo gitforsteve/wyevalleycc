@@ -31,37 +31,40 @@ $year = "2022 - 2023";
 <?PHP
 //"Councillor","Basic Payment","Responsibility Payment","Chair's Payment","Vice Chair's Payment","Loss Allowance","Travel and Subsistence","Cost of Care","Attendance","Other","total"
   foreach($data as $cllr){
-    if(output($cllr->total) !== '0'){
+    if($cllr->total === '0'){
+      printf("<strong>%s No payments</strong><br />",$cllr->councillor);
+    }else{
       printf("<strong>%s Total %s</strong><br />",$cllr->councillor,output($cllr->total));
-      $total += floatval($cllr->total);
     }
+    $total += floatval($cllr->total);
     if(output($cllr->basic) !== '0'){
-      printf("Basic Payment. %s<br />",output($cllr->basic));
+      printf("&nbsp;&nbsp;Basic Payment. %s<br />",output($cllr->basic));
     }
     if(output($cllr->responsibility) !== '0'){
-      printf("Responsibility Payment %s<br />",output($cllr->responsibility));
+      printf("&nbsp;$nrsp;Responsibility Payment %s<br />",output($cllr->responsibility));
     }
     if(output($cllr->chair) !== '0'){
-      printf("Chair's Payment %s<br />",output($cllr->chair));
+      printf("&nbsp;&nbsp;Chair's Payment %s<br />",output($cllr->chair));
     }
     if(output($cllr->vice) !== '0'){
-      printf("Vice Chair's Payment %s<br />",output($cllr->loss));
+      printf("&nbsp;&nbsp;Vice Chair's Payment %s<br />",output($cllr->loss));
     }
     if(output($cllr->loss) !== '0'){
-      printf("Loss Allowance %s<br />",output($cllr->expenses));
+      printf("&nbsp;&nbsp;Loss Allowance %s<br />",output($cllr->expenses));
     }
     if(output($cllr->expenses) !== '0'){
-      printf("Travel and Subsistence Expenses %s<br />",output($cllr->expenses));
+      printf("&nbsp;&nbsp;Travel and Subsistence Expenses %s<br />",output($cllr->expenses));
     }
     if(output($cllr->care) !== '0'){
-      printf("Contribution to Cost of Care %s<br />",output($cllr->care));
+      printf("&nbsp;&nbsp;Contribution to Cost of Care %s<br />",output($cllr->care));
     }
     if(output($cllr->attendance) !== '0'){
-      printf("Attendance Allowance %s<br />",output($cllr->expenses));
+      printf("&nbsp;&nbsp;Attendance Allowance %s<br />",output($cllr->expenses));
     }
     if(output($cllr->other) !== '0'){
-      printf("Other %s<br />",output($cllr->other));
+      printf("&nbsp;&nbsp;Other %s<br />",output($cllr->other));
     }
+    print("<br />");
   }
   printf("</p><p>Total payments to members for the year %s: &pound;%s</p>",$year,number_format($total,2,'.',','));
   ?>

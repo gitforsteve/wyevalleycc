@@ -7,10 +7,6 @@
   zoom: 1;
   width: extend-to-zoom;
 }
-@-ms-viewport {
-  width: extend-to-zoom;
-  zoom: 1;
-}
 @media screen and (max-width: 670px) {
   nav ul li {
     display: block;
@@ -43,6 +39,10 @@ h1 {
   color: #336699;
   font-weight: 500;
   font-size: 5vw;
+}
+
+hr {
+  padding: 0px;
 }
 
 html {
