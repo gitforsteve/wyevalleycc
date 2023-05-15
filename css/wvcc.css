@@ -45,6 +45,10 @@ hr {
   padding: 0px;
 }
 
+li {
+  padding: 0px;
+}
+
 html {
   height: 100%;
 }
