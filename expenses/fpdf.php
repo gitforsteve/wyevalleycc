@@ -8,19 +8,14 @@
 * Contains: Rounded rectangles                                                 *
 * Bulleted multicell                                                           *
 * Rulers by Steve Evans  
-* SetWeight by Steve Evans 
 * Vertical and horizontal labels by Steve Evans  
 * code39 barcode
 * writetext (letter justification)   
-* fitText (fit a string to a width by increasing text size
 * Get Multicell height    
 * SetFillColorS (use a string to set fille color
 * SetTextColorS use a string to set text color    
 * SetDrawColorS use a string to set draw color
-* SpreadText space between characters in a cell  
-* Hex2RGB convert color to rgb  
-* Title resizes text to fill width
-* CheckBox produces a checkbox with text to the right or left (default)                                        
+* SpreadText space between characters in a cell                                           
 *******************************************************************************/
 
 define('FPDF_VERSION','1.6');
@@ -90,7 +85,7 @@ var $aligns;
 *                               Public methods                                 *
 *                                                                              *
 *******************************************************************************/
-function FPDF($orientation='P', $unit='mm', $format='A4')
+function __construct($orientation='P', $unit='mm', $format='A4')
 {
 	//Some checks
 	$this->_dochecks();
@@ -709,7 +704,7 @@ function Cell($w, $h=0, $txt='', $border=0, $ln=0, $align='', $fill=false, $link
 		$this->x+=$w;
 }
 
-function MultiCell($w, $h, $txt, $border=0, $align='L', $fill=false)
+function MultiCell($w, $h, $txt, $border=0, $align='J', $fill=false)
 {
 	//Output text with automatic or explicit line breaks
 	$cw=&$this->CurrentFont['cw'];
@@ -1087,9 +1082,6 @@ function _dochecks()
 	//Check mbstring overloading
 	if(ini_get('mbstring.func_overload') & 2)
 		$this->Error('mbstring overloading must be disabled');
-	//Disable runtime magic quotes
-	if(get_magic_quotes_runtime())
-		@set_magic_quotes_runtime(0);
 }
 
 function _getpageformat($format)
@@ -1105,7 +1097,8 @@ function _getfontpath()
 {
 	if(!defined('FPDF_FONTPATH') && is_dir(dirname(__FILE__).'/font'))
 		define('FPDF_FONTPATH',dirname(__FILE__).'/font/');
-	return defined('FPDF_FONTPATH') ? FPDF_FONTPATH : '';
+	//return defined('FPDF_FONTPATH') ? FPDF_FONTPATH : '';
+	return "font/";
 }
 
 function _beginpage($orientation, $format)
@@ -1737,22 +1730,9 @@ function _enddoc()
 	$this->_out('%%EOF');
 	$this->state=3;
 }
-// XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-function SetWeight($w = ""){
-// shortcut to set the font weight
-  switch($w){
-    case "b" : $this->SetFont("","B"); break;
-    case "B" : $this->SetFont("","B"); break;
-    case "" : $this->SetFont("","");
-  }
-}
-function FontWeight($w = ""){
-// set font weight calls SetWeight
-	$this->SetWeight($w);
-}
 // ROUNDEDRECT
-function RoundedRect($x, $y, $w, $h,$r, $style = ''){
-// draws rounded corners on a rectangle
+function RoundedRect($x, $y, $w, $h,$r, $style = '')
+{
 $k = $this->k;
 $hp = $this->h;
 if($style=='F')
@@ -1789,8 +1769,8 @@ $x2*$this->k, ($h-$y2)*$this->k, $x3*$this->k, ($h-$y3)*$this->k));
 }
 
 // BULLETED MULTICELL
-function MultiCellBlt($w, $h, $blt, $txt, $border=0, $align='L', $fill=false){
-// produces a multicell with a bullet (single only)
+function MultiCellBlt($w, $h, $blt, $txt, $border=0, $align='J', $fill=false)
+{
 	//Get bullet width including margins
   $blt_width = $this->GetStringWidth($blt)+$this->cMargin*2;
 
@@ -1810,7 +1790,6 @@ function MultiCellBlt($w, $h, $blt, $txt, $border=0, $align='L', $fill=false){
 
 // RULERS
 function SetDash($black=false, $white=false){
-// sets the dash for dashed line
       if($black and $white){
           $s=sprintf('[%.3f %.3f] 0 d', $black*$this->k, $white*$this->k);
       }else{
@@ -1819,20 +1798,16 @@ function SetDash($black=false, $white=false){
       $this->_out($s);
 }
 
-function DottedLine($x,$y,$w,$space=0,$count=1,$lw=0.2){
-// produces a dotted line
-  $this->SetLineWidth($lw);
+function DottedLine($x,$y,$w,$space=0,$count=1){
   $this->SetDash(0.5,0.5);
   for($i=0;$i<$count;$i++){
     $this->Line($x,$y,$x+$w,$y);
     $y+=$space;
   }
-  $this->SetLineWidth(0.2);
   $this->SetDash();
 }
 
 function vLine($x,$y,$h,$space=0,$count=1,$lw=0.2){
-// produces any number of vertical line
   $this->SetLineWidth($lw);
   for($i=0;$i<$count;$i++){
     $this->Line($x, $y, $x, $y+$h);
@@ -1842,7 +1817,6 @@ function vLine($x,$y,$h,$space=0,$count=1,$lw=0.2){
 }
 
 function hLine($x,$y,$w,$space=0,$count=1,$lw=0.2){
-// produces any number of horizontal lines
   $this->SetLineWidth($lw);
   for($i=0;$i<$count;$i++){
     $this->Line($x,$y,$x+$w,$y);
@@ -1852,7 +1826,6 @@ function hLine($x,$y,$w,$space=0,$count=1,$lw=0.2){
 }
 
 function hLabel($x,$y,$w,$h=5,$labels=array(),$align="L"){
-// produces any number of labels horizontally on the page
   $oldx = $this->GetX();
   $oldy = $this->GetY();
   $this->SetXY($x, $y);
@@ -1863,7 +1836,6 @@ function hLabel($x,$y,$w,$h=5,$labels=array(),$align="L"){
 }
 
 function vLabel($x,$y,$w,$h=5,$labels=array(),$align="L"){
-// produces any number of labels vertically on the page
   $oldx = $this->GetX();
   $oldy = $this->GetY();
   $this->SetMargins($x, 10);
@@ -1877,7 +1849,6 @@ function vLabel($x,$y,$w,$h=5,$labels=array(),$align="L"){
 }
 
 function MusicRule($x,$y,$w,$staves,$space,$border,$sets){
-// produces a set of lines as music staves
   $oldx = $this->GetX();
   $oldy = $this->GetY();
   $this->SetXY($x,$y);
@@ -1933,14 +1904,12 @@ function RotatedImage($file,$x,$y,$w,$h,$angle)
 }
 
 function Bold($width,$height,$text,$border=0,$newline=0,$align='L'){
-// produces a cell with bold text
   $this->SetFont('','B');
   $this->Cell($width,$height,$text,$border,$newline,$align);
   $this->SetFont('','');
 }
 
 function Red($width,$height,$text,$border=0,$newline=0,$align='L'){
-// produces a cell with red text
   $this->SetTextColor(255,0,0);
   $this->Cell($width,$height,$text,$border,$newline,$align);
   $this->SetTextColor(0);
@@ -2272,7 +2241,6 @@ function GetMultiCellHeight($w, $h, $txt, $border=null, $align='J') {
     return implode(",", $rgb); // STRING returns the rgb values separated by commas
   }
   function SetFillColorS($color){ 
-  // sets fill colour based on hex value
       if(substr($color,0,1)=='#'){
 	$color = $this->hex2rgb($color);
       }
@@ -2285,7 +2253,6 @@ function GetMultiCellHeight($w, $h, $txt, $border=null, $align='J') {
       //return true; 
    } 
   function SetTextColorS($color){ 
-  // sets text colour based on hex value
       if(substr($color,0,1)=='#'){
 	$color = $this->hex2rgb($color);
       }
@@ -2298,7 +2265,6 @@ function GetMultiCellHeight($w, $h, $txt, $border=null, $align='J') {
       //return true; 
    } 
   function SetDrawColorS($color){ 
-  // sets draw colour based on hex value
       if(substr($color,0,1)=='#'){
 	$color = $this->hex2rgb($color);
       }
@@ -2314,108 +2280,492 @@ function GetMultiCellHeight($w, $h, $txt, $border=null, $align='J') {
      $newtext = implode(' ',str_split($txt));
      $this->Cell($w, $h, $newtext, $border, $ln, $align, $fill, $linl);
    }
-   function fitText($txt, $w=0, $auto=0){
-     $fsize = $this->FontSizePt;
-     $w = $w !==0 ? $w : $this->w-20;
-     if($auto>0){
-       $txt = wordwrap($txt,$auto,'/n',true);
-     }
-     $lines = explode("/n",$txt);
-     foreach($lines as $line){
-  	$size = 10;
-  	$this->SetFontSize($size);
-  	while($this->getStringWidth($line)<$w){
-    	$size+=0.1;
-    	$this->setFontSize($size);
-  	}
-  	$this->cell($w,$size/2.83,$line,0,1,"C");
-     }
-     $this->SetFontSize($fsize);
-   }
-   function GetFontSize(){
-     return $this->FontSizePt;
-   }
-   function CheckMark($size=11){
-		$font = $this->FontFamily;
-		$fontsize = $this->FontSizePt;
-		$fontstyle = $this->FontStyle;
-     $this->SetFont('ZapfDingbats','',$size);
-     $this->Cell(5,5,'4');
-	 	$this->SetFont($font,$fontstyle,$fontsize);
-   }
-   function CheckedBox(){
-     $x = $this->GetX();
-     $y = $this->GetY();
-     $fontsize = $this->GetFontSize();
-     $h = $fontsize * 0.352778; // convert point size to mm
-     $this->Rect($x,$y,5,5);
-     $this->SetXY($x,$y);
-     $this->CheckMark();
-   }
+
+/**************************** SSFPDF ************************/
+  function SetWeight($w = ""){
+  // shortcut to set the font weight
+    switch($w){
+      case "b" : $this->SetFont("","B"); break;
+      case "B" : $this->SetFont("","B"); break;
+      case "" : $this->SetFont("","");
+    }
+  }
+  function FontWeight($w = ""){
+  // set font weight calls SetWeight
+	  $this->SetWeight($w);
+  }
+  function _Arc($x1, $y1, $x2, $y2, $x3, $y3)
+    {
+        $h = $this->h;
+        $this->_out(sprintf('%.2F %.2F %.2F %.2F %.2F %.2F c ', $x1*$this->k, ($h-$y1)*$this->k,
+            $x2*$this->k, ($h-$y2)*$this->k, $x3*$this->k, ($h-$y3)*$this->k));
+    }
+
   
-   function CheckBox(){
-     $this->SetDrawColor(0);
-     $x = $this->GetX();
-     $y = $this->GetY();
-     $fontsize = $this->GetFontSize();
-     $h = $fontsize * 0.352778; // convert point size to mm
-     $this->Rect($x,$y,5,5);
-   }
-   
-  function Title($w,$text,$ln=0){
-    // resizes text to fill width
-    $y = $this->GetY();
-    $x = $this->GetX();
-    $size = 1;
-    do{
-      $size += 1;
-      $this->SetFontSize($size);
-    } while ($this->GetStringWidth($text) < $w);
-    $this->Text($x,$y+$size*0.352778,$text);
-    if($ln){$this->Ln($size*0.352778);}
-    $this->setY($y+$size*0.352778);
-  }
+     function fitText($txt, $w=0, $auto=0){
+       $fsize = $this->FontSizePt;
+       $w = $w !==0 ? $w : $this->w-20;
+       if($auto>0){
+	 $txt = wordwrap($txt,$auto,'/n',true);
+       }
+       $lines = explode("/n",$txt);
+       foreach($lines as $line){
+	  $size = 10;
+	  $this->SetFontSize($size);
+	  while($this->getStringWidth($line)<$w){
+	  $size+=0.1;
+	  $this->setFontSize($size);
+	  }
+	  $this->cell($w,$size/2.83,$line,0,1,"C");
+       }
+       $this->SetFontSize($fsize);
+     }
+     function GetFontSize(){
+       return $this->FontSizePt;
+     }
+     function CheckMark($size=11){
+       $currentfont = $this->GetCurrentFont();
+       $this->SetFont('ZapfDingbats','',$size);
+       $this->Cell(5,5,'4');
+       $this->SetFont($currentfont['family'],$currentfont['style'],$currentfont['size']);
+     }
+    function CheckedBox($textpos="l", $txt=''){
+	$currentfont = $this->GetCurrentFont();
+       $x = $this->GetX();
+       $this->SetFont('ZapfDingbats','',$currentfont['size']*1.5);
+       $this->Cell($currentfont['size'],5,chr(113));
+       $this->SetX($x+0.5);
+       $this->CheckMark($currentfont['size']*0.9);
+       $this->SetFont($currentfont['family'],$currentfont['style'],$currentfont['size']);
+       $this->SetLeftMargin($x+10);
+       $this->SetX($x+$currentfont['em']*2);
+       $this->MultiCell(0,5,$txt);
+       $this->SetLeftMargin($x);
+       $this->SetX($x);
+    }
+    function CheckBoxes($textpos="L", $txt=[], $count = 1, $space = 5){
+      $y = $this->GetY();
+      for($i=0;$i<$count;$i++){
+	if($txt[$i] !== NULL){
+	  $this->CheckBox($textpos, $txt[$i]);
+	}else{
+	  $this->CheckBox();
+	}
+	$y += $space;
+	$this->SetY($y);
+      }
+    }
+    function Title($w,$text,$ln=0){
+      // resizes text to fill width
+      $y = $this->GetY();
+      $x = $this->GetX();
+      $size = 1;
+      do{
+	$size += 1;
+	$this->SetFontSize($size);
+      } while ($this->GetStringWidth($text) < $w);
+      $this->Text($x,$y+$size*0.352778,$text);
+      if($ln){$this->Ln($size*0.352778);}
+      $this->setY($y+$size*0.352778);
+    }
+
+    function setFontWeight($wt){
+      switch($wt){
+	case 'bold':
+	case 'b' : $this->SetFont('','b',''); break;
+	case '' : $this->SetFont('','',''); break;
+      }
+    }
   function MultiCellBltArray($w, $h, $blt_array, $border=0, $align='L', $fill=false){
-   // produces a number of bulleted multicells based on array
-        if (!is_array($blt_array))
-        {
-            die('MultiCellBltArray requires an array with the following keys: bullet,margin,text,indent,spacer');
-            exit;
-        }
-                
-        //Save x
-        $bak_x = $this->x;
-        
-        for ($i=0; $i<sizeof($blt_array['text']); $i++)
-        {
-            //Get bullet width including margin
-            $blt_width = $this->GetStringWidth($blt_array['bullet'] . $blt_array['margin'])+$this->cMargin*2;
-            
-            // SetX
-            $this->SetX($bak_x);
-            
-            //Output indent
-            if ($blt_array['indent'] > 0)
-                $this->Cell($blt_array['indent']);
-            
-            //Output bullet
-            $this->Cell($blt_width,$h,$blt_array['bullet'] . $blt_array['margin'],0,'',$fill);
-            
-            //Output text
-            $this->MultiCell($w-$blt_width,$h,$blt_array['text'][$i],$border,$align,$fill);
-            
-            //Insert a spacer between items if not the last item
-            if ($i != sizeof($blt_array['text'])-1)
-                $this->Ln($blt_array['spacer']);
-            
-            //Increment bullet if it's a number
-            if (is_numeric($blt_array['bullet']))
-                $blt_array['bullet']++;
-        }
-    
-        //Restore x
-        $this->x = $bak_x;
+     // produces a number of bulleted multicells based on array
+	  if (!is_array($blt_array))
+	  {
+	      die('MultiCellBltArray requires an array with the following keys: bullet,margin,text,indent,spacer');
+	      exit;
+	  }
+
+	  //Save x
+	  $bak_x = $this->x;
+
+	  for ($i=0; $i<sizeof($blt_array['text']); $i++)
+	  {
+	      //Get bullet width including margin
+	      $blt_width = $this->GetStringWidth($blt_array['bullet'] . $blt_array['margin'])+$this->cMargin*2;
+
+	      // SetX
+	      $this->SetX($bak_x);
+
+	      //Output indent
+	      if ($blt_array['indent'] > 0)
+		  $this->Cell($blt_array['indent']);
+
+	      //Output bullet
+	      $this->Cell($blt_width,$h,$blt_array['bullet'] . $blt_array['margin'],0,'',$fill);
+
+	      //Output text
+	      $this->MultiCell($w-$blt_width,$h,$blt_array['text'][$i],$border,$align,$fill);
+
+	      //Insert a spacer between items if not the last item
+	      if ($i != sizeof($blt_array['text'])-1)
+		  $this->Ln($blt_array['spacer']);
+
+	      //Increment bullet if it's a number
+	      if (is_numeric($blt_array['bullet']))
+		  $blt_array['bullet']++;
+	  }
+
+	  //Restore x
+	  $this->x = $bak_x;
+    }
+    // **************************** INDEX CREATION ************************
+    // Program set to override refTitleSize and refPageSize
+  var $RefActive=false;    //Flag indicating that the index is being processed
+  var $ChangePage=false;   //Flag indicating that a page break has occurred
+  var $Reference=array();  //Array containing the references
+  var $col=0;              //Current column number
+  var $NbCol;              //Total number of columns
+  var $y0;                 //Top ordinate of columns
+  public $refTitleSize=14;	 //Font size of INDEX
+  public $refFontSize=12;	 //font size of index items
+  public $refPageSize=270;    // cut off mm for page break;
+
+  function setRefTitleSize($size){
+    $this->refTitleSize = $size;
   }
+  function setRefFontSize($size){
+    $this->refFontSize = $size;
+  }
+  function setRefPageSize($size){
+    $this->refPageSize = $size;
+  }
+  function mycheckpagebreak()
+  {
+      if ($this->RefActive) {
+	  if($this->col<$this->NbCol-1)
+	  {
+	      //Go to the next column
+	      $this->SetCol($this->col+1);
+	      $this->SetY($this->y0);
+	      //Stay on the page
+	      return false;
+	  }
+	  else
+	  {
+	      //Go back to the first column
+	      $this->SetCol(0);
+	      $this->ChangePage=true;
+	      //Page break
+	      $this->AddPage();
+	  }
+      }
+      else
+      {
+	  $this->AddPage();
+      }
+  }
+
+  function Reference($txt)
+  {
+      $Present=0;
+      $size=sizeof($this->Reference);
+
+      //Search the reference in the array
+      for ($i=0;$i<$size;$i++){
+	  if ($this->Reference[$i]['t']==$txt){
+	      $Present=1;
+	      $this->Reference[$i]['p'].=','.$this->PageNo();
+	  }
+      }
+
+      //If not found, add it
+      if ($Present==0)
+	  $this->Reference[]=array('t'=>$txt,'p'=>$this->PageNo());
+  }
+
+  function CreateReference($NbCol)
+  {
+      //Initialization
+      $this->RefActive=true;
+      $this->SetFontSize($this->refFontSize);
+
+      //New page
+      //if(!$GLOBALS['blankpage']){
+	//$this->AddPage();
+      //}
+      $this->SetY(10);
+      $fsize = $this->GetFontSize();
+      $this->SetFont('','B',$this->refTitleSize);
+      $this->Cell(0,10,"I N D E X",0,1,'C');
+      $this->SetFont('','',$fsize);
+      //Save the ordinate
+      $this->y0=$this->GetY();
+      $this->NbCol=$NbCol;
+      $size=sizeof($this->Reference);
+      $PageWidth=$this->w-$this->lMargin-$this->rMargin;
+
+      for ($i=0;$i<$size;$i++){
+
+	  //Handles page break and new position
+	  if ($this->ChangePage) {
+	      $this->ChangePage=false;
+	      $this->y0=$this->GetY()-$this->FontSize-1;
+	  }
+
+	  //LibellLabel
+	  $str=$this->Reference[$i]['t'];
+	  $strsize=$this->GetStringWidth($str);
+	  $this->Cell($strsize+2,$this->FontSize+2,ucfirst($str),0,0,'R');
+
+	  //Dots
+	  //Computes the widths
+	  $ColWidth = ($PageWidth/$NbCol)-2;
+	  $w=$ColWidth-$this->GetStringWidth($this->Reference[$i]['p'])-($strsize+4);
+	  if ($w<15)
+	      $w=15;
+	  $nb=$w/$this->GetStringWidth('.');
+	  $dots=str_repeat('.',$nb-2);
+	  $this->Cell($w-2,$this->FontSize+2,$dots,0,0,'L');
+
+	  //Page number
+	  $Width=$ColWidth-$strsize-$w;
+	  $this->Cell($Width,$this->FontSize+2,$this->Reference[$i]['p'],0,1,'R');
+
+	  if($this->GetY() >= $this->refPageSize){
+	    $this->mycheckpagebreak();
+	  }
+      }
+      $this->RefActive=false;
+  }
+  function SetCol($col)
+  {
+      //Set position on a column
+      $this->col=$col;
+      $x=$this->rMargin+$col*($this->w-$this->rMargin-$this->rMargin)/$this->NbCol;
+      $this->SetLeftMargin($x);
+      $this->SetX($x);
+  }
+  // NUMBER OF LINES A MULTICELL WILL TAKE UP
+  function NbLines($w,$txt)
+  {
+      //Computes the number of lines a MultiCell of width w will take
+      $cw=&$this->CurrentFont['cw'];
+      if($w==0)
+	  $w=$this->w-$this->rMargin-$this->x;
+      $wmax=($w-2*$this->cMargin)*1000/$this->FontSize;
+      $s=str_replace("\r",'',$txt);
+      $nb=strlen($s);
+      if($nb>0 and $s[$nb-1]=="\n")
+	  $nb--;
+      $sep=-1;
+      $i=0;
+      $j=0;
+      $l=0;
+      $nl=1;
+      while($i<$nb)
+      {
+	  $c=$s[$i];
+	  if($c=="\n")
+	  {
+	      $i++;
+	      $sep=-1;
+	      $j=$i;
+	      $l=0;
+	      $nl++;
+	      continue;
+	  }
+	  if($c==' ')
+	      $sep=$i;
+	  $l+=$cw[$c];
+	  if($l>$wmax)
+	  {
+	      if($sep==-1)
+	      {
+		  if($i==$j)
+		      $i++;
+	      }
+	      else
+		  $i=$sep+1;
+	      $sep=-1;
+	      $j=$i;
+	      $l=0;
+	      $nl++;
+	  }
+	  else
+	      $i++;
+      }
+      return $nl;
+  }
+  function GetFillColor(){
+    return $this->FillColor;
+  }
+  function GetTextColor(){
+    return $this->TextColor;
+  }
+  function ReverseColors(){
+    $t = explode(' ',$this->GetTextColor());
+    array_pop($t);
+    $textcols = $t;
+    $t = explode(' ',$this->GetFillColor());
+    array_pop($t);
+    $fillcols = $t;
+    if(count($fillcols) === 1){
+      $this->SetTextColor($fillcols[0]*255);
+    }else{
+      $this->SetTextColor($fillcols[0]*255,$fillcols[1]*255,$fillcols[2]*255);
+    }
+    if(count($textcols) === 1){
+      $this->SetFillColor($textcols[0]*255);
+    }else{
+      $this->SetFillColor($textcols[0]*255,$textcols[1]*255,$textcols[2]*255);
+    }
+  }
+  function GetCurrentFont(){
+    $arr = [];
+    $arr['family'] = $this->FontFamily;
+    $arr['style'] = $this->FontStyle;
+    $arr['size'] = $this->FontSizePt;
+    $arr['em'] = $this->GetStringWidth("M");
+    return $arr;
+  }
+  function Grid($width, $height, $hcount, $vcount, $darkline=0){
+    $x = $this->GetX();
+    $y = $this->GetY();
+    $hspace = round($height/$hcount,1);
+    $vspace = round($width/$vcount,1);
+    $this->hline($x, $y, $width, $hspace, $hcount+1, 0.2, $darkline);
+    $this->SetXY($x, $y);
+    $this->vLine($x, $y, $height, $vspace, $vcount+1, 0.2, $darkline);
+  }
+  function LabelBox($x, $y, $w, $h, $txt, $line=0, $round=0){
+    if($round > 0){
+      $this->RoundedRect($x, $y, $w, $h, $round);
+      $this->Text($x+$round,$y+5,$txt);
+    }else{
+      $this->Rect($x, $y, $w, $h);
+    $this->Text($x+2, $y+5, $txt);
+    }
+    if($line > 0){
+      $this->hLine($x, $y+6, $w);
+    }
+  }
+  function Erased($w, $h, $txt){
+    $x = $this->GetX();
+    $y = $this->GetY();
+    $ly = $y / 2;
+    $ll = $this->GetStringWidth($txt);
+    $this->Cell($w, $h, $txt);
+    $this->hLine($x, $ly, $ll);
+  }
+
+  function subWrite($h, $txt, $link='', $subFontSize=12, $subOffset=0)
+  {
+      // resize font
+      $subFontSizeold = $this->FontSizePt;
+      $this->SetFontSize($subFontSize);
+
+      // reposition y
+      $subOffset = ((($subFontSize - $subFontSizeold) / $this->k) * 0.3) + ($subOffset / $this->k);
+      $subX        = $this->x;
+      $subY        = $this->y;
+      $this->SetXY($subX, $subY - $subOffset);
+
+      //Output text
+      $this->Write($h, $txt, $link);
+
+      // restore y position
+      $subX        = $this->x;
+      $subY        = $this->y;
+      $this->SetXY($subX,  $subY + $subOffset);
+
+      // restore font size
+      $this->SetFontSize($subFontSizeold);
+  }
+  function Number($s="No"){
+    $char1 = substr($s,0,1);
+    $char2 = substr($s,-1);
+    $this->Cell($this->GetStringWidth($char1),5,$char1);
+    $this->subWrite(5, $char2.' ', '', $this->GetFontSize()*0.75, $this->GetFontSize()*0.33);
+  }
+  function OverUnder($s){
+    $char1 = substr($s,0,1);
+    $char2 = substr($s,-1);
+    $x = $this->GetX();
+    $this->subWrite(5, $char1.' ', '', $this->GetFontSize()*0.5, $this->GetFontSize()*0.50);
+    $this->SetX($x);
+    $this->subWrite(5, $char2.' ', '', $this->GetFontSize()*0.5, ($this->GetFontSize()*0.0)*-1);
+  }
+  function WordWrap(&$text, $maxwidth)
+  {
+    $text = trim($text);
+    if ($text==='')
+        return 0;
+    $space = $this->GetStringWidth(' ');
+    $lines = explode("\n", $text);
+    $text = '';
+    $count = 0;
+
+    foreach ($lines as $line)
+    {
+        $words = preg_split('/ +/', $line);
+        $width = 0;
+
+        foreach ($words as $word)
+        {
+            $wordwidth = $this->GetStringWidth($word);
+            if ($wordwidth > $maxwidth)
+            {
+                // Word is too long, we cut it
+                for($i=0; $i<strlen($word); $i++)
+                {
+                    $wordwidth = $this->GetStringWidth(substr($word, $i, 1));
+                    if($width + $wordwidth <= $maxwidth)
+                    {
+                        $width += $wordwidth;
+                        $text .= substr($word, $i, 1);
+                    }
+                    else
+                    {
+                        $width = $wordwidth;
+                        $text = rtrim($text)."\n".substr($word, $i, 1);
+                        $count++;
+                    }
+                }
+            }
+            elseif($width + $wordwidth <= $maxwidth)
+            {
+                $width += $wordwidth + $space;
+                $text .= $word.' ';
+            }
+            else
+            {
+                $width = $wordwidth + $space;
+                $text = rtrim($text)."\n".$word.' ';
+                $count++;
+            }
+        }
+        $text = rtrim($text)."\n";
+        $count++;
+    }
+    $text = rtrim($text);
+    return $count;
+  }
+  function WrapText($txt, $width){
+    WordWrap($txt, $width);
+    $this->Write(5, $txt);
+  }
+      function CheckBox($textpos='l',$txt=''){
+       $currentfont = $this->GetCurrentFont();
+       $x = $this->GetX();
+       $this->SetFont('ZapfDingbats','',$currentfont['size']*1.5);
+       $this->Cell($currentfont['size'],5,chr(113));
+       $this->SetFont($currentfont['family'],$currentfont['style'],$currentfont['size']);
+       $this->SetLeftMargin($x+10);
+       $this->SetX($x+$currentfont['em']*2);
+       $this->MultiCell(0,5,$txt);
+       $this->SetLeftMargin($x);
+       $this->SetX($x);
+      }
+ 
 }
 //End of class
 

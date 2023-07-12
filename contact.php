@@ -1,7 +1,9 @@
 <?PHP
 // cSpell:disable
 $bad = 0;
-
+function mysort($a,$b){
+  return $a->surname <=> $b->surname;
+}
 $mailpage = true;
 if (!function_exists('str_contains')) {
   function str_contains($haystack, $needle) {
@@ -64,7 +66,7 @@ require "classes.php";
 require "Exception.php";
 require "PHPMailer.php";
 require "SMTP.php";
-require "MyCSV.class.php";
+require "steveCSV.php";
 if(isset($_GET['id'])){
   // send to me
   $id = $_GET['id'];
@@ -170,9 +172,9 @@ HERE;
 
 //$q = new Database('Councillor');
 //$councillors = $q->getData("select * from councillor c left join ward w on c.ward=w.wardid order by surname, name");
-$councillors = new MyCSV('data/councillor.csv');
-$councillors->sort('surname');
-
+$councillors = new steveCSV('data/councillor.csv');
+$councillors->sortfield = "surname";
+$councillors->sort();
 ?>
 <div class="eight columns" id="content" style="border-radius:0 0 15px 0; ">
   <div class="row">
@@ -196,20 +198,20 @@ $councillors->sort('surname');
       <select class="u-full-width" name="emailTo" id="emailTo">
         <option value="">--- Please choose (required, for general email choose the Clerk) ---</option>
         <?php
-        while($councillor = $councillors->each()){
-          if($councillor['surname'] != "ZZZ"){
+        foreach($councillors->data as $councillor){
+          if($councillor->surname != "ZZZ"){
             $sel = "";
-            switch($councillor['ward']){
+            switch($councillor->ward){
               case 1: $wardname = "Tintern"; break;
               case 2: $wardname = "Llandogo"; break;
               case 3: $wardname = "Clerk to the Council"; break;
               case 4: $wardname = "County Councillor"; break;
             }
-            if($councillor['surname'] > '' or $id > ''){
-              if($councillor['code'] === $id or $councillor['email'] === $_POST['emailTo']){
+            if($councillor->surname > '' or $id > ''){
+              if($councillor->code === $id or $councillor->email === $_POST['emailTo']){
               $sel = "selected";
             }
-            printf("<option value='%s' %s>%s %s (%s)</option>",$councillor['email'],$sel,$councillor['name'],$councillor['surname'],$wardname);
+            printf("<option value='%s' %s>%s %s (%s)</option>",$councillor->email,$sel,$councillor->name,$councillor->surname,$councillor->ward);
           }
         }
       }

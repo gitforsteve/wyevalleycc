@@ -147,7 +147,7 @@
         <div class="container">
             <h1 style="text-align:center;">Wye Valley Community Council</h1>
             <h2 style="text-align:center;">Expenses Claim</h2>
-            <form id="expform" action="expenses.php" method="POST" autocomplete="off">
+            <form id="expform" action="drawform.php" method="POST" autocomplete="off">
                 <div class="row">
                     <fieldset>
                         <legend>Claim details</legend>

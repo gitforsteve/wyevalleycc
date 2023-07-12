@@ -11,36 +11,49 @@ function highlight_words( $text, $keywords ){
     $dir = "./minutes/";
     $search = $_POST['srch'];
     $searchok = false;
-    if($dh = opendir($dir)){
-        while(($file = readdir($dh)) !== false){
+    $output.="<form action='searchminutes.php' method='POST'><label for='srch' style='font-weight:normal;'>Search minutes again <input type='text' id='srch' name='srch' autocomplete='off' placeholder='At least 4 characters' > <button class='shadow' id='srchbtn' disabled>SEARCH</button></label>
+    </form>";
+    $found = 0;
+    //if($dh = opendir($dir)){
+        $files = scandir($dir,SCANDIR_SORT_DESCENDING);
+        foreach($files as $file){
             if(pathinfo($file,PATHINFO_EXTENSION) === "txt"){
                 $realname = substr($file,0,1)==="a"?substr($file,1):$file;
                 $dt = substr($realname,0,4)."-".substr($realname,4,2)."-".substr($realname,6,2);
-                if(strtotime($dt) > strtotime('-540 days')){
+                if(strtotime($dt) > strtotime('-2 years')){
                     $f = fopen("./minutes/".$file,"r");
-                    $found = 0;
                     while(!feof($f)){
                         $s = fgets($f);
                         if( preg_match_all('/('.preg_quote($search,'/').')/i', $s, $matches)){
                             $found ++;
                             $searchok = true;
-                            if($found === 1){echo "<strong>Minutes for ".date("jS F Y",strtotime($dt))."</strong><br />";}
-                            echo highlight_words($s,$search)."<br />";
+                            $output.="<strong>Minutes for ".date("jS F Y",strtotime($dt))."</strong><br />".highlight_words($s,$search)."<br /><hr />";
                         }
                     }
                     fclose($f);
-                    if($found > 0){echo "<hr />";}
                 }
             }
         }
-        closedir($dh);
+        //closedir($dh);
+    //}
+    if($found < 1){ $output.="Sorry '".$search."' was not found<br><a href='minutes.php'>Back to Minutes</a>";}else{
+        $output.=sprintf("<p>%s minutes contain your search</p>",$found);
+        echo $output;
     }
-    if(!$searchok){ echo "Sorry '".$search."' was not found<br><a href='minutes.php'>Back to Minutes</a>";}
 ?>
 </div>
 <script type="text/javascript">
   handleMenu($('#minutes'));
-  //$('#current').html("Meeting Agenda");
+  $('#srchbtn').attr("disabled",true);
+  $('#srch').on("keyup",function(){
+    if($('#srch').val().length > 3){
+      $('#srchbtn').attr("disabled",false);
+    }else{
+      $('#srchbtn').attr("disabled",true);
+    }
+  });
+
+//$('#current').html("Meeting Agenda");
 </script>
 <?PHP
 require 'bottom.html';
