@@ -19,7 +19,9 @@ $table = new steveTable('{
 ?>
 <div class='nine columns' style='padding-right: 10px; border-radius:0 0 15px 0; ' id='content'>
 <h1>Annual Report 2022/23</h1>
-<a class="button" href="annualreport.php" title="annual report main page">What we do</a> <a class="button" href="chairsreport.php" title="chair's report">Chair's report</a> <a class="button" href="futureplans.php" title="plans for the future">Our plans for the future</a>  
+<div style="position:sticky;top:0;background:white;">
+<a class="button" href="annualreport.php" title="annual report main page">What we do</a> <a class="button" href="chairsreport.php" title="chair's report">Chair's report</a> <a class="button" href="futureplans.php" title="plans for the future">Our plans for the future</a> 
+</div>
 <h2>WHAT WE COST</h2>
 <p>Running a Community Council obviously costs money as well as the time and effort of your Community Councillors. The money we receive forms a very small part of your Council Tax (known as our precept) and our costs are shown below</p>
 <?PHP

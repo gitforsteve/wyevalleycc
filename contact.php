@@ -173,8 +173,7 @@ HERE;
 //$q = new Database('Councillor');
 //$councillors = $q->getData("select * from councillor c left join ward w on c.ward=w.wardid order by surname, name");
 $councillors = new steveCSV('data/councillor.csv');
-$councillors->sortfield = "surname";
-$councillors->sort();
+$councillors->sort("surname");
 ?>
 <div class="eight columns" id="content" style="border-radius:0 0 15px 0; ">
   <div class="row">

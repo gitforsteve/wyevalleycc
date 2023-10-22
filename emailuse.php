@@ -3,6 +3,8 @@
 require_once "stevetable.php";
 require_once "steveCSV.php";
 $csv = new steveCSV("data/emailusage.csv");
+$count = count($csv->fields);
+$heading=$csv->fields;
 $table = new steveTable('{
     "ID": "emailtable",
     "tableWidth": "30%",
@@ -11,8 +13,8 @@ $table = new steveTable('{
     "border": "b",
     "borderColor": "lightgray",
     "widths": ["60%","20%","20%"],
-    "heading": ["Councillor","Used Mb","Useage %"],
-    "aligns": ["L","R","R"]
+    "aligns": ["L","R","R"],
+    "heading": ["Name","Use","Percent"]
 }');
 $table->heading();
 foreach($csv->data as $user){

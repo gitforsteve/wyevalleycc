@@ -10,7 +10,6 @@ $keywords = "contact Tintern Llandogo community councillors, wards, represent";
 require 'top.html';
 /******************************* */
 class Councillor {
-  public $id;
   public $code;
   public $name;
   public $surname;
@@ -23,8 +22,7 @@ class Councillor {
   public $status;
 }
 $csv = new steveCSV('data/councillor.csv');
-$csv->sortfield = "ward";
-$csv->sort();
+$csv->sort("ward");
 /**** GROUP INTO WARDS */
 $wards = [];
 foreach($csv->data as $councillor){

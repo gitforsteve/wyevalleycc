@@ -1,5 +1,8 @@
 <?PHP
 // cSpell:disable
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
+//error_reporting(E_ALL);
 $title = "Accounting Statement";
 $desc = "our latest accounting statement";
 require 'top.html';
@@ -7,7 +10,12 @@ if(!class_exists('Database')){
   require 'classes.php';
 }
 require "stevetable.php";
-include "data/accstatement.php";
+require "steveCSV.php";
+/// SET DATES
+$dates = ["31 March 2022","31 March 2023"];
+///
+$csv = new steveCSV("data/accounts.csv");
+$data = $csv->data;
 
 ?>
 <div class='nine columns' id='content'>
@@ -21,53 +29,76 @@ include "data/accstatement.php";
   </div>
 <h1>Accounting statement</h1>
 <?PHP
-
 $table = new steveTable('{
-  "widths": ["5%","50%","22%","21%","2%"],
+  "widths": ["52%","21%","21%","3%"],
   "border": "b",
   "tableBorder": true,
   "borderColor": "gray",
-  "sum": [0,0,0,0],
   "currency": [0,0,0,0],
   "currencySymbol": "&pound;",
+  "noSymbolOnZero": true,
   "decimals": 0,
-  "brackets": [0,0,1,1]
+  "brackets": [0,1,1,0]
 }');
-$table->reset('{ "aligns": ["L","L","R","L"] }');
-$table->row(["","","Year","Ending"]);
-$table->reset('{ "aligns": ["L","L","C","C"] }');
-$table->row(["","",$dates[0],$dates[1]]);
-$table->reset('{ "aligns": ["C","L","R","R"], "currency": [0,0,1,1], "sum": [0,0,1,1] }');
+$table->version();
+$table->reset('{ "aligns": ["L","C","C","L"] }');
+$table->row(["","Year","Ending",""]);
+$table->reset('{ "aligns": ["L","C","C","L"] }');
+$table->row(["",$dates[0],$dates[1],""]);
+$table->reset('{ "aligns": ["L","L","L","L"], "currency": [0,1,1,0] }');
 $table->fontWeight("b");
 $table->text("Statement of income and expenditure/receipts and payments");
 $table->fontWeight();
-$count = 1;
-foreach($income as $data){
-  $table->row([$count,$data[0],$data[1],$data[2]]);
-  $count++;
-}
-$incometotals = $table->getTotals(true);
-$table->row([$count,"(=) Balances carried forward",$incometotals[2],$incometotals[3]]);
-$count++;
+//INCOME
+  $row = $csv->find("text","Balances brought forward");
+  $table->row([$row[0]->text,$row[0]->year1,$row[0]->year2,""]);
+  $row = $csv->find("text","Income from local taxation/levy");
+  $table->row([$row[0]->text,$row[0]->year1,$row[0]->year2,""]);
+ $row = $csv->find("text","Total other receipts");
+  $table->row([$row[0]->text,$row[0]->year1,$row[0]->year2,""]);
+  $row = $csv->find("text","Totals");
+$table->fontWeight('b');
+$table->row([$row[0]->text,$row[0]->year1,$row[0]->year2,""]);
+$table->fontweight();
+
+
+//EXPENSE
+$row = $csv->find("text","Staff costs");
+$table->row([$row[0]->text,$row[0]->year1,$row[0]->year2,""]);
+$row = $csv->find("text","Loan interest/capital repayments");
+$table->row([$row[0]->text,$row[0]->year1,$row[0]->year2,""]);
+$row = $csv->find("text","Total other payments");
+$table->row([$row[0]->text,$row[0]->year1,$row[0]->year2,""]);
+$row = $csv->find("text","Total expenses");
+$table->fontWeight('b');
+$table->row([$row[0]->text,$row[0]->year1,$row[0]->year2,""]);
+$row = $csv->find("text","Balance carried forward");
+$table->row([$row[0]->text,$row[0]->year1,$row[0]->year2,""]);
+$table->print(true);
 $table->fontWeight("b");
 $table->center();
 $table->text("Statement of balances");
 $table->fontWeight();
-$table->reset('{ "aligns": ["C","L","R","R"] }');
-foreach($balances as $data){
-  for($i=0;$i<count($data);$i++){
-    if(substr($data[$i],0,6) === "income"){
-      preg_match_all('!\d+!', $data[$i], $matches);
-      $number = implode(' ', $matches[0]);
-      $data[$i] = $incometotals[$number];
-    }
-  }
-  $table->row([$count,$data[0],$data[1],$data[2]]);
-  $count++;
-}
+$table->reset('{ "aligns": ["L","R","R","L"] }');
+$totals = [0,0];
+
+$row = $csv->find("text","Debtors and stock balances");
+$table->row([$row[0]->text,$row[0]->year1,$row[0]->year2,""]);
+
+$row = $csv->find("text","Total cash and investments");
+$table->row([$row[0]->text,$row[0]->year1,$row[0]->year2,""]);
+
+$row = $csv->find("text","Creditors");
+$table->row([$row[0]->text,$row[0]->year1,$row[0]->year2,""]);
+$row = $csv->find("text","Balances carried forward");
+$table->fontWeight("b");
+$table->row([$row[0]->text,$row[0]->year1,$row[0]->year2,""]);
+$table->fontWeight();
+$table->setAligns(['C']);
 $table->text("Trust funds disclosure note N/A");
-$table->sums = [];
+$table->version();
 $table->print();
+printf("<p>%s</p>",$ver);
 
 
 

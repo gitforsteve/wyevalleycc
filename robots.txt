@@ -17,6 +17,7 @@ Disallow: /minutes/
 Disallow: /norelease/
 Disallow: /voting/
 Disallow: /expenses/
+Disallow: /data/
 Disallow: /*?*
 Disallow: bottom.html
 Disallow: classes.php
@@ -30,4 +31,5 @@ Disallow: showagenda.php
 Disallow: showminute.php
 Disallow: singlenotice.php
 Disallow: top.html
+Disallow: vhevents.php
 Sitemap: https://wyevalleycc.co.uk/sitemap.xml

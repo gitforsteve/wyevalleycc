@@ -1,9 +1,9 @@
-"id","linkid","linktitle","linkdesc","linkurl","linkactive"
-1,"8","Citizens' Advice opening times","Opening times for Citizens' Advice centres in the region","doc/Citizens Advice Opening Times.pdf","Y"
-2,"4","Llandogo Primary School","All about the local primary school","http://www.llandogo.monmouthshire.sch.uk","Y"
-3,"2","Monmouthshire County Council","The web site of the Monmouthshire County Council","http://www.monmouthshire.gov.uk/","Y"
-4,"11","Severn Bridges status","Highways England website showing the status of both bridges and planned maintenance","https://highwaysengland.co.uk/travel-updates/the-severn-bridges/","Y"
-5,"1","Tintern Churches Burial Records","A complete list of burials in St Michael's and St Mary's churches","https://parva.co.uk/burials","Y"
-6,"7","Tintern News","The latest issue of the Village Newsletter","docs/Tintern News.pdf","Y"
-7,"9","Tintern Village Website","The site for Tintern in the Wye Valley","http://www.tinternvillage.co.uk","Y"
-8,"5","Wye Dean GP Practice","The local doctors' surgery","https://wyedean.gpsurgery.net/","Y"
+linktitle,linkdesc,linkurl,linkactive
+Citizens' Advice opening times,Opening times for Citizens' Advice centres in the region,doc/Citizens Advice Opening Times.pdf,Y
+Llandogo Primary School,All about the local primary school,http://www.llandogo.monmouthshire.sch.uk,Y
+Monmouthshire County Council,The web site of the Monmouthshire County Council,http://www.monmouthshire.gov.uk/,Y
+Severn Bridges status,Highways England website showing the status of both bridges and planned maintenance,https://highwaysengland.co.uk/travel-updates/the-severn-bridges/,Y
+Tintern Churches Burial Records,A complete list of burials in St Michael's and St Mary's churches,https://parva.co.uk/burials,Y
+Tintern News,The latest issue of the Village Newsletter,docs/Tintern News.pdf,Y
+Tintern Village Website,The site for Tintern in the Wye Valley,http://www.tinternvillage.co.uk,Y
+Wye Dean GP Practice,The local doctors' surgery,https://wyedean.gpsurgery.net/,Y

@@ -19,7 +19,9 @@ $table = new steveTable('{
 ?>
 <div class='nine columns' style='padding-right: 10px; border-radius:0 0 15px 0; ' id='content'>
 <h1>Annual Report 2022/23</h1>
+<div style="position:sticky;top:0;background:white;">
 <a class="button" href="annualreport.php" title="annual report main page">What we do</a>  <a class="button" href="whatwecost.php" title="what we cost">What we cost</a> <a class="button" href="chairsreport.php" title="chair's report">Chair's report</a>
+</div>
 <h2>OUR PLANS FOR THE FUTURE</h2>
 <p>We will continue to support the community's interests and facilitate a harmonious integration of Tintern and Llandogo now that the Wye Valley Community Council has come into being. We will continue to support community events to strengthen communities.
 We will engage with members of the community and village groups to encourage activities and projects that are of benefit to residents. Our support for local business will continue with assistance in advertising.</p>

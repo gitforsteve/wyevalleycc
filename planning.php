@@ -1,5 +1,8 @@
 <?PHP
 //cSpell:disable
+//ini_set ('display_errors', 1);
+//ini_set ('display_startup_errors', 1);
+//error_reporting (E_ALL);
 $title = "Planning applications";
 $desc = "Check out the planning applications for the Tintern area";
 $keywords = "tintern, planning applications, Monmouthshire planning";
@@ -34,8 +37,17 @@ if (!function_exists('str_contains')) {
   <input style="float:left;clear:none;" type="radio" name="display" id="all" value="all" <?=$display === 'all' ? 'checked' : ''?>  > <label style="float:left;clear:none;display:block;padding:0 10px 0 10px;" for="all">All</label>
   <input style="float:left;clear:none;" type="radio" name="display" id="active" value="active" <?=$display === 'active' ? 'checked' : ''?> > <label style="float:left;clear:none;display:block;;padding:0 10px 0 10px;" for="active">Current only</label>
   <input style="float:left;clear:none;" type="radio" name="display" id="complete" value="complete" <?=$display === 'complete' ? 'checked' : ''?> > <label style="float:left;clear:none;display:block;;padding:0 10px 0 10px;" for="complete">Processed only</label>
-  <input class="shadow" style="float:left;" type="submit" value="Select" />
+    <input class="shadow" style="float:left;" type="submit" value="Select" />
 </fieldset>
+<!--select id="byyear" style="float:left;clear:none;display:block;"><option value="">Choose year</option>
+  <?PHP
+    /*$q = new Database("Application");
+    $options = $q->getData("select DISTINCT SUBSTRING(number,4,4) as planyear from planning");
+    foreach($options as $option){
+      printf("<option value=%s>%s</option>",$option->planyear,$option->planyear);
+    }*/
+  ?>
+  </select-->
 </form>
 <div id="hover" style="position:absolute;display:none;background:white;color:#336699;padding:5px;font-size:80%;box-shadow:2px 2px 2px 2px gray;">Click to copy to clipboard</div>
 

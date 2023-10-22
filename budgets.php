@@ -8,38 +8,7 @@ $years = "2023-24";
 require "stevetable.php";
 require 'top.html';
 require "steveCSV.php";
-/*class Budget {
-  public $id;
-  public $type;
-  public $text;
-  public $budget1;
-  public $spend1;
-  public $budget2;
-  public $spend2;
-}
-$f = fopen('data/budget.csv','r');
-$budgets = [];
-while($line = fgetcsv($f)){
-  $b = new Budget();
-  $b->id = $line[0];
-  $b->type = $line[1];
-  $b->text = $line[2];
-  $b->budget1 = $line[3];
-  $b->spend1 = $line[4];
-  $b->budget2 = $line[5];
-  $b->spend2 = $line[6];
-  $budgets[] = $b;
-}*/
-$budgets = new steveCSV('data/budget.csv');
-$revenue = $capital = [];
-foreach($budgets->data as $row){
-  switch($row->type){
-    case 'capital': array_push($capital,$row); break;
-    case 'revenue': array_push($revenue,$row); break;
-  }
-}
-
-$revtotals = $captotals = [0,0,0,0];
+$totals = [0,0,0,0];
 ?>
 <div class='nine columns' id='content'>
 <div role="navigation">Our other financial pages:
@@ -51,6 +20,8 @@ $revtotals = $captotals = [0,0,0,0];
     </ul>
   </div>
 <?PHP
+$csv = new steveCSV("data/budget.csv");
+$csv->sort('item');
 
 $table = new steveTable('{
   "widths": ["40%","15%","15%","15%","15%"],
@@ -61,46 +32,26 @@ $table = new steveTable('{
   "borderColor": "lightgray",
   "currency": [0,1,1,1,1],
   "currencySymbol": "&pound;",
-  "aligns": ["L","R","R","R","R"],
   "emptyFields": true,
-  "sum": [0,1,1,1]
+  "aligns": ["L","R","R","R","R"],
+  "sum": [0,1,1,1,1],
+  "totalLabel": "TOTALS"
 }');
 ?>
 <!--div class="nine columns" id="content"-->
 <h1>BUDGET <?=$years?></h1>
 <?PHP
 $table->heading();
-$table->fontWeight('b');
-$table->text("REVENUE");
-$table->fontWeight('');
-$table->setSubTotalLabel("REVENUE TOTAL");
-foreach($revenue as $data){
-  $table->row([$data->text,$data->budget1,$data->spend1,$data->budget2,$data->spend2]);
-  if($data->budget1 > ''){$revtotals[0] += $data->budget1;}
-  if($data->spend1 > ''){$revtotals[1] += $data->spend1;}
-  if($data->budget2 > ''){$revtotals[2] += $data->budget2;}
-  if($data->spend2 > ''){$revtotals[3] += $data->spend2;}
+foreach($csv->data as $data){
+  $table->row([$data->item,$data->budget1,$data->spend1,$data->budget2,$data->spend2]);
+  if($data->budget1 > ''){$totals[0] += $data->budget1;}
+  if($data->spend1 > ''){$totals[1] += $data->spend1;}
+  if($data->budget2 > ''){$totals[2] += $data->budget2;}
+  if($data->spend2 > ''){$totals[3] += $data->spend2;}
 }
-//$table->total();
-$table->row(["REVENUE TOTALS",$revtotals[0],$revtotals[1],$revtotals[2],$revtotals[3]]);
-$table->fontWeight('b');
-$table->text("\nCAPITAL");
-$table->fontWeight('');
-//$table->setSubTotalLabel("CAPITAL TOTAL");
-//$table->sums = [];
-foreach($capital as $data){
-  $table->row([$data->text,$data->budget1,$data->spend1,$data->budget2,$data->spend2]);
-  if($data->budget1 > ''){$captotals[0] += $data->budget1;}
-  if($data->spend1 > ''){$captotals[1] += $data->spend1;}
-  if($data->budget2 > ''){$captotals[2] += $data->budget2;}
-  if($data->spend2 > ''){$captotals[3] += $data->spend2;}
-}
-//$captotals = $table->sums;
-$table->row(["CAPITAL TOTALS",$captotals[0],$captotals[1],$captotals[2],$captotals[3]]);
-$table->text("\n");
-$table->row(["TOTAL EXPENDITURE",$revtotals[0]+$captotals[0],$revtotals[1]+$captotals[1],$revtotals[2]+$captotals[2],$revtotals[3]+$captotals[3]]);
-$table->sums = [];
+$table->setStyles(['b','b','b','b','b']);
 $table->print();
+
 echo "<p>Appropriate sum for 2023/24 &pound;9.93 per elector = &pound9,334<br />Tintern Ward: 548 electors, Llandogo Ward: 392 electors (as at Dec 2022)</p>";
 $table = new steveTable('{
   "tableWidth": "75%",

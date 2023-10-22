@@ -1,53 +1,54 @@
-﻿id,item,qty,location,value
-1,Bench,1,Abbey Roundabout,300
-2,Bench,1,Front of Abbey shop,300
-3,Bench,1,St Anns Road,350
-4,Bench,1,Front of Hall (small),217
-5,Bench,1,Trellech Rd adj Chapel,350
-6,Bench,1,Trellech Rd by Park Glade,350
-7,Bench,1,The Green (opp George),350
-8,Bench,1,Millennium seat on prom,750
-9,Bench,1,Promenade - Marmax,300
-10,Bench,2,Rear of Hll - Marmax,300
-11,Bench,1,Below landslide (small),250
-12,Noticeboard,1,Village Greem (large),800
-13,Noticeboard,1,Village Hall (small),250
-14,Noticeboard,1,Trellech Road,261
-15,Noticeboard,1,The Quayside,450
-16,Noticeboard,1,By Millennium Hall,1102
-17,Noticeboard,1,By Browns Shop,348
-18,Lawnmower,1,,329
-19,Strimmer,1,,290
-20,Refuse bin,1,Upper Glynwood Road,500
-21,Refuse bin,1,A466 Playground entrance,367
-22,Refuse bin,1,Rear of White Monk Cafe,367
-23,Refuse bin,1,Pavement by public toilet,367
-24,Refuse bin,1,Lower Wireworks car park,367
-25,Refuse bin,1,A466 between Wye Lodge and Spring Cottage,367
-26,Dog waste bin,1,Chapel Hill Lane,115
-27,Dog waste bin,1,Fryers Wharf / church path,115
-28,Dog waste bin,1,Abbey roundabout,115
-29,Dog waste bin,1,Forge Road,115
-30,Dog waste bin,1,A466 by The Bay Cottage,115
-31,Dog waste bin,1,A466 between Llandogo shop and Wye Valley Crafts,115
-32,Dog waste bin,1,Below Sloop Inn,115
-33,Planter,2,,410
-34,Planter,3,,383
-35,Defibrillator,2,Dr Surgery & Wye Valley Hotel,1425
-36,Defibrillator,1,Sloop Inn Llandogo,975
-37,Defibrillator,1,Llandogo defibrillator cabinet,450
-38,Defibrillator,1,Defibrillator batteries and pads,119
-39,Welcome sign,2,,711
-40,Road sign to school and hall,1,,156
-41,Bus shelter,1,Near Bigsweir Bridge,4652
-42,Well,1,Field above Fountain Inn,0
-43,Well,1,Linen Well,0
-44,Well,1,Bottom of Glyn Road,0
-45,Well,1,Church Grove,0
-46,Well,1,Bottom of Trellech Road,0
-47,The Pound,1,Church Lane,500
-48,Fryers Wharf,1,Adj St Michaels Church,5000
-49,Danger sign,1,On river bank,0
-50,Village Hall and Playground,1,The Quayside,325000
-51,Clerk's laptop,1,,453
-52,Clerk's printer,1,,40
+item,qty,location,value
+Bench,1,Abbey Roundabout,300
+Bench,1,Front of Abbey shop,300
+Bench,1,St Anns Road,350
+Bench,1,Front of Hall (small),217
+Bench,1,Trellech Rd adj Chapel,350
+Bench,1,Trellech Rd by Park Glade,350
+Bench,1,The Green (opp George),350
+Bench,1,Millennium seat on prom,750
+Bench,1,Promenade - Marmax,300
+Bench,2,Rear of Hll - Marmax,300
+Bench,1,Below landslide (small),250
+Noticeboard,1,Village Greem (large),800
+Noticeboard,1,Village Hall (small),250
+Noticeboard,1,Trellech Road,261
+Noticeboard,1,The Quayside,450
+Noticeboard,1,By Millennium Hall,1102
+Noticeboard,1,By Browns Shop,348
+Lawnmower,1,,329
+Strimmer,1,,290
+Refuse bin,1,Upper Glynwood Road,500
+Refuse bin,1,A466 Playground entrance,367
+Refuse bin,1,Rear of White Monk Cafe,367
+Refuse bin,1,Pavement by public toilet,367
+Refuse bin,1,Lower Wireworks car park,367
+Refuse bin,1,A466 between Wye Lodge and Spring Cottage,367
+Dog waste bin,1,Chapel Hill Lane,115
+Dog waste bin,1,Fryers Wharf / church path,115
+Dog waste bin,1,Abbey roundabout,115
+Dog waste bin,1,Forge Road,115
+Dog waste bin,1,A466 by The Bay Cottage,115
+Dog waste bin,1,A466 between Llandogo shop and Wye Valley Crafts,115
+Dog waste bin,1,Below Sloop Inn,115
+Planter,2,,410
+Planter,3,,383
+Defibrillator,2,Dr Surgery & Wye Valley Hotel,1425
+Defibrillator,1,Sloop Inn Llandogo,975
+Defibrillator,1,Llandogo defibrillator cabinet,450
+Defibrillator,1,Defibrillator batteries and pads,119
+Welcome sign,2,,711
+Road sign to school and hall,1,,156
+Bus shelter,1,Near Bigsweir Bridge,4652
+Well,1,Field above Fountain Inn,0
+Well,1,Linen Well,0
+Well,1,Bottom of Glyn Road,0
+Well,1,Church Grove,0
+Well,1,Bottom of Trellech Road,0
+The Pound,1,Church Lane,500
+Fryers Wharf,1,Adj St Michaels Church,5000
+Village Hall and Playground,1,The Quayside,325000
+Clerk's laptop,1,,453
+Clerk's printer,1,,40
+Projector,1,Tintern Village Hall,2616
+

@@ -1,6 +1,6 @@
 <?PHP
 // cSpell:disable
-$title = "Terms and consitions of purchase";
+$title = "Terms and conditions of purchase";
 $desc = "Our standard terms and conditions which apply for purchases of goods or services";
 require "top.html";
 require 'classes.php';

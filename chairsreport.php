@@ -19,7 +19,9 @@ $table = new steveTable('{
 ?>
 <div class='nine columns' style='padding-right: 10px; border-radius:0 0 15px 0; ' id='content'>
 <h1>Annual Report 2022/23</h1>
-<a class="button" href="annualreport.php" title="annual report main page">What we do</a> <a class="button" href="whatwecost.php" title="what we cost">What we cost</a> <a class="button" href="futureplans.php" title="plans for the future">Our plans for the future</a>  
+<div style="position:sticky;top:0;background:white;">
+<a class="button" href="annualreport.php" title="annual report main page">What we do</a> <a class="button" href="whatwecost.php" title="what we cost">What we cost</a> <a class="button" href="futureplans.php" title="plans for the future">Our plans for the future</a>
+</div>
 <h2>Chair's report</h2>
 <p>The last three years have been difficult for everyone, with the closure of the A466, which had a phenomenal impact on business, residents and visitors, followed by the Covid Pandemic. The community council did its best to represent you through these difficult times. In order to do that we met regularly via telephone conference calls; the other means not being easy in our rural area where not everyone has access to computers and Zoom.</p>
 <p>Where possible we continued consultations on planning applications and strived with local residents to have reduced speed limits in Tintern.</p>

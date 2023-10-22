@@ -1,8 +1,8 @@
-"councillor","basic","responsibility","chair","vice","loss","expenses","care","attendance","other","total"
-"Cllr A Ashman",0,0,0,0,0,0,0,0,0,0
-"Cllr S Evans",0,0,0,0,0,0,0,0,0,0
-"Cllr I Mawdsley",0,0,0,0,0,0,0,0,0,0
-"Cllr J Morrison",0,0,0,0,0,0,0,0,0,0
-"Cllr L Parker","150",0,0,0,0,0,0,0,0,150
-"Cllr S Shewell",0,0,"500",0,0,0,0,0,0,"500"
-"Cllr C Snell",0,0,0,0,0,0,0,0,0,0
+"surname","forename","basic","responsibility","chair","vice","loss","expenses","care","attendance","other","total"
+"Ashman","Angus",0,0,0,0,0,0,0,0,0,0
+"Mawdsley","Ian",0,0,0,0,0,0,0,0,0,0
+"Morrison","Jamie",0,0,0,0,0,0,0,0,0,0
+"Parker","Lynne","150",0,0,0,0,0,0,0,0,150
+"Shewell","Stephanie",0,0,"500",0,0,0,0,0,0,"500"
+"Snell","Carla",0,0,0,0,0,0,0,0,0,0
+"Evans","Steve",0,0,0,0,0,0,0,0,0,0

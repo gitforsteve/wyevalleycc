@@ -6,6 +6,12 @@
   Table object which creates a standard html table
   with optional headings
   */
+  function validateDate($date, $format = 'Y-m-d')
+  {
+    $d = DateTime::createFromFormat($format, $date);
+    // The Y ( 4 digits year ) returns TRUE for any integer with any number of digits so changing the comparison from == to === fixes the issue.
+    return $d && $d->format($format) === $date;
+  }
   function mysort($a,$b){
     $col = $GLOBALS['col'];
     if ($a->cells[$col]->content===$b->cells[$col]->content) return 0;
@@ -45,6 +51,7 @@
     public $stripeTextcolor;
     public $borderColor;
     public $skipFieldValues;
+    public $sortExclude;
     
     public $id = "";
     public function __construct($tot = false){
@@ -77,7 +84,7 @@
         if(trim($cell->colspan) > ''){
           $colspan = sprintf("colspan='%s'",$cell->colspan);
         }
-          $cstyles = $cell->style."width:".$cell->width.";text-align:".$cell->align;
+        $cstyles = $cell->style."width:".$cell->width.";text-align:".$cell->align;
           if($cell->border > ''){
             $cstyles .= $cell->border;
           } 
@@ -93,7 +100,7 @@
           if($this->heading){
             $s .= sprintf("<th %s %s %s>%s</th>\r\n",$cell->id, $colspan,$cstyles,$cell->content);
           }else{
-            $s .= sprintf("<td %s %s %s>%s</td>\r\n",$cell->id, $colspan,$cstyles,$cell->content);
+            $s .= sprintf("<td %s %s %s %s>%s</td>\r\n",$cell->id, $cell->celleditable, $colspan,$cstyles,$cell->content);
           }
         }
       //}
@@ -116,74 +123,81 @@ class Cell {
     public $content; // content of the cell
     public $subtotal; // internal
     public $id; // identifier
+    public $celleditable; // string
 }
 class steveTable {
-  public $version = "Build 28";
-  public $ID = "steveTable"; //id for table
-  public $tableClass = ""; //Overall class for table
-  public $classes; //Array of class for each column
-  public $tableStyle; //string of css for entire table
-  public $tableFont = "Arial,Helvetica,sans-serif"; //Font to be used for table
-  public $tableFontSize = "2rem"; //Font size;
-  public $tableBorder = false; //Border surrounding the table (not cells)
-  public $borderCollapse = true; //Collapse border
-  public $tableWidth = "100%"; // Overall width of table
-  public $tableCenter = false; //Whether to horizontally centre the table on the window
-  public $widths; //array of strings of value and unit
+  public function __set($property,$value){
+    $this->$property = $value;
+  }
+  private $version = "Build 38";
   public $aligns; //array of singe character strings L-left C-centre R-right
-  public $topAlign = true; //vertical align top true by default
+  public $backgrounds; //array of colour names, hex or rgb
   public $border = ""; //string L-left R-right T-top B-bottom or A-all cell not table
   public $borders; // array of combinations of l,r,t and b
-  public $noBorder; //array of boolean for columns which have border turned off
-  public $noTopBorder; //array of boolean to turn off top border
-  public $noBottomBorder; //array of boolean to turn off bottom border
-  public $bordercolor = "black"; //string of colour name, hex or rgb
-  public $colors; //array of colour names, hex or rgb
-  public $backgrounds; //array of colour names, hex or rgb
-  public $headingColor; //string colour name or value
-  public $headingBackground; //string colour name or value
-  public $heading; //array of heading values 
-  public $hrow; //heading row
-  public $styles; //array of strings b-bold u-underline i-italic or mix of those
-  public $html = ""; //internal storage of output string
-  public $skipFields = []; //array of fields to be tested for duplicate
-  public $skipText = []; //array of strings to replace duplicate fields text
-  public $skipValues = []; //internal storage of value for duplicate test
-  public $prefix; //Character or string to prefix - array
+  public $borderCollapse = true; //Collapse border
+  public $borderColor = "black"; //string of colour name, hex or rgb
   public $brackets; //Array of boolean for enclosing negative values in brackets
-  public $stripe = ""; //colour for stripe on even rows
-  public $stripeTextcolor; //color for text on stripe
+  public $classes; //Array of class for each column
+  public $colors; //array of colour names, hex or rgb
   public $currency = "";
   public $currencySymbol;
+  public $date = "";
+  public $dateFormat = "jS F Y";
   public $decimals = 2;
-  public $sum; //sum for columns
-  public $headingOnClick; //array of onclick handlers for each heading column
-  public $sums = []; //internal
-  public $subtotal = false; //internal;
+  public $editable = false;
+  public $emptyFields = false; // show empty field instead of zeros
+  public $heading; //array of heading values 
+  public $headingBackground; //string colour name or value
+  public $headingColor; //string colour name or value
+  private $hrow; //heading row
+  private $html = ""; //internal storage of output string
+  public $ID = "steveTable"; //id for table
+  public $keyCell = '';
+  public $lineheight = 1.5; 
+  public $links = [];
+  public $noBorder; //array of boolean for columns which have border turned off
+  public $noBottomBorder; //array of boolean to turn off bottom border
+  public $noSymbolOnZero = false;
+  public $noTopBorder; //array of boolean to turn off top border
+  public $prefix; //Character or string to prefix - array
+  public $pointers = ''; // array of pointers. 1 for pointer 0 for default
   public $rowNo = 0; //internal counter for strip
   public $rows = []; //internal row collection
+  public $seperators;
+  public $skipFields = []; //array of fields to be tested for duplicate
+  private $skipFieldValues = [];
+  public $skipStripe = false;
+  public $skipText = []; //array of strings to replace duplicate fields text
+  public $skipValues = []; //internal storage of value for duplicate test
+  public $stripe = ""; //colour for stripe on even rows
+  public $stripeTextcolor; //color for text on stripe
+  public $styles; //array of strings b-bold u-underline i-italic or mix of those
+  public $subTotalLabel = " ";
+  public $sum; //sum for columns
+  public $subtotal = false; //internal;
+  public $sums = []; //internal
+  public $tableBorder = false; //Border surrounding the table (not cells)
+  public $tableCenter = false; //Whether to horizontally centre the table on the window
+  public $tableClass = ""; //Overall class for table
+  public $tableFont = "Arial,Helvetica,sans-serif"; //Font to be used for table
+  public $tableFontSize = "1.2rem"; //Font size;
+  public $tableStyle; //string of css for entire table
+  public $tableWidth = "100%"; // Overall width of table
+  public $tdeditable = [];
   public $textJustify = false;
   public $textRowActive = false;
-  public $totalLabel = "";
-  public $subTotalLabel = "";
+  public $topAlign = true; //vertical align top true by default
   public $totalFormat = "";
-  public $emptyFields = false; // show empty field instead of zeros
-  public $skipStripe = false;
-  public $keyCell = '';
-  public $pointers = ''; // array of pointers. 1 for pointer 0 for default
-  public $seperators;
-  public $lineheight = 1.5; 
-  public $skipFieldValues = [];
-  public $borderColor;
-
+  public $totalLabel = " ";
+  public $widths; //array of strings of value and unit
+  
   public function isJson($string) { // test for valid json string
     return ((is_string($string) &&
             (is_object(json_decode($string)) ||
             is_array(json_decode($string))))) ? true : false;
   }
   public function version(){ //return current version
-    $dt = date('d m Y',filemtime('stevetable.php'));
-    return $dt." ".$this->version;
+    return $this->version;
   }
   public function getTotals($clear = false){
     $v =  $this->sums;
@@ -241,7 +255,7 @@ class steveTable {
   $this->noBottomBorder = $s;
   }
   public function setBorderColor($s = "black"){ //sets the colour of the border
-      $this->bordercolor = $s;
+      $this->borderColor = $s;
   }
   public function setWidths($s){ //sets the widths for columns
       $this->widths = $s;
@@ -297,14 +311,20 @@ class steveTable {
   public function setCurrencysymbol($s){
       $this->currencySymbol = $s;
   }
+  public function setNoSymbolOnZero($s){
+      $this->noSymbolOnZero = $s;
+  }
+  public function setDate($s){
+      $this->date = $s;
+  }
+  public function setDateFormat($s){
+    $this->dateFormat = $s;
+  }
   public function setDecimals($s){
     $this->decimals = $s;
   }
   public function setSum($s){
       $this->sum = $s;
-  }
-  public function setHeadingOnClick($s){
-      $this->headingOnClick = $s;
   }
   public function setTotalLabel($s){
       $this->totalLabel = $s;
@@ -324,24 +344,35 @@ class steveTable {
   public function setLineheight($s){
     $this->lineheight = $s;
   }
-
+  public function setEditable($s){
+    $this->editable = $s;
+  }
+  public function setTdEditable($s){
+    $this->tdeditable = $s;
+  }
   public function total($sub = false){
     if($sub){
       $this->subtotal = true;
     }
     $sumarray = [];
     for($col=0;$col<count($this->widths);$col++){
-      $sumarray[] = $this->sums[$col];
-      if($this->subtotal){
-        $t = end($sumarray);
+      if(!$this->date[$col]){
+        $sumarray[] = $this->sums[$col];
+        if($this->subtotal){
+          $t = end($sumarray);
+        }
+      }else{
+        if(!validateDate($this->sums[$col],$this->dateFormat)){
+          $sumarray[] = $this->totalLabel;
+        }
       }
     }
     if($this->subtotal){
-      if($this->subTotalLabel > ''){
+      if($this->subTotalLabel > ' '){
         $sumarray[0] = $this->subTotalLabel;
       }
     }else{
-      if($this->totalLabel > ''){
+      if($this->totalLabel > ' '){
         $sumarray[0] = $this->totalLabel;
       }
     }
@@ -460,14 +491,20 @@ class steveTable {
       if(isset($obj->currencySymbol)){
         $this->setCurrencySymbol($obj->currencySymbol);
       }
+      if(isset($obj->noSymbolOnZero)){
+        $this->setNoSymbolOnZero($obj->noSymbolOnZero);
+      }
+      if(isset($obj->date)){
+        $this->setDate($obj->date);
+      }
+      if(isset($obj->dateFormat)){
+        $this->setDateFormat($obj->dateFormat);
+      }
       if(isset($obj->decimals)){
         $this->setDecimals($obj->decimals);
       }
       if(isset($obj->sum)){
         $this->setSum($obj->sum);
-      }
-      if(isset($obj->headingOnClick)){
-        $this->setHeadingOnClick($obj->headingOnClick);
       }
       if(isset($obj->totalLabel)){
         $this->totalLabel = $obj->totalLabel;
@@ -489,6 +526,15 @@ class steveTable {
       }
       if(isset($obj->lineheight)){
         $this->lineheight = $obj->lineheight;
+      }
+      if(isset($obj->links)){
+        $this->links = $obj->links;
+      }
+      if(isset($obj->editable)){
+        $this->editable = $obj->editable;
+      }
+      if(isset($obj->tdeditable)){
+        $this->tdeditable = $obj->tdeditable;
       }
    }else{
     printf("<p style='font-weight:bold;color:red;'>steveTable version %s <br />Invalid json string (%s)<br /></p>",$this->version,json_last_error_msg());
@@ -579,11 +625,14 @@ public function row($s,$id = null,$h = false){
     if($c->id > ''){
       $s[$i] = deleteBetween($s[$i],"{","}");
     }
+    if($this->tdeditable[$i]){
+      $c->celleditable = "contenteditable";
+    }
     if($this->textRowActive){
       $c->colspan = count($this->widths);
     }
     if($this->sum[$i] && is_numeric($s[$i]) && !$this->subtotal){
-      $this->sums[$i] += $s[$i];
+      $this->sums[$i] += floatval($s[$i]);
       $c->subtotal = $this->sums[$i];
     }else{
       if($this->sum[$i] && !$this->subtotal){
@@ -592,13 +641,16 @@ public function row($s,$id = null,$h = false){
           $newval = substr($newval,1);
         }
         if($newval > ''){
-          $this->sums[$i] += $newval;
+          $this->sums[$i] += floatval($newval);
         }
         $c->subtotal = $this->sums[$i];
       }
     }
     $c->class = $this->classes[$i];
     $c->width = $this->widths[$i];
+    if($this->currency[$i]){
+      $c->align .= "right;";
+    }
     switch(strtoupper($this->aligns[$i])){
       case 'L': $c->align .= "left;"; break;
       case 'C': $c->align .= "center;"; break;
@@ -607,29 +659,29 @@ public function row($s,$id = null,$h = false){
     }
     if($this->border > ''){
       if(is_numeric(stripos($this->border,'a'))){
-        $c->border = "border-right:1px solid ".$this->bordercolor.";"; 
-        $c->border .= "border-left:1px solid ".$this->bordercolor.";"; 
+        $c->border = "border-right:1px solid ".$this->borderColor.";"; 
+        $c->border .= "border-left:1px solid ".$this->borderColor.";"; 
         if(!$this->noTopBorder[$i]){
-          $c->border .= "border-top:1px solid ".$this->bordercolor.";";
+          $c->border .= "border-top:1px solid ".$this->borderColor.";";
         }
         if(!$this->noBottomBorder[$i]){
-          $c->border .= "border-bottom:1px solid ".$this->bordercolor.";"; 
+          $c->border .= "border-bottom:1px solid ".$this->borderColor.";"; 
         }
       }else{
         if(is_numeric(stripos($this->border,'l'))){
-          $c->border = "border-left:1px solid ".$this->bordercolor.";";
+          $c->border = "border-left:1px solid ".$this->borderColor.";";
         }
         if(is_numeric(stripos($this->border,'r'))){
-          $c->border = "border-right:1px solid ".$this->bordercolor.";";
+          $c->border = "border-right:1px solid ".$this->borderColor.";";
         }
         if(is_numeric(stripos($this->border,'t'))){
           if(!$this->noTopBorder[$i]){
-            $c->border = "border-top:1px solid ".$this->bordercolor.";";
+            $c->border = "border-top:1px solid ".$this->borderColor.";";
           }
         }
         if(is_numeric(stripos($this->border,'b'))){
           if(!$this->noBottomBorder[$i]){
-            $c->border = "border-bottom:1px solid ".$this->bordercolor.";";
+            $c->border = "border-bottom:1px solid ".$this->borderColor.";";
           }
         }
       }
@@ -674,7 +726,7 @@ public function row($s,$id = null,$h = false){
       $c->style .= "vertical-align:top;";
     }
     if($this->seperators[$i]){
-      $c->style .= "border-right:2px solid ".$this->bordercolor.";";
+      $c->style .= "border-right:2px solid ".$this->borderColor.";";
     }
     if(count($this->skipFields) > 0){
       if(in_array($i,$this->skipFields)){
@@ -686,16 +738,33 @@ public function row($s,$id = null,$h = false){
       }
     }
     if($this->currency[$i] && !$r->heading){
-      if($this->emptyFields && floatval($s[$i]) === 0.00){
-        $s[$i] = "";
-      }elseif(isset($this->brackets[$i]) && floatval($s[$i]) < 0){
+      $symbol = $this->currencySymbol;
+      // empty fields not to display if 0
+      if(floatval($s[$i]) === 0.00){
+        if($this->emptyFields){
+          $s[$i] = "";
+          $out = "";
+        }
+        if($this->noSymbolOnZero){
+          $symbol = "";
+        }
+      }elseif(floatval($s[$i]) < 0){
         $v = floatval($s[$i]);
-        $c->content = "(".$this->currencySymbol.number_format(abs($v),$this->decimals,'.',',').")";
+        $out = $symbol.number_format(abs($v),$this->decimals,'.',',');
+        if(isset($this->brackets[$i])){
+          $s[$i] = "(".$out.")";
+        }
       }else{
-        $c->content = $this->currencySymbol.number_format(floatval($s[$i]),$this->decimals,'.',',');
+        $s[$i] = $symbol.number_format(floatval($s[$i]),$this->decimals,'.',',');
       }
+    }
+    if($this->date[$i] && !$r->heading && validateDate($s[$i])){
+      $c->content = date($this->dateFormat,strtotime($s[$i]));
     }else{
-      $c->content = $s[$i];
+        $c->content = $s[$i];
+    }
+    if($this->links[$i] && filter_var($s[$i], FILTER_VALIDATE_URL)!==false){
+        $c->content = sprintf("<a href='%s'>%s</a>",$s[$i],$s[$i]);
     }
     array_push($r->cells,$c);
    }
@@ -734,7 +803,7 @@ public function row($s,$id = null,$h = false){
       $this->tableStyle.="margin:0 auto;";
     }
     if($this->tableBorder){
-      $this->tableStyle.="border:1px solid ".$this->bordercolor.";";
+      $this->tableStyle.="border:1px solid ".$this->borderColor.";";
     }
     if($this->lineheight){
       $this->tableStyle.="line-height:".$this->lineheight
@@ -752,8 +821,18 @@ public function row($s,$id = null,$h = false){
     if($this->borderCollapse){
       $tstyle.="border-collapse:collapse;";
     }
-    $this->html = "<table id='".$this->ID."' keyCell='".$this->keyCell."' ".$tstyle."'>";
+    if($this->editable){
+      $edit = "contenteditable";
+    }else{
+      $edit = "";
+    }
+    $this->html = "<table ".$edit." ver='steveTable ".$this->version."' id='".$this->ID."' keyCell='".$this->keyCell."' ".$tstyle."'>";
     foreach($this->rows as $row){
+      if($row == $this->rows[count($this->rows)]){
+        if($this->date[0]){
+          $row[0] = $this->totalLabel;
+        }
+      }
       $this->html .= $row->print();
     }
     $this->html .= "</table>";
@@ -767,5 +846,5 @@ public function row($s,$id = null,$h = false){
     $content = $this->print(true);
     file_put_contents($filename,$content);
   }
+
 }
-?>

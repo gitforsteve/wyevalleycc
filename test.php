@@ -1,13 +1,56 @@
+<style>
+    div {
+        box-shadow: 10px 10px 20px #888888;
+        padding: 10px 0 10px 0;
+        width: 90%;
+        margin: auto;
+    }
+</style>
 <?PHP
-require_once 'PdfParser/Element.php';
-require_once 'PdfParser/PDFObject.php';
-require_once 'PdfParser/Font.php';
-require_once 'PdfParser/Page.php';
-require_once 'PdfParser/Element/ElementString.php';
-require_once 'PdfParser/Encoding/AbstractEncoding.php';
+error_reporting(E_ALL);
+require "steveCSV.php";
+require "stevetable.php";
+$table = new steveTable('{
+    "tableWidth": "90%",
+    "tableCenter": true,
+    "widths": ["25%","15%","60%"],
+    "heading": ["Date","Time","Event"],
+    "tableFontSize": "1.3vw",
+    "border": "b"
+}');
+$csv = new steveCSV("data/vhevents.csv");
+// date location event description time
+$csv->sort('Date');
+//$table->heading();
+$today = date('Y-m-d');
+$csv->data = $csv->gt('Date',$today);
+$c = clone $csv;
+$table->setStyles(["b"]);
+$table->text("TINTERN VILLAGE HALL");
+$table->setStyles([""]);
+$c->data = $c->find("Location","Tintern");
+foreach($c->data as $event){
+    $date = date("jS F Y",strtotime($event->Date));
+    if($event->Description){ $event->Description = " - ".$event->Description;}
+    $table->row([$date,$event->Time,$event->Event." ".$event->Description]);
+}
+$table->border = "";
+$table->text("");
+$table->setBorder("b");
+$table->setStyles(["b"]);
+$table->text("LLANDOGO VILLAGE HALL");
+$table->setStyles([""]);
+$c = clone $csv;
+$c->data = $c->find("Location","LLANDOGO");
+foreach($c->data as $event){
+    $date = date("jS F Y",strtotime($event->Date));
+    if($event->Description){ $event->Description = " - ".$event->Description;}
+    $table->row([$date,$event->Time,$event->Event." ".$event->Description]);
+}
 
-$parser = new PdfParser/Parser();
-$pdf = $parser->parseFile()("https://www.monmouthshire.gov.uk/app/uploads/2023/03/week-ending-24.03-ext.pdf");
-$t = $pdf->getText();
-echo $t;
 ?>
+<div>
+    <?PHP
+    $table->print();
+    ?>
+</div>

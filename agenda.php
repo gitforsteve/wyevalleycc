@@ -12,7 +12,7 @@ if(!class_exists('Database')){
 <h1>Agenda</h1>
 <br />
 <?PHP
-print("<p>Council meetings are held in either of the Tintern or Llandogo Village Halls at the times shown on the <a href='meetings.php' title='Link to meetings page'>meetings page</a></p><p>There is a short time allocated to members of the public who wish to attend who are asked to notify the Clerk as soon as possible before the proposed attendance.</p><p>Each entry links to a copy of the agenda which will load into this page. Agenda for meetings more than three months ago will not be displayed.</p><ul>");
+print("<p>Council meetings are held in either of the Tintern or Llandogo Village Halls at the times shown on the <a href='meetings.php' title='Link to meetings page'>meetings page</a></p><h2>Public attendance</h2><p>There is a short time allocated to members of the public who wish to attend. If you wish to attend please notify the Clerk as soon as possible before the proposed attendance</strong>.</p><p>Each entry links to a copy of the agenda which will load into this page. Agenda for meetings more than three months ago will not be displayed.</p><ul>");
 
 $files = glob("agenda/*.txt");
 foreach($files as $filename){

@@ -52,9 +52,7 @@ if($today >= $fromdate && $today <= $todate){
 	  <title><?PHP echo $title?></title>
 	  <meta name="description" content="<?PHP echo $desc?>">
 	  <meta name="keywords" content="<?PHP echo $keywords?>">
-    <!--******* WARNING CHANGE FOR LIVE **********/-->
-    <meta name="baseurl" content="locahost/wyevalleycc" />
-    <!--*******************************************-->
+      <meta name="baseurl" content="https://wyevalleycc.co.uk" />
 	  <meta name="author" content="Steve Evans" >
 	  <meta charset="UTF-8">
 	  <!--meta name="viewport" content="width=device-width, initial-scale=1.0"-->
@@ -195,8 +193,8 @@ if($today >= $fromdate && $today <= $todate){
 	          <br />
 	          <?PHP
 	            $now = time();
-              // check file date less that 7 days old (60*60*24*7);
-	            if($now - filemtime("docs/Tintern News.pdf") < 604800){
+              // check file date less that 10 days old (60*60*24*10);
+	            if($now - filemtime("docs/Tintern News.pdf") < 864000){
 	  	          echo $tinternnews;
 	            }
 	          ?>

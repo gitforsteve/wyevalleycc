@@ -1,20 +1,39 @@
 <?PHP
 //cSpell:disable
+/*********** SET FINANCIAL YEAR *************/
+$year = "2022 to 2023";
 $title = "Payments to members";
 $desc = "Statement of payments made to members";
 require 'steveCSV.php';
+require 'steveTable.php';
 require 'top.html';
 $d = new steveCSV("data/payments.csv");
+$d->sort('surname');
+$table = new steveTable('{
+  "tableWidth": "80%",
+  "tableCenter": true,
+  "widths": ["80%","10%","10%"],
+  "aligns": ["L","R","R"],
+  "currency": [0,1,1],
+  "currencySymbol": "&pound;",
+  "sum": [0,0,1],
+  "totalLabel": "Total payments for the year",
+  "emptyFields": true,
+  "heading": ["Councillor","Payment","Total"],
+  "headingBackground": "darkgray",
+  "headingColor": "white"
+}');
+$table->row(["2>Payments for the financial year 2022 - 2023"]);
+$table->heading();
 $data = $d->data;
 $total = 0;
 function output($v){
   if($v === '0'){
     return "0";
   }
-  return "&pound;".number_format($v,2,'.',',');
+  return number_format($v,2,'.',',');
 }
-/*********** SET FINANCIAL YEAR *************/
-$year = "2022 - 2023";
+
 ?>
 <div class="nine columns" style="padding-left:10px;">
 <div role="navigation">Our other financial pages:
@@ -27,48 +46,62 @@ $year = "2022 - 2023";
 </div>
 <h1>Payments to members</h1>
 <p>Statement of payments made to members of the Community Council for the financial year <?=$year?></p>
+<p style="font-size:80%;">In accordance with Section 151 of the Local Government Measure 2011, Community and Town Councils must publish within their authority area the remuneration received by their members by 30th September following the end of the previous financial year.</p>
 <p> 
 <?PHP
-//"Councillor","Basic Payment","Responsibility Payment","Chair's Payment","Vice Chair's Payment","Loss Allowance","Travel and Subsistence","Cost of Care","Attendance","Other","total"
+//"Surname","Initial","Basic Payment","Responsibility Payment","Chair's Payment","Vice Chair's Payment","Loss Allowance","Travel and Subsistence","Cost of Care","Attendance","Other","total"
+$spacer = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
   foreach($data as $cllr){
+    $table->setStyles(['b','b','b']);
     if($cllr->total === '0'){
-      printf("<strong>%s No payments</strong><br />",$cllr->councillor);
+      $table->text($cllr->forename." ".$cllr->surname);
     }else{
-      printf("<strong>%s Total %s</strong><br />",$cllr->councillor,output($cllr->total));
+      $table->row([$cllr->forename." ".$cllr->surname,'',$cllr->total]);
     }
+    $table->setStyles(['','']);
     $total += floatval($cllr->total);
     if(output($cllr->basic) !== '0'){
-      printf("&nbsp;&nbsp;Basic Payment. %s<br />",output($cllr->basic));
+      $table->row([$spacer."Basic Payment",output($cllr->basic),'']);
     }
     if(output($cllr->responsibility) !== '0'){
-      printf("&nbsp;$nrsp;Responsibility Payment %s<br />",output($cllr->responsibility));
+      $table->row([$spacer."Responsibility Payment",output($cllr->responsibility),'']);
     }
     if(output($cllr->chair) !== '0'){
-      printf("&nbsp;&nbsp;Chair's Payment %s<br />",output($cllr->chair));
+      $table->row([$spacer."Chair's Payment",output($cllr->chair),'']);
     }
     if(output($cllr->vice) !== '0'){
-      printf("&nbsp;&nbsp;Vice Chair's Payment %s<br />",output($cllr->loss));
+      $table->row([$spacer."Vice Chair's Payment",output($cllr->vice),'']);
     }
     if(output($cllr->loss) !== '0'){
-      printf("&nbsp;&nbsp;Loss Allowance %s<br />",output($cllr->expenses));
+      $table->row([$spacer."Loss Allowance",output($cllr->loss)],'');
     }
     if(output($cllr->expenses) !== '0'){
-      printf("&nbsp;&nbsp;Travel and Subsistence Expenses %s<br />",output($cllr->expenses));
+      $table->row([$spacer."Travel and Subsistence Expenses",output($cllr->expenses),'']);
     }
     if(output($cllr->care) !== '0'){
-      printf("&nbsp;&nbsp;Contribution to Cost of Care %s<br />",output($cllr->care));
+      $table->row([$spacer."Contribution to Cost of Care",output($cllr->care),'']);
     }
     if(output($cllr->attendance) !== '0'){
-      printf("&nbsp;&nbsp;Attendance Allowance %s<br />",output($cllr->expenses));
+      $table->row([$spacer."Attendance Allowance",output($cllr->expenses),'']);
     }
     if(output($cllr->other) !== '0'){
-      printf("&nbsp;&nbsp;Other %s<br />",output($cllr->other));
+      $table->row([$spacer."Other",output($cllr->other)]);
     }
-    print("<br />");
+    //$table->text("");
   }
-  printf("</p><p>Total payments to members for the year %s: &pound;%s</p>",$year,number_format($total,2,'.',','));
-  ?>
-<p style="font-size:80%;">In accordance with Section 151 of the Local Government Measure 2011, Community and Town Councils must publish within their authority area the remuneration received by their members by 30th September following the end of the previous financial year.</p></div>
+  //$table->row(["Total payments to members for the year ".$year,"&pound;".number_format($total,2,'.',',')]);
+  $table->text("");
+  $table->setStyles(['b','b','b']);
+  $table->print();
+?>
+<br />
+<p>NOTES</p>
+<p>Community and town councils in our group must pay their members &pound;156 a year (equivalent to &pound;3 a week) towards the extra household expenses (including heating, lighting, power and broadband) of working from home unless the Councillor opts out of the payment.</p>
+<p>Councils must either pay their members £52 a year for the cost of office consumables required to carry out their role, or alternatively councils must enable members to claim full reimbursement for the cost of their office consumables.</p>
+<p>Community and town councils in our group can make an annual payment of up to &pound;500 to up to 3 members in recognition of specific responsibilities. This is in addition to the &pound;156 towards the extra household expenses of working from home and the &pound;52 a year for the cost of office consumables required to carry out their role.
+
+</p>
+</div>
 
 <?PHP
   require "bottom.html";

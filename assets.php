@@ -1,13 +1,13 @@
 <?PHP
 //cSpell:disable
+
 $title = "Finance - Tangible Assets";
 $desc = "The tangible assets owned on behalf of the residents by the Council";
 require "stevetable.php";
 require "top.html";
 require "steveCSV.php";
 $csv = new steveCSV('data/assets.csv');
-$csv->sortfield = "item";
-$csv->sort();
+$csv->sort('item');
 $assets = $csv->data;
 //include "classes.php";
 ?>
@@ -50,6 +50,7 @@ class Item {
     $this->total = 0;
   }
 }
+
 $items = [];
 $thisitem = "X";
 $thisvalue = $count = 0;
@@ -62,11 +63,13 @@ foreach($assets as $dataitem){
   $item->qty += $dataitem->qty;
   $item->total += $dataitem->qty*$dataitem->value;
 }
+
 foreach($items as $item){
   if($item->item > ''){
     $table->row([$item->item,$item->qty,$item->total]);
   }
 }
+$table->setStyles(['b','','b']);
 $table->print();
 ?>
 </div>
