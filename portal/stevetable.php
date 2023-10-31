@@ -126,7 +126,7 @@ class Cell {
     public $celleditable; // string
 }
 class steveTable {
-  private $version = "Build 38";
+  private $version = "Build 39";
   public $aligns; //array of singe character strings L-left C-centre R-right
   public $backgrounds; //array of colour names, hex or rgb
   public $border = ""; //string L-left R-right T-top B-bottom or A-all cell not table
@@ -843,5 +843,16 @@ public function row($s,$id = null,$h = false){
     $content = $this->print(true);
     file_put_contents($filename,$content);
   }
-
+  public function csv($filename = "saved_table.csv"){
+    $output = "";
+    foreach($this->rows as $row){
+      $temp = [];
+      foreach($row->cells as $cell){
+        $temp[] = strip_tags($cell->content);
+      }
+      $line = implode(",",$temp);
+      $temp = implode("",explode("&nbsp;",$line));      $output .= $line."\r\n";
+    }
+    file_put_contents($filename,$output);
+  }
 }

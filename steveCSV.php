@@ -13,8 +13,9 @@
  Less than: call lt with the field and value (handles numeric and string)
  Between: call between with the field and two values (handle numeric and string)
  Always returns an array except in total and average if the field is non numeric
- Unique: finds a unique values for a field and optionally totals a named field returning an array of objects Parms: field name, field to total or none, display if zer default true
+ Unique: finds unique values for a field returning an array of objects Parms: field name optional field for total
  Schema: display the details for the object. Call schema()
+ Copy: creates a clone of the object and returns it.
  subSets : gathers objects based on the field given
 
  display: displays the data in a table
@@ -35,7 +36,7 @@ class steveCSV {
     public $fields;
     public $data;
     public $total;
-    public $version = "9.0/231015";
+    public $version = "10.5/231023";
     function __construct($file,$fields = '',$msg=true){
         $this->file = $file;
         $f = fopen($this->file,'r');
@@ -167,6 +168,10 @@ class steveCSV {
             }
         });
     }
+    function copy(){
+        $obj = clone $this;
+        return $obj;
+    }
     function pop(){
         $found = null;
         var_dump($this->data[0]);
@@ -201,40 +206,32 @@ class steveCSV {
         }
         return NULL;
     }
-    function unique($field,$sum,$zero=true){
-        $arr = [];
+    function unique($field,$totfield=""){
+        $obj = new Obj();
         // build the unique array
         foreach($this->data as $item){
-            if(!in_array($item->$field,$arr)){
-                $arr[] = $item->$field;
+            $obj->{$item->$field} += $item->$totfield;
+        }
+        return $obj;
+    }
+    function count($field,$ignoreempty=false){
+        $count = 0;
+        foreach($this->data as $item){
+            if($ignoreempty){
+                if(preg_match('/[^A-Za-z0-9]*/',$item->$field)){
+                    $count++;
+                }
+            }else{
+                $count++;
             }
         }
-        for($c=0;$c<count($arr);$c++){
-            $obj = new Obj();
-            // set the item field of the object
-            $obj->item = $arr[$c];
-            // get the items for each of the array values
-            $set = $this->find($field,$arr[$c]);
-            if($sum > ''){
-                $total = 0;
-                foreach($set as $s){
-                    $total += floatval($s->{$sum});
-                    $obj->total = $total;
-                }
-                if($obj->total > 0 || $zero){
-                    $objects[] = $obj;
-                }
-            }
-        }
-        return $objects;
+        return $count;
     }
     function total($field, $decimals = NULL, $prefix = ""){
         $total = 0;
         foreach($this->data as $item) {
             if(is_numeric($item->$field)){
                 $total += $item->$field;
-            }else{
-                return "Not numeric";
             }
         }
         if(!is_numeric($total)){
@@ -246,11 +243,12 @@ class steveCSV {
             return $prefix.number_format($total,$decimals,'.',',');
         }
     }
-    function average($field,$decimals = NULL,$prefix=''){
+    function average($field,$decimals = NULL,$prefix='',$ignoreempty){
         if(!is_numeric($this->total($field))){
             return "Not numeric";
         }
-        $avg = $this->total($field) / count($this->data);
+        $count = $this->count($field,$decimals,$prefix,$ignoreempty);
+        $avg = $this->total($field) / $count;
         if(is_null($decimals)){
             return $avg;
         }else{

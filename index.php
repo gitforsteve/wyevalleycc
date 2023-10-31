@@ -47,12 +47,12 @@ include "top.html";
             exit;
           }
           $csv->sort("Date");
-          $c = clone $csv;
+          $c = $csv->copy();
           $c->data = $c->gt('Date',$today);
           // find Tintern
           $tevent = $c->match("Location","Tintern");
           // find Llandogo
-          $c = clone $csv;
+          $c = $csv->copy();;
           $c->data = $c->gt('Date',$today);
           // find Tintern
           $levent = $c->match("Location","Llandogo");
