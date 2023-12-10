@@ -1,15 +1,12 @@
 <?PHP
-  //session_start();
-  // cSpell:disable
-  /*
-  Created by Steve Evans
-  Table object which creates a standard html table
-  with optional headings
-  */
-  function validateDate($date, $format = 'Y-m-d')
+/**********************************************************
+ * STEVETABLE IS A CLASS WRITTEN FOR PHP BY STEVE EVANS
+ * AND IS COPYRIGHT (C) 2023, LICENCED FOR USE ON THIS
+ * SERVER AND SYSTEM ONLY.
+ **********************************************************/
+function validateDate($date, $format = 'Y-m-d')
   {
     $d = DateTime::createFromFormat($format, $date);
-    // The Y ( 4 digits year ) returns TRUE for any integer with any number of digits so changing the comparison from == to === fixes the issue.
     return $d && $d->format($format) === $date;
   }
   function mysort($a,$b){
@@ -126,8 +123,9 @@ class Cell {
     public $celleditable; // string
 }
 class steveTable {
-  private $version = "Build 39";
-  public $aligns; //array of singe character strings L-left C-centre R-right
+  private $version = "Release 1.0";
+  public $pageBreakBefore = false;
+  public $aligns; //array of single character strings L-left C-centre R-right
   public $backgrounds; //array of colour names, hex or rgb
   public $border = ""; //string L-left R-right T-top B-bottom or A-all cell not table
   public $borders; // array of combinations of l,r,t and b
@@ -188,6 +186,9 @@ class steveTable {
   public $totalLabel = " ";
   public $widths; //array of strings of value and unit
   
+  public function __set($property,$value){
+    $this->$property = $value;
+  }
   public function isJson($string) { // test for valid json string
     return ((is_string($string) &&
             (is_object(json_decode($string)) ||
@@ -202,6 +203,9 @@ class steveTable {
       $this->sums = [];
     }
     return $v;
+  }
+  public function setPageBreakBefore($a){ // true or false
+    $this->pageBreakBefore = $a;
   }
   public function setSeperator($a){
     $this->seperators = $a;
@@ -391,6 +395,9 @@ class steveTable {
       $obj = json_decode($s);
       if(isset($obj->tableClass) && $obj->tableClass > ''){
         $this->setTableClass($obj->tableClass);
+      }
+      if(isset($obj->pageBreakBefore)){
+        $this->setPageBreakBefore($obj->pageBreakBefore);
       }
       if(isset($obj->classes)){
         $this->setClasses($obj->classes);
@@ -823,6 +830,9 @@ public function row($s,$id = null,$h = false){
     }else{
       $edit = "";
     }
+    if($this->pageBreakBefore){
+      $tstyle.=";page-break-before:always;";
+    }
     $this->html = "<table ".$edit." ver='steveTable ".$this->version."' id='".$this->ID."' keyCell='".$this->keyCell."' ".$tstyle."'>";
     foreach($this->rows as $row){
       if($row == $this->rows[count($this->rows)]){
@@ -843,7 +853,7 @@ public function row($s,$id = null,$h = false){
     $content = $this->print(true);
     file_put_contents($filename,$content);
   }
-  public function csv($filename = "saved_table.csv"){
+  public function csv($filename = ""){
     $output = "";
     foreach($this->rows as $row){
       $temp = [];
@@ -853,6 +863,10 @@ public function row($s,$id = null,$h = false){
       $line = implode(",",$temp);
       $temp = implode("",explode("&nbsp;",$line));      $output .= $line."\r\n";
     }
-    file_put_contents($filename,$output);
+    if($filename > ''){
+      file_put_contents($filename,$output);
+    }else{
+      echo $output;
+    }
   }
 }

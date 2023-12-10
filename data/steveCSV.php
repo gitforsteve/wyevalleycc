@@ -1,5 +1,8 @@
 <?PHP
-/**************************************************
+/*****************************************************
+ * STEVECSV IS CREATED BY STEVE EVANS AND IS COPYRIGHT
+ * (C) 2023, LICENCED ON THIS SYSTEM AND APPLICATION
+ * ONLY
  Construct object with the name of a csv file which should have the field names as the first row
  If the first row does not contain field name these can be added as a comma separated string as a second parameter.
  Display: display() will show the whole data in a table. If only selected fields are to be shown these should be entered as a string with field names spearated as a parameter.
@@ -9,6 +12,7 @@
  Exact match: call match with field name and text to return the first match
  Total: get the total for any field. Call total with the field name. The decimal count may also be stated as a second parameter
  Average: get the average for any field. Call average with the field name. The decimal count may also be stated as a second parameter
+ Valueaverage: get the average of any field as in above but average is calculated only on actual values.
  Greater than: call gt with the field and value (handles numeric and string)
  Less than: call lt with the field and value (handles numeric and string)
  Between: call between with the field and two values (handle numeric and string)
@@ -36,7 +40,7 @@ class steveCSV {
     public $fields;
     public $data;
     public $total;
-    public $version = "10.5/231023";
+    public $version = "Release 1.0";
     function __construct($file,$fields = '',$msg=true){
         $this->file = $file;
         $f = fopen($this->file,'r');
@@ -214,19 +218,6 @@ class steveCSV {
         }
         return $obj;
     }
-    function count($field,$ignoreempty=false){
-        $count = 0;
-        foreach($this->data as $item){
-            if($ignoreempty){
-                if(preg_match('/[^A-Za-z0-9]*/',$item->$field)){
-                    $count++;
-                }
-            }else{
-                $count++;
-            }
-        }
-        return $count;
-    }
     function total($field, $decimals = NULL, $prefix = ""){
         $total = 0;
         foreach($this->data as $item) {
@@ -243,12 +234,26 @@ class steveCSV {
             return $prefix.number_format($total,$decimals,'.',',');
         }
     }
-    function average($field,$decimals = NULL,$prefix='',$ignoreempty){
+    function valueaverage($field,$decimals = NULL,$prefix=''){
+        $count = $total = 0;
+        foreach($this->data as $item){
+            if(is_numeric($item->$field)){
+                $count++;
+                $total+=$item->$field;
+            }
+        }
+        if($count > 0){
+            if(is_null($decimals)){
+                return($prefix.$total / $count);
+            }else
+                return $prefix.number_format($total/$count,$decimals,'.',',');
+        }
+    }
+    function average($field,$decimals = NULL,$prefix=''){
         if(!is_numeric($this->total($field))){
             return "Not numeric";
         }
-        $count = $this->count($field,$decimals,$prefix,$ignoreempty);
-        $avg = $this->total($field) / $count;
+        $avg = $this->total($field) / count($this->data);
         if(is_null($decimals)){
             return $avg;
         }else{
