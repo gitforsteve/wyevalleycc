@@ -123,7 +123,7 @@ class Cell {
     public $celleditable; // string
 }
 class steveTable {
-  private $version = "Release 1.0";
+  private $version = "Release 1.5";
   public $pageBreakBefore = false;
   public $aligns; //array of single character strings L-left C-centre R-right
   public $backgrounds; //array of colour names, hex or rgb
@@ -641,10 +641,12 @@ public function row($s,$id = null,$h = false){
     }else{
       if($this->sum[$i] && !$this->subtotal){
         $newval = $s[$i];
-        while(!is_numeric($newval) && $newval > ''){
+        // removed to prevent headings being included in total
+        // when they contain numerics
+       /* while(!is_numeric($newval) && $newval > ''){
           $newval = substr($newval,1);
-        }
-        if($newval > ''){
+        }*/
+        if($newval > '' && is_numeric($newval)){
           $this->sums[$i] += floatval($newval);
         }
         $c->subtotal = $this->sums[$i];

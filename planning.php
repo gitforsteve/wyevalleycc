@@ -25,7 +25,7 @@ if (!function_exists('str_contains')) {
 ?>
 <div class='nine columns' style='padding-right: 10px; border-radius:0 0 15px 0; ' id='content'>
 <h1>Planning</h1>
-<p>Local planning applications may be listed here when details become available. For direct access to Monmouthshire CC Planning click for <a class="button shadow" title="External link to Monmouthshire Planning weekly page" href="https://planningonline.monmouthshire.gov.uk/online-applications/search.do?action=weeklyList" target="new">weekly list</a> or <a class="button shadow" title="External link to Monmouthshire Planning monthly list" href="https://planningonline.monmouthshire.gov.uk/online-applications/search.do?action=monthlyList" target="new">monthly list</a></p>
+<p>Local planning applications may be listed here when details become available. Processed applications will be displayed for 90 days from the date of processing.<br />For direct access to Monmouthshire CC Planning click for <a class="button shadow" title="External link to Monmouthshire Planning weekly page" href="https://planningonline.monmouthshire.gov.uk/online-applications/search.do?action=weeklyList" target="new">weekly list</a> or <a class="button shadow" title="External link to Monmouthshire Planning monthly list" href="https://planningonline.monmouthshire.gov.uk/online-applications/search.do?action=monthlyList" target="new">monthly list</a></p>
 
 <form action="planningsearch.php" method="POST" onsubmit="return $('#srch').val() > ''">
 <label for="srch" style="display:inline;">Search our planning records</label> <input size="25" id="srch" name="srch" type="text" placeholder="Search all of our records" />&nbsp;<input class="shadow" title="Search button" id="srchbtn" type="submit" style="width:80px;text-align:center;padding:0;" value="SEARCH"><br />
@@ -60,7 +60,7 @@ switch($display){
   case "complete" : $sql = "select * from planning where status <> 'Current' and (appdate BETWEEN CURDATE() - INTERVAL 30 DAY AND CURDATE() OR appdate = '0000-00-00')  order by number desc"; 
    $caption = "<caption>Displaying processed applications only</caption>";
    break;
-  default : $sql = "select * from planning where appdate BETWEEN CURDATE() - INTERVAL 30 DAY AND CURDATE() OR appdate = '0000-00-00' OR status = 'Current'  order by number desc"; 
+  default : $sql = "select * from planning where appdate BETWEEN CURDATE() - INTERVAL 90 DAY AND CURDATE() OR appdate = '0000-00-00' OR status = 'Current'  order by number desc"; 
   $caption = "";
   break;
 }
