@@ -1,4 +1,5 @@
 <?PHP
+// N O   L O N G E R   U S E D //
 // cSpell:disable
 $bad = 0;
 function mysort($a,$b){
@@ -136,8 +137,10 @@ if(isset($_GET['id'])){
   $address = test_input($_POST['address']);
   $reply = test_input($_POST['reply']);
     if($error === 0 && $bad === 0 ){
-      $mail = new PHPMailer(TRUE);
-      $mail->isHTML(TRUE);
+      $mail = new PHPMailer();
+      $mail->isSMTP(TRUE);
+      $mail->SMTPAuth = true;
+      $mail->username
       try {
         $mail->setFrom($emailFrom, $name);
         $mail->addAddress($emailTo,$emailTo);

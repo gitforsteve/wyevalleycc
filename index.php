@@ -10,9 +10,10 @@ include "top.html";
 <div class="six columns" style="background:white; padding-left:10px;" id="content">
     <h1>Welcome</h1>
     <p>Welcome to the web site of your local Community Council. Since May 2022 (after merging Tintern and Trellech United Community Councils) we have been here to help you and our fellow villagers enjoy the wonderful surroundings with which we are blessed.</p>
+    <p class="blue"><b>If you wish to contact any of our Councillors please use the email address<br>councillor's forename . councillor's surname @ wyevalleycc.co.uk<br>To contact the Clerk please use the word clerk instead of the forename and surname.</b></p>
     <p>While the Councillors are elected to represent their particular ward (Tintern Ward and Llandogo Ward) they are, of course, able to represent anyone in either ward. Your Councillors are <a href="about.php" title="Link to list of Councillors">listed here</a>. Monthly meetings are held to which villagers are invited and all minutes are recorded.</p>
     <p class="center">For any concerns regarding this site<br />please <a href="contact.php?id=se">contact Steve Evans</a></p>
-    <p class="blue">We encourage you to use the contact page on this site to contact your Councillors. Any email sent via this site will be copied to the Clerk who will be able to respond in the event of holiday or sickness.</p>
+    <!--p class="blue">We encourage you to use the contact page on this site to contact your Councillors. Any email sent via this site will be copied to the Clerk who will be able to respond in the event of holiday or sickness.</p-->
     <div class="rounded shadow" id="popup" style="position:absolute;top:300px;left:100px;width:600px;border:1px solid #336699;background:white;display:none;"></div>
     <script type="text/javascript">
         handleMenu($('#home'));

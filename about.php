@@ -73,7 +73,7 @@ if(!isset($_GET['ward'])){
 	      </div>
 	      <div class="eight columns">
 	        <span><?=$councillor->name?> <?=$councillor->surname?> </span><?=$stat?><br /><?=$address?><br /><?=$phone?> <?=$councillor->phone?><br /><br />
-          <button class='email shadow' style='text-align:center;font-weight:bold;width:30vw;font-size:1.2vw;' type='button' id="<?=$councillor->code?>">Send email to <?=$councillor->name?></button>
+          <!--button class='email shadow' style='text-align:center;font-weight:bold;width:30vw;font-size:1.2vw;' type='button' id="<?=$councillor->code?>">Send email to <?=$councillor->name?></button-->
           <br />
           <?PHP
               if($councillor->responsibility > ''){
@@ -111,7 +111,12 @@ require 'bottom.html';
     $('#id').val($(this).attr('id'));
     var id = $(this).attr('id');
     //$(location).attr('href','contact.php?id='+id);
-    $('#idform').submit();
+    //$('#idform').submit();
+    <?PHP
+    $people = $csv->data;
+    var_dump($people);
+    ?>
+    
   });
   $('button.showall').on("click",function(){
     $('#content').load('about.php');
