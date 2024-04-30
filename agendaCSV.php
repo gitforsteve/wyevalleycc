@@ -1,13 +1,13 @@
 <?PHP
 require_once "steveCSV.php";
 require_once "stevetable.php";
-$d = new steveCSV('./data/20231030.csv',"id,text");
+$d = new steveCSV('agenda/20240429.csv',"id,text");
 
 $data = $d->data;
 $table = new steveTable('{
     "tableWidth": "90%",
     "widths": ["8%","92%"],
-    "tableFontSize": "1.2rem",
+    "tableFontSize": "1rem",
     "tableCenter": true
 }');
 foreach($data as $item){
