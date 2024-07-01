@@ -6,6 +6,7 @@ $keywords = "tintern, annual report, council report";
 require 'top.html';
 require 'classes.php';
 require "stevetable.php";
+require "steveCSV.php";
 $table = new steveTable('{
     "tableWidth": "100%",
     "widths": ["85%","15%"],
@@ -31,8 +32,8 @@ $table->setStyles(['b','b']);
 $table->text("Salary, etc");
 $table->setStyles(['','']);
 $table->setBackgrounds(['white','white']);
-$table->row(["Clerk's salary",3800]);
-$table->row(["Clerk's expenses, Home Allowance, Stationery",800]);
+$table->row(["Clerk's salary",6000]);
+$table->row(["Clerk's expenses, Home Allowance, Stationery",900]);
 $table->row(["Councillor expenses",250]);
 $table->row(["Councillor training",50]);
 $table->row(["Chairman's honoraria",300]);

@@ -24,7 +24,10 @@ $table = new steveTable('{
 <a class="button" href="whatwecost.php" title="what we cost">What we cost</a> <a class="button" href="chairsreport.php" title="chair's report">Chair's report</a> <a class="button" href="futureplans.php" title="plans for the future">Our plans for the future</a>  
 </div>
 <h2>What we do</h2>
-    <p>Community Councils are made up of local people who give their time working for and on behalf of their community.</p><p>WVCC meets on the last Monday of every month (except December and Bank Holidays), either in Tintern or Llandogo Village Hall. Starting at 19:00, the meetings last approximately two hours and are open to members of the public. Each meeting starts with a public forum for individuals to raise concerns. Our chief responsibility is to make known the concerns of local people to Monmouthshire County Council (MCC) and other public bodies, for example, the Police, Welsh Assembly Government (WAG) and Natural Resources Wales (NRW).</p><p>MCC has a duty to consult with WVCC over local services such as planning and licensing applications.</p><p>In addition WVCC:</p>
+    <p>Community Councils are made up of local people who give their time working for and on behalf of their community.</p>
+    <p>WVCC meets on the last Monday of every month (except December and Bank Holidays), either in Tintern or Llandogo Village Hall. Starting at 19:00, the meetings last approximately two hours and are open to members of the public. Each meeting starts with a public forum for individuals to raise concerns. Our chief responsibility is to make known the concerns of local people to Monmouthshire County Council (MCC) and other public bodies, for example, the Police, Welsh Assembly Government (WAG) and Natural Resources Wales (NRW).</p>
+    <p>MCC has a duty to consult with WVCC over local services such as planning and licensing applications.</p>
+    <p>In addition WVCC:</p>
     <ul>
     <li>Provides grants for the maintenance of the churchyards in Tintern and Llandogo. Provides small grants for local projects and charities e.g. Monmouth Children's Services, new playground equipment, etc.</li>
     <li>Pays for the provision and emptying of dog waste bins.</li>

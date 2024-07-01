@@ -1,30 +1,29 @@
 item,budget1,spend1,budget2,spend2
-Clerk's salary,6500,4604,6000,1944
+Clerk's salary,6000,4807,6000,1498.5
 Clerk's home allowance,400,400,400,400
-Office costs,600,280.26,500,165.07
-Training,420,105,300,38
-Councillors' expenses (travel),0,62.55,200,386
-Councillors' entitlement,1400,0,1400,0
+Office costs,500,450.11,500,139.3
+Training,300,38,300,0
+Councillors' expenses (travel),200,22,100,0
+Councillors' allowance (£156 per Cllr),1400,312,1092,1092
+Councillors' entitlement (office consumables),0,364,364,364
 Chairman's allowance,500,500,500,500
-Village Hall Hire,200,179,200,0
-Council insurance,800,1051.93,1100,1113.33
-Halls insurance,1000,2120,2200,0
-Halls business rates,500,451.45,500,0
-Hall services,700,350,500,0
-Subscriptions (OVW/SLCC),300,231,250,315
-Audit,500,82.5,500,90
-Elections,250,0,0,0
-Playground safety inspections,100,80.5,100,126
-Village maintenance,2000,2132,5000,2845.35
+Village Hall Hire,200,182,120,0
+Council insurance,1100,1113.33,2400,543.97
+Halls insurance,2200,2259,2400,0
+Halls business rates,500,0,500,0
+Hall services,500,500,500,0
+Subscriptions (OVW/SLCC),250,315,350,213
+Audit,500,90,500,90
+Elections,0,0,200,0
+Playground safety inspections,100,126,100,94
+Village maintenance,5000,3273,3500,433.77
 Data protection,40,40,40,40
-Tintern Village Hall & Playground,1500,1500,0,0
-Churchyards,1000,1000,1500,1500
-Tintern News,300,300,400,0
-WVCC websites,500,115.84,150,0
-Youth groups,500,500,500,500
-Charities,1500,100,100,0
-Projects,7000,7498,5000,4060
-Education grants,1000,1000,1000,1000
-Fetes and Festivals,1000,500,1000,1800
-Summer Play Scheme,500,0,0,0
-Penterry Ward Reserves,0,1168.70,0,0
+Tintern Village Hall & Playground,0,6400,1000,0
+Churchyards (3),1500,1500,1500,1500
+Tintern News,400,400,400,0
+WVCC websites,150,84,200,0
+Youth groups (inc Brigade),500,500,500,0
+Charities,100,100,100,0
+Projects,5000,6180,5000,0
+Education grants,1000,1000,1000,0
+Fetes and Festivals,1000,1550,1500,350

@@ -1,7 +1,7 @@
 <?PHP
 /**********************************************************
  * STEVETABLE IS A CLASS WRITTEN FOR PHP BY STEVE EVANS
- * AND IS COPYRIGHT (C) 2023, LICENCED FOR USE ON THIS
+ * AND IS COPYRIGHT (C) 2024, LICENCED FOR USE ON THIS
  * SERVER AND SYSTEM ONLY.
  **********************************************************/
 function validateDate($date, $format = 'Y-m-d')
@@ -123,7 +123,7 @@ class Cell {
     public $celleditable; // string
 }
 class steveTable {
-  private $version = "Release 1.5";
+  private $version = "Release 2.0";
   public $pageBreakBefore = false;
   public $aligns; //array of single character strings L-left C-centre R-right
   public $backgrounds; //array of colour names, hex or rgb
@@ -135,6 +135,7 @@ class steveTable {
   public $classes; //Array of class for each column
   public $colors; //array of colour names, hex or rgb
   public $currency = "";
+  public $percent = "";
   public $currencySymbol;
   public $date = "";
   public $dateFormat = "jS F Y";
@@ -311,6 +312,9 @@ class steveTable {
   }
   public function setCurrencysymbol($s){
       $this->currencySymbol = $s;
+  }
+  public function setPercent($s){
+      $this->percent = $s;
   }
   public function setNoSymbolOnZero($s){
       $this->noSymbolOnZero = $s;
@@ -494,6 +498,9 @@ class steveTable {
       }
       if(isset($obj->currencySymbol)){
         $this->setCurrencySymbol($obj->currencySymbol);
+      }
+      if(isset($obj->percent)){
+        $this->setPercent($obj->percent);
       }
       if(isset($obj->noSymbolOnZero)){
         $this->setNoSymbolOnZero($obj->noSymbolOnZero);
@@ -763,6 +770,10 @@ public function row($s,$id = null,$h = false){
       }else{
         $s[$i] = $symbol.number_format(floatval($s[$i]),$this->decimals,'.',',');
       }
+    }
+    if($this->percent[$i] && !$r->heading){
+      $out = floatval($s[$i])*100;
+      $s[$i] = number_format($out,0,'.',',')."%";
     }
     if($this->date[$i] && !$r->heading && validateDate($s[$i])){
       $c->content = date($this->dateFormat,strtotime($s[$i]));

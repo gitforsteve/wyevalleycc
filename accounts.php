@@ -12,7 +12,7 @@ if(!class_exists('Database')){
 require "stevetable.php";
 require "steveCSV.php";
 /// SET DATES
-$dates = ["31 March 2022","31 March 2023"];
+$dates = ["31 March 2023","31 March 2024"];
 ///
 $csv = new steveCSV("data/accounts.csv");
 $data = $csv->data;
@@ -56,20 +56,12 @@ $table->fontWeight();
   $table->row([$row[0]->text,$row[0]->year1,$row[0]->year2,""]);
  $row = $csv->find("text","Total other receipts");
   $table->row([$row[0]->text,$row[0]->year1,$row[0]->year2,""]);
-  $row = $csv->find("text","Totals");
-$table->fontWeight('b');
-$table->row([$row[0]->text,$row[0]->year1,$row[0]->year2,""]);
-$table->fontweight();
-
-
-//EXPENSE
-$row = $csv->find("text","Staff costs");
+ $row = $csv->find("text","Staff costs");
 $table->row([$row[0]->text,$row[0]->year1,$row[0]->year2,""]);
 $row = $csv->find("text","Loan interest/capital repayments");
 $table->row([$row[0]->text,$row[0]->year1,$row[0]->year2,""]);
 $row = $csv->find("text","Total other payments");
 $table->row([$row[0]->text,$row[0]->year1,$row[0]->year2,""]);
-$row = $csv->find("text","Total expenses");
 $table->fontWeight('b');
 $table->row([$row[0]->text,$row[0]->year1,$row[0]->year2,""]);
 $row = $csv->find("text","Balance carried forward");
@@ -94,6 +86,8 @@ $row = $csv->find("text","Balances carried forward");
 $table->fontWeight("b");
 $table->row([$row[0]->text,$row[0]->year1,$row[0]->year2,""]);
 $table->fontWeight();
+$row = $csv->find("text","Total fixed assets");
+$table->row(["Total fixed assets",$row[0]->year1,$row[0]->year2]);
 $table->setAligns(['C']);
 $table->text("Trust funds disclosure note N/A");
 $table->version();

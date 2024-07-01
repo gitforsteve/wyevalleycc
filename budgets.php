@@ -3,7 +3,7 @@
 $title = "Finance - Annual budgets";
 $desc = "See how we handle our finances in our annual budgets";
 /******* YEARS FOR BUDGET CHANGE EACH YEAR ****/
-$years = "2023-24";
+$years = "2024-25";
 /******************************************** */
 require "stevetable.php";
 require 'top.html';
