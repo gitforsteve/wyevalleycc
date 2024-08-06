@@ -39,6 +39,8 @@ if(isset($_POST)){
 $pdf = new FPDF();
 $pdf->AliasNbPages();
 $pdf->AddPage();
+$pdf->Image("wvcclogomono.png",95,10,20,20,"png");
+$pdf->SetY(30);
 $pdf->SetFont('Arial',"",14);
 $pdf->Cell(0,5,"WYE VALLEY COMMUNITY COUNCIL",0,1,"C");
 $pdf->Cell(0,5,"GRANT FUNDING APPLICATION FORM",0,0,"C");
