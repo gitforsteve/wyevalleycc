@@ -3,6 +3,7 @@ Disallow: /accounts/
 Disallow: /agenda/
 Disallow: /budgets/
 Disallow: /councillors/
+Disallow: /grants/
 Disallow: /css/
 Disallow: /data/
 Disallow: /docs/

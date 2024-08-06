@@ -18,10 +18,10 @@ $table = new steveTable('{
 
 ?>
 <div class='nine columns' style='padding-right: 10px; border-radius:0 0 15px 0; ' id='content'>
-<h1>Annual Report 2022/23</h1>
+<h1>Annual Report 2023/24</h1>
 <p>Our annual report has been distributed, where possible, as a printed leaflet for those who have no access to the internet. If required a printed copy may be obtained from the Clerk.</p>
 <div style="position:sticky;top:0;background:white;">
-<a class="button" href="whatwecost.php" title="what we cost">What we cost</a> <a class="button" href="chairsreport.php" title="chair's report">Chair's report</a> <a class="button" href="futureplans.php" title="plans for the future">Our plans for the future</a>  
+<a class="button" href="whatwecost.php" title="what we cost">What we cost</a> <a class="button" href="chairsreport.php" title="chair's report">Chair's report</a> 
 </div>
 <h2>What we do</h2>
     <p>Community Councils are made up of local people who give their time working for and on behalf of their community.</p>
@@ -29,7 +29,8 @@ $table = new steveTable('{
     <p>MCC has a duty to consult with WVCC over local services such as planning and licensing applications.</p>
     <p>In addition WVCC:</p>
     <ul>
-    <li>Provides grants for the maintenance of the churchyards in Tintern and Llandogo. Provides small grants for local projects and charities e.g. Monmouth Children's Services, new playground equipment, etc.</li>
+    <li>Provides grants for the maintenance of the Churchyards in Tintern & Llandogo, towards Church Festivals, Coronation Events, Tintern Playground Works & Equipment Youth Groups.</li>
+    <li>Provides small grants for local projects & charities e.g. Wales Air Ambulance, SARA and Llandogo and Kymin View Schools.</li>
     <li>Pays for the provision and emptying of dog waste bins.</li>
     <li>Owns and maintains benches and notice boards.</li>
     <li>Consults with local residents on planning applications.</li>
@@ -37,8 +38,7 @@ $table = new steveTable('{
     <li>Consults with MCC and the Police on issues of speed and road safety.</li>
     <li>Reports issues concerning public rights of way such as stiles, diversions and blockages.</li>
     <li>Liaises with the Police on issues of anti-social behaviour, drug abuse, speeding, crime, etc.</li>
-    <li>Appoints representatives on village hall committees, Llandogo School, Tintern and Llandogo Churches and the Wye Valley Villages Project.</i>
-    <li>Owns Tintern Village Hall and supports both Tintern & Llandogo Village Halls.</li>
+    <li>Appoints representatives on village hall committees, Llandogo and Kymin View Schools, Tintern and Llandogo Churches and the Wye Valley Villages Project.</li>
     </ul>
 
 </div>
