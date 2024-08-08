@@ -1,0 +1,35 @@
+<?PHP
+// cSpell:disable
+$title = "Grants Policy";
+$desc = "Our grants policy";
+$keywords = "wye valley community council, grants policy";
+require 'top.html';
+?>
+<div class="nine columns" style="padding-left:10px;">
+  <h1 class="limit-min-max">Grants Policy</h1>
+  <p>Wye Valley Community Council, subject to certain provisions, may make donations to organisations from its budget.  The Community Council’s limited funds for donations are to benefit activities which are in the interest of and benefit to as many people as possible within the Council’s area.</p>
+  <p>The Council considers that it is beneficial to provide small grants of up to £500 to help local projects that benefit all or most of the community.. The availability of these grants will be advertised locally, but the Council is responsible for the proper allocation of public funds and will require assurances.</p>The existing scheme offering £250 to each village hall towards business rates and £250 for hall services will continue.  The Council will also cover the cost of insuring both Village Halls.</p>
+  <p>The following procedures will apply:-</p>
+  <ol>
+    <li>When setting the budget the Council will agree a sum to be made available for small grants/village projects, this will not usually exceed 10% of the planned precept and will be divided equally between the two villages.</li>
+    <li>Applications will be invited in October and must be made in writing and submitted to the Clerk.</li>
+    <li>Payment of grants approved will be made in June or September.</li>
+    <li>Applications should be accompanied by supporting documentation:
+      <ol type="a">
+        <li>a copy of the most recent accounts or balance sheet.</li>
+        <li>if a registered Charity details of the registration number and officers, otherwise a copy of the rules or constitution of the organisation.</li>
+        <li>evidence that the organisation has a properly conducted bank account.</li>
+      </ol>
+      <li>Applications for grants for an individual, eg. study or sporting trip will not normally be considered but an individual may make an application on behalf of a group. If the group is very small or new the Council may consider a &quot;start up&quot; grant subject to written support of at least two, unrelated members of the community;</li>
+      <li>Preference will be given to applications that enhance the area, offer improvements to the inhabitants of the Council’s area or have attracted match funding of at least 75%. Capital grants to village halls may be considered up to 100% but will not normally exceed £2000.</li>
+      </li>
+      <li> If the project is not completed within the same financial year in which it is approved the grant will still be deemed to have applied in the year in which it was approved.</li>
+      <li>Applications may be made in successive years, no application will receive more than one grant per financial year unless the Council is satisfied exceptional circumstances apply and subject to funding being available.</li>
+  </ol>
+</div>
+<?PHP
+require "bottom.html";
+?>
+<script type='text/javascript'>
+  handleMenu($('#grantspolicy'));
+</script>
