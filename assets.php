@@ -1,13 +1,13 @@
 <?PHP
 //cSpell:disable
-
+ini_set('error_reporting','1');
 $title = "Finance - Tangible Assets";
 $desc = "The tangible assets owned on behalf of the residents by the Council";
 require "stevetable.php";
 require "top.html";
 require "steveCSV.php";
 $csv = new steveCSV('data/assets.csv');
-$csv->sort('item');
+$csv->sort('Item');
 $assets = $csv->data;
 //include "classes.php";
 ?>
@@ -25,7 +25,7 @@ $assets = $csv->data;
 <?PHP
 $table = new steveTable('{
   "tableCenter": true,
-  "tableWidth": "70%",
+  "tableWidth": "80%",
   "tableFontSize": "2vw",
   "widths": ["70%","10%","20%"],
   "aligns": ["L","C","R"],
@@ -38,7 +38,6 @@ $table = new steveTable('{
   "decimals": 0,
   "totalLabel": "Total"
 }');
-
 $table->heading();
 class Item {
   public $item;
@@ -51,22 +50,9 @@ class Item {
   }
 }
 
-$items = [];
-$thisitem = "X";
-$thisvalue = $count = 0;
-foreach($assets as $dataitem){
-  if($thisitem !== $dataitem->item){
-    $item = new Item($dataitem->item);
-    $items[] = $item;
-    $thisitem = $dataitem->item;
-  }
-  $item->qty += $dataitem->qty;
-  $item->total += $dataitem->qty*$dataitem->value;
-}
-
-foreach($items as $item){
-  if($item->item > ''){
-    $table->row([$item->item,$item->qty,$item->total]);
+foreach($assets as $item){
+  if($item->Item > ''){
+    $table->row([$item->Item,$item->Qty,$item->Value]);
   }
 }
 $table->setStyles(['b','','b']);

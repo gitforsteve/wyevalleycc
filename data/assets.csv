@@ -1,54 +1,18 @@
-item,qty,location,value
-Bench,1,Abbey Roundabout,300
-Bench,1,Front of Abbey shop,300
-Bench,1,St Anns Road,350
-Bench,1,Front of Hall (small),217
-Bench,1,Trellech Rd adj Chapel,350
-Bench,1,Trellech Rd by Park Glade,350
-Bench,1,The Green (opp George),350
-Bench,1,Millennium seat on prom,750
-Bench,1,Promenade - Marmax,300
-Bench,2,Rear of Hll - Marmax,300
-Bench,1,Below landslide (small),250
-Noticeboard,1,Village Greem (large),800
-Noticeboard,1,Village Hall (small),250
-Noticeboard,1,Trellech Road,261
-Noticeboard,1,The Quayside,450
-Noticeboard,1,By Millennium Hall,1102
-Noticeboard,1,By Browns Shop,348
-Lawnmower,1,,329
-Strimmer,1,,290
-Refuse bin,1,Upper Glynwood Road,500
-Refuse bin,1,A466 Playground entrance,367
-Refuse bin,1,Rear of White Monk Cafe,367
-Refuse bin,1,Pavement by public toilet,367
-Refuse bin,1,Lower Wireworks car park,367
-Refuse bin,1,A466 between Wye Lodge and Spring Cottage,367
-Dog waste bin,1,Chapel Hill Lane,115
-Dog waste bin,1,Fryers Wharf / church path,115
-Dog waste bin,1,Abbey roundabout,115
-Dog waste bin,1,Forge Road,115
-Dog waste bin,1,A466 by The Bay Cottage,115
-Dog waste bin,1,A466 between Llandogo shop and Wye Valley Crafts,115
-Dog waste bin,1,Below Sloop Inn,115
-Planter,2,,410
-Planter,3,,383
-Defibrillator,2,Dr Surgery & Wye Valley Hotel,1425
-Defibrillator,1,Sloop Inn Llandogo,975
-Defibrillator,1,Llandogo defibrillator cabinet,450
-Defibrillator,1,Defibrillator batteries and pads,119
-Welcome sign,2,,711
-Road sign to school and hall,1,,156
-Bus shelter,1,Near Bigsweir Bridge,4652
-Well,1,Field above Fountain Inn,0
-Well,1,Linen Well,0
-Well,1,Bottom of Glyn Road,0
-Well,1,Church Grove,0
-Well,1,Bottom of Trellech Road,0
-The Pound,1,Church Lane,500
-Fryers Wharf,1,Adj St Michaels Church,5000
-Village Hall and Playground,1,The Quayside,325000
-Clerk's laptop,1,,453
-Clerk's printer,1,,40
-Projector,1,Tintern Village Hall,2616
-
+Item,Qty,Value
+Bench,11,3617
+Bus shelter,1,4652
+Clerk's laptop,1,453
+Clerk's printer,1,40
+Deffibrillator,5,4394
+Dog waste bin,7,1253
+Fryers Wharf,1,5000
+Noticeboard,6,3211
+Planter,5,1969
+Projector,1,2180
+Refuse bin,7,2702
+Road sign to school and hall,1,156
+Strimmer,1,300
+The Pound,1,500
+Village Hall and Playground,1,325000
+Welcome sign,2,1422
+Well,5,0
