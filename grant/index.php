@@ -42,6 +42,9 @@ include "fpdf.php";
             .smallinput {
                 height: 15%;
             }
+            .error {
+                border: 2px solid red;
+            }
         </style>
     </head>
     <body>
@@ -61,33 +64,33 @@ include "fpdf.php";
                 <fieldset>
                     <legend>SECTION 1 ORGANISATION CONTACT DETAILS</legend>
                     <label for="orgname">Name of group or organisation</label>
-                    <input type="text" id="orgname" name="orgname" class="u-full-width" /><br />
+                    <input type="text" id="orgname" name="orgname" class="u-full-width required" /><br />
                     <label for="orgcontact">Contact name</label>
-                    <input type="text" id="orgcontact" name="orgcontact" class="u-full-width" placeholder="This is probably your name" /><br />
+                    <input type="text" id="orgcontact" name="orgcontact" class="u-full-width required" placeholder="This is probably your name" /><br />
                     <label for="orgaddress">Contact postal address including postcode</label>
-                    <textarea class="u-full-width" id="orgaddress" name="orgaddress" placeholder="Ideally the organisation's address or your own if not applicable"></textarea>
+                    <textarea class="u-full-width required" id="orgaddress" name="orgaddress" placeholder="Ideally the organisation's address or your own if not applicable"></textarea>
                     <label for="contactphone" class="five columns">Day time phone number</label>
                         <input type="text" id="contactphone" name="contactphone" class="five columns" placeholder="Land line or mobile" />
-                    <label for="contactemail" class="five columns">Contact email address</label>
-                    <input type="text" id="contactemail" name="contactemail" class="five columns"/>
+                    <label for="contactemail" class="five columns required">Contact email address</label>
+                    <input type="text" id="contactemail" name="contactemail" class="five columns required"/>
                 </fieldset>
             </div>
             <div class="row">
                 <fieldset>
                     <legend>SECTION 2 ORGANISATION ACTIVITY DETAILS</legend>
                     <label for="objectives">Describe your organisation's main activites and objectives</label>
-                    <textarea id="objectives" name="objectives" class="u-full-width mediuminput" placeholder="Please give as full a desciption as possible"></textarea>
+                    <textarea id="objectives" name="objectives" class="u-full-width mediuminput required" placeholder="Please give as full a desciption as possible"></textarea>
                     <label for="howlong">How long has the organisation been operating?</label>
-                    <input type="text" class="u-full-width" id="howlong" name="howlong" />
+                    <input type="text" class="u-full-width required" id="howlong" name="howlong" />
                     <label for="where">Where and when do your meetings take place?</label>
-                    <textarea class="u-full-width mediuminput" id="where" name="where"></textarea>
+                    <textarea class="u-full-width mediuminput required" id="where" name="where"></textarea>
                 </fieldset>
             </div>
             <div class="row">
                 <fieldset>
                     <legend>Section 3 PROJECT DETAILS</legend>
                     <label for="project">Outline of the project or item for which funding is sought</label>
-                    <textarea class="u-full-width mediuminput" id="project" name="project"></textarea>
+                    <textarea class="u-full-width mediuminput required" id="project" name="project"></textarea>
                     <label for="inarea">Who, in the Council's area will benefit?</label>
                     <textarea id="inarea" name="inarea" class="u-full-width mediuminput" placeholder="Who will benefit in the Council's area and for how long. Estimated number of people, age range and for how long"></textarea>
                     <label for="notinarea">Who, outside of the Council's area will benefit?</label>
@@ -123,7 +126,21 @@ include "fpdf.php";
     </body>
 </html>
 <script>
-    $('#print').click(function(){
-        $('#dataform').submit();
+    function checkform(){
+        $('input.required, textarea.required').each(function(){
+            if($.trim($(this).val()) === ''){
+                $(this).css("border","3px solid red");
+                var txt = $.trim($(this).attr('placeholder')) + " REQUIRED";
+                $(this).attr('placeholder',txt);
+            }
+        });
+        return false;
+    }
+    $('#print').click(function(e){
+        e.preventDefault();
+        checkform();
+        //if(checkform()){
+        // $('#dataform').submit();
+        //}
     });
 </script>
